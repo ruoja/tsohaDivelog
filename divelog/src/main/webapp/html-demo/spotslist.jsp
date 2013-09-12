@@ -13,16 +13,27 @@
             <li><a href="/divelog/html-demo/divestats.jsp">Yhteenveto</a></li>
             <li><a href="/divelog/html-demo/divelist.jsp">Sukellukset</a></li>
             <li class="active"><a href="#">Kohteet</a></li>
-            <li><a href="/divelog/html-demo/editdiver.jsp">Omat tiedot</a></li>
+            <li><a href="/divelog/html-demo/diver.jsp">Omat tiedot</a></li>
         </ul>
-        <div class="container">
-            <h1>Käydyt sukelluskohteet</h1>
-            <ul>
-                <li>Lista</li>
-                <li>Käydyistä</li>
-                <li>Sukelluskohteista</li>
-            </ul>
+
+        <div class="panel panel-default">
+            <p></p>
+            <div class="panel-heading">Kohteet</div>
+            <div class="panel-body">
+                <p>Valitse kohde nähdäksesi tarkemmat tiedot ja muokataksesi kohdetta</p>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nimi</th>
+                        <th>Sijainti</th>
+                        <th>Tyyppi</th>
+                        <th>Minimisyvyys</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
-        <a href="/divelog/html-demo/addspot.jsp">Lisää uusi</a>
+
+        <a href="/divelog/html-demo/spot.jsp" class="btn btn-primary">Lisää uusi</a>
     </body>
 </html>

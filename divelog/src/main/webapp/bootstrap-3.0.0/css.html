@@ -324,8 +324,8 @@ base_url: "../"
 </div>
 
 <div class="row">
-  <div class="col-sm-6 col-md-5 col-lg-6">.col-sm-6 .col-md-5 .col-lg-6</div>
-  <div class="col-sm-6 col-md-5 col-md-offset-2 col-lg-6 col-lg-offset-0">.col-sm-6 .col-md-5 .col-md-offset-2 .col-lg-6 .col-lg-offset-0</div>
+  <div class="col-sm-6 col-md-5 col-md-6">.col-sm-6 .col-md-5 .col-lg-6</div>
+  <div class="col-sm-6 col-md-5 col-md-offset-2 col-md-6 col-lg-offset-0">.col-sm-6 .col-md-5 .col-md-offset-2 .col-lg-6 .col-lg-offset-0</div>
 </div>
 {% endhighlight %}
 
@@ -1542,19 +1542,19 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
     <p>Use Bootstrap's predefined grid classes to align labels and groups of form controls in a horizontal layout by adding <code>.form-horizontal</code> to the form. Doing so changes <code>.form-group</code>s to behave as grid rows, so no need for <code>.row</code>.</p>
     <form class="bs-example form-horizontal">
       <div class="form-group">
-        <label for="inputEmail1" class="col-lg-2 control-label">Email</label>
-        <div class="col-lg-10">
+        <label for="inputEmail1" class="col-md-2 control-label">Email</label>
+        <div class="col-md-6">
           <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
         </div>
       </div>
       <div class="form-group">
-        <label for="inputPassword1" class="col-lg-2 control-label">Password</label>
-        <div class="col-lg-10">
+        <label for="inputPassword1" class="col-md-2 control-label">Password</label>
+        <div class="col-md-6">
           <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
         </div>
       </div>
       <div class="form-group">
-        <div class="col-lg-offset-2 col-lg-10">
+        <div class="col-lg-offset-2 col-md-6">
           <div class="checkbox">
             <label>
               <input type="checkbox"> Remember me
@@ -1563,7 +1563,7 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
         </div>
       </div>
       <div class="form-group">
-        <div class="col-lg-offset-2 col-lg-10">
+        <div class="col-lg-offset-2 col-md-6">
           <button type="submit" class="btn btn-default">Sign in</button>
         </div>
       </div>
@@ -1571,19 +1571,19 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
 {% highlight html %}
 <form class="form-horizontal" role="form">
   <div class="form-group">
-    <label for="inputEmail1" class="col-lg-2 control-label">Email</label>
-    <div class="col-lg-10">
+    <label for="inputEmail1" class="col-md-2 control-label">Email</label>
+    <div class="col-md-6">
       <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword1" class="col-lg-2 control-label">Password</label>
-    <div class="col-lg-10">
+    <label for="inputPassword1" class="col-md-2 control-label">Password</label>
+    <div class="col-md-6">
       <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
     </div>
   </div>
   <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
+    <div class="col-lg-offset-2 col-md-6">
       <div class="checkbox">
         <label>
           <input type="checkbox"> Remember me
@@ -1592,7 +1592,7 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
     </div>
   </div>
   <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
+    <div class="col-lg-offset-2 col-md-6">
       <button type="submit" class="btn btn-default">Sign in</button>
     </div>
   </div>
@@ -1738,14 +1738,14 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
     <p>When you need to place plain text next to a form label within a horizontal form, use the <code>.form-control-static</code> class on a <code>&lt;p&gt;</code>.</p>
     <form class="bs-example form-horizontal">
       <div class="form-group">
-        <label class="col-lg-2 control-label">Email</label>
-        <div class="col-lg-10">
+        <label class="col-md-2 control-label">Email</label>
+        <div class="col-md-6">
           <p class="form-control-static">email@example.com</p>
         </div>
       </div>
       <div class="form-group">
-        <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-        <div class="col-lg-10">
+        <label for="inputPassword" class="col-md-2 control-label">Password</label>
+        <div class="col-md-6">
           <input type="password" class="form-control" id="inputPassword" placeholder="Password">
         </div>
       </div>
@@ -1753,14 +1753,14 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
 {% highlight html %}
 <form class="form-horizontal" role="form">
   <div class="form-group">
-    <label class="col-lg-2 control-label">Email</label>
-    <div class="col-lg-10">
+    <label class="col-md-2 control-label">Email</label>
+    <div class="col-md-6">
       <p class="form-control-static">email@example.com</p>
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-    <div class="col-lg-10">
+    <label for="inputPassword" class="col-md-2 control-label">Password</label>
+    <div class="col-md-6">
       <input type="password" class="form-control" id="inputPassword" placeholder="Password">
     </div>
   </div>
@@ -1914,7 +1914,7 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
     <p>Wrap inputs in grid columns, or any custom parent element, to easily enforce desired widths.</p>
     <form class="bs-example" style="padding-bottom: 15px;">
       <div class="row">
-        <div class="col-lg-2">
+        <div class="col-md-2">
           <input type="text" class="form-control" placeholder=".col-lg-2">
         </div>
         <div class="col-lg-3">
@@ -1927,7 +1927,7 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
     </form>
 {% highlight html %}
 <div class="row">
-  <div class="col-lg-2">
+  <div class="col-md-2">
     <input type="text" class="form-control" placeholder=".col-lg-2">
   </div>
   <div class="col-lg-3">

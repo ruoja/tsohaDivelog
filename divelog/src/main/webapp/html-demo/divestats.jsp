@@ -6,22 +6,35 @@
         <link href="../bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
         <link href="../bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet">
         <link href="../bootstrap-3.0.0/dist/css/main.css" rel="stylesheet">
-        <title>Divelog</title>
+        <link href="../bootstrap-3.0.0/examples/grid/grid.css" rel="stylesheet"
     </head>
 
     <body>
         <ul class="nav nav-tabs">
             <li class="active"><a href="#">Yhteenveto</a></li>
             <li><a href="/divelog/html-demo/divelist.jsp">Sukellukset</a></li>
-            <li><a href="/divelog/html-demo/divespots.jsp">Kohteet</a></li>
-            <li><a href="/divelog/html-demo/editdiver.jsp">Omat tiedot</a></li>
+            <li><a href="/divelog/html-demo/spotslist.jsp">Kohteet</a></li>
+            <li><a href="/divelog/html-demo/diver.jsp">Omat tiedot</a></li>
         </ul>
-        <div class="container">
-            <h1>Yhteenveto sukelluksistasi</h1>
-            <p>Erkki Esimerkki sinulla on yhteensä ### sukellusta</p>
-            <p>Tähän tuodaan dynaamisesti tietokannasta kirjautuneen käyttäjän tekemien sukellusten yhteenveto<br/>
-                Tämä toimii käyttäjän etusivuna.
-            </p>
-        </div>   
+        <div class="page-header">
+            <h1>Tervetuloa Erkki Esimerkki!</h1>
+            <h2>Statistiikkaa sukellukelluksistasi</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Sukelluksia yhteensä:</div>
+            <div class="col-md-4">Viimeisin sukellus:</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Pisin sukellus:</div>
+            <div class="col-md-4">Sukellusaika yhteensä:</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Suosikkikohde:</div>
+            <div class="col-md-4">Suurin syvyys:</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Sukelluksia Nitroxilla:</div>
+            <div class="col-md-4">Sukelluksia ilmalla:</div>
+        </div>
     </body>
 </html>

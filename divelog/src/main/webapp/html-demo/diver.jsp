@@ -9,8 +9,15 @@
         <title>Divelog</title>
     </head>
     <body>
+        <ul class="nav nav-tabs">
+            <li><a href="/divelog/html-demo/divestats.jsp">Yhteenveto</a></li>
+            <li><a href="/divelog/html-demo/divelist.jsp">Sukellukset</a></li>
+            <li><a href="/divelog/html-demo/spotslist.jsp">Kohteet</a></li>
+            <li class="active"><a href="#">Omat tiedot</a></li>
+        </ul>
+
         <div class="panel panel-default">
-            <div class="panel-heading text-center">Rekisteröidy syöttämällä tietosi</div>
+            <div class="panel-heading text-center">Omat Tiedot</div>
             <div class="panel-body">
 
                 <form class="form-horizontal" role="form">
@@ -51,17 +58,23 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputVahvistaSalasana" class="col-md-2 control-label">Vahvista salasana</label>
+                        <label for="inputUusiSalasana" class="col-md-2 control-label">Uusi salasana</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" id="inputVahvistaSalasana" placeholder="Salasana uudelleen">
+                            <input type="password" class="form-control" id="inputUusiSalasana" placeholder="Uusi salasana">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputVahvistaUusiSalasana" class="col-md-2 control-label">Vahvista salasanan vaihto</label>
+                        <div class="col-md-6">
+                            <input type="password" class="form-control" id="inputVahvistaUusiSalasana" placeholder="Uusi salasana uudelleen">
                         </div>
                     </div>
                 </form>
             </div>
         </div>
         <div class="btn-toolbar pull-right">
-            <a href="/divelog/html-demo/login.jsp" class="btn btn-primary">Peruuta</a>
-            <a href="/divelog/html-demo/divestats.jsp" class="btn btn-primary">Tallenna</a>
+            <a href="/divelog/html-demo/divestats.jsp"class="btn btn-primary">Peruuta</a>
+            <button type="button" class="btn btn-primary">Tallenna</button>
         </div>
     </body>
 </html>
