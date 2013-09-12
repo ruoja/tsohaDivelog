@@ -18,7 +18,10 @@
         </ul>
         <div class="container">
             <h1>Yhteenveto sukelluksistasi</h1>
-            <p>Tähän tuodaan dynaamisesti tietokannasta kirjautuneen käyttäjän tekemien sukellusten yhteenveto</p>
+            <p>Erkki Esimerkki sinulla on yhteensä ### sukellusta</p>
+            <p>Tähän tuodaan dynaamisesti tietokannasta kirjautuneen käyttäjän tekemien sukellusten yhteenveto<br/>
+                Tämä toimii käyttäjän etusivuna.
+            </p>
         </div>   
     </body>
 </html>

@@ -18,7 +18,7 @@
     <p>
     <form>
         <label>Käyttäjätunnus: <input type="text" name="tunnus" /></label></br>
-        <label>Salasana: <input type="text" name="salasana" /></label></br>
+        <label>Salasana: <input type="password" name="salasana" /></label></br>
         <input type="submit" value="kirjaudu" />
     </form>
 </p>

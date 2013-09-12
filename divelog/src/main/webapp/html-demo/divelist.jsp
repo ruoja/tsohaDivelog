@@ -22,6 +22,8 @@
                 <li>Kirjatuista</li>
                 <li>Sukelluksista</li>
             </ul>
+            
         </div>
+        <a href="/divelog/html-demo/add-dive.jsp">Lisää uusi</a>
     </body>
 </html>

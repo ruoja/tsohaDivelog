@@ -23,5 +23,6 @@
                 <li>Sukelluskohteista</li>
             </ul>
         </div>
+        <a href="/divelog/html-demo/addspot.jsp">Lisää uusi</a>
     </body>
 </html>
