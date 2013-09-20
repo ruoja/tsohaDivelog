@@ -16,6 +16,9 @@
             <li><a href="divelist">Sukellukset</a></li>
             <li><a href="spotslist">Kohteet</a></li>
             <li><a href="diver">Omat tiedot</a></li>
+            <form action="logout">
+            <button type="submit" class="btn btn-primary pull-right" >Kirjaudu ulos</button>
+            </form>
         </ul>
         <div class="page-header">
             <h1>Tervetuloa ${diverName}</h1>
