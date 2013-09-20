@@ -13,12 +13,12 @@
     <body>
         <ul class="nav nav-tabs">
             <li class="active"><a href="#">Yhteenveto</a></li>
-            <li><a href="/divelog/divelist">Sukellukset</a></li>
-            <li><a href="/divelog/spotslist">Kohteet</a></li>
-            <li><a href="/divelog/diver">Omat tiedot</a></li>
+            <li><a href="divelist">Sukellukset</a></li>
+            <li><a href="spotslist">Kohteet</a></li>
+            <li><a href="diver">Omat tiedot</a></li>
         </ul>
         <div class="page-header">
-            <h1>Tervetuloa Erkki Esimerkki!</h1>
+            <h1>Tervetuloa ${diverName}</h1>
             <h2>Statistiikkaa sukellukelluksistasi</h2>
         </div>
         <div class="row">

@@ -1,16 +1,18 @@
 package tsoha.divelog.servlet;
 
-import tsoha.divelog.divelog.Divelog;
+import tsoha.divelog.model.Common;
+import tsoha.divelog.model.Diver;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author jani
  */
-public class LoginServlet extends Divelog {
+public class LoginServlet extends Common {
 
     /**
      * Processes requests for both HTTP
@@ -25,7 +27,6 @@ public class LoginServlet extends Divelog {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setAttribute("appDescription", "Pidä kirjaa sukelluksistasi ja sukelluskohteistasi.");
         showPage(request, response, "login");
     }
 
@@ -57,7 +58,18 @@ public class LoginServlet extends Divelog {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        if (Diver.getDiver(username, password) != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("loggedInDiver", new Diver(1, "Erkki", "Esimerkki", "P3", "555-123456", "erkki@internez.net"));
+            response.sendRedirect("divestats");
+        } else {
+            request.setAttribute("errorMessage", "Kirjautuminen epäonnistui!");
+            showPage(request, response, "login");
+        }
     }
 
     /**
@@ -67,6 +79,6 @@ public class LoginServlet extends Divelog {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "";
     }// </editor-fold>
 }

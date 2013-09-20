@@ -11,9 +11,9 @@
     </head>
     <body>
         <ul class="nav nav-tabs">
-            <li><a href="/divelog/WEB-INF/jsp/divestats.jsp">Yhteenveto</a></li>
-            <li><a href="/divelog/WEB-INF/jsp/divelist.jsp">Sukellukset</a></li>
-            <li><a href="/divelog/WEB-INF/jsp/spotslist.jsp">Kohteet</a></li>
+            <li><a href="divestats">Yhteenveto</a></li>
+            <li><a href="divelist">Sukellukset</a></li>
+            <li><a href="spotslist">Kohteet</a></li>
             <li class="active"><a href="#">Omat tiedot</a></li>
         </ul>
 
@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="btn-toolbar pull-right">
-            <a href="/divelog/WEB-INF/jsp/divestats.jsp" class="btn btn-primary">Peruuta</a>
+            <a href="divestats" class="btn btn-primary">Peruuta</a>
             <button type="button" class="btn btn-primary">Tallenna</button>
         </div>
     </body>

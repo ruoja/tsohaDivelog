@@ -4,13 +4,13 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tsoha.divelog.divelog.Divelog;
+import tsoha.divelog.model.Common;
 
 /**
  *
  * @author jani
  */
-public class DiveListServlet extends Divelog {
+public class DiveListServlet extends Common {
 
     /**
      * Processes requests for both HTTP
@@ -25,6 +25,7 @@ public class DiveListServlet extends Divelog {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        isLogged(request, response);
         showPage(request, response, "divelist");
     }
 

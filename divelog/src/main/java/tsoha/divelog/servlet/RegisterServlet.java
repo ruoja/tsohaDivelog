@@ -4,13 +4,13 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tsoha.divelog.divelog.Divelog;
+import tsoha.divelog.model.Common;
 
 /**
  *
  * @author jani
  */
-public class RegisterServlet extends Divelog {
+public class RegisterServlet extends Common {
 
     /**
      * Processes requests for both HTTP

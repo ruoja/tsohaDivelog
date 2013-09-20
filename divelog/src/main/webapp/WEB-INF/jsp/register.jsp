@@ -61,8 +61,8 @@
             </div>
         </div>
         <div class="btn-toolbar pull-right">
-            <a href="/divelog/WEB-INF/jsp/login.jsp" class="btn btn-primary">Peruuta</a>
-            <a href="/divelog/WEB-INF/jsp/divestats.jsp" class="btn btn-primary">Tallenna</a>
+            <a href="login" class="btn btn-primary">Peruuta</a>
+            <a href="/divelog/divestats" class="btn btn-primary">Tallenna</a>
         </div>
     </body>
 </html>

@@ -12,20 +12,20 @@
     <body>
         <h1 class="text-center">Divelog - Sukelluspäiväkirja</h1>
 
-        <p class="text-center lead">${appDescription}</p>
+        <p class="text-center lead">Pidä kirjaa sukelluksistasi ja sukelluskohteistasi.</p>
 
         <div class="container">
 
-            <form class="form-signin">
+            <form action="login" method="POST" class="form-signin" >
                 <h2 class="form-signin-heading text-center">Kirjaudu sisään</h2>
-                <input type="text" class="form-control" placeholder="sähköposti" autofocus>
-                <input type="password" class="form-control" placeholder="salasana">
-                <a href="/divelog/divestats" class="btn btn-lg btn-primary btn-block">Kirjaudu</a>
-                <a href="/divelog/register" class="btn btn-lg btn-primary btn-block">Rekisteröidy</a>
+                <input type="text" name="username" class="form-control" placeholder="sähköposti" autofocus>
+                <input type="password" name="password" class="form-control" placeholder="salasana">
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Kirjaudu</button>
+                <button type="submit" formaction="register" class="btn btn-lg btn-primary btn-block">Rekisteröidy</button>
             </form>
 
-            <c:if test="${loginError != null}">
-                <div class="alert alert-danger">Virhe! ${loginError}</div>
+            <c:if test="${errorMessage != null}">
+                <div class="alert alert-danger">${errorMessage}</div>
             </c:if>
 
         </div>

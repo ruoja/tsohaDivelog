@@ -11,10 +11,10 @@
     </head>
     <body>
         <ul class="nav nav-tabs">
-            <li><a href="/divelog/WEB-INF/jsp/divestats.jsp">Yhteenveto</a></li>
-            <li><a href="/divelog/WEB-INF/jsp/divelist.jsp">Sukellukset</a></li>
+            <li><a href="divestats">Yhteenveto</a></li>
+            <li><a href="divelist">Sukellukset</a></li>
             <li class="active"><a href="#">Kohteet</a></li>
-            <li><a href="/divelog/WEB-INF/jsp/diver.jsp">Omat tiedot</a></li>
+            <li><a href="diver">Omat tiedot</a></li>
         </ul>
 
         <div class="panel panel-default">
@@ -35,6 +35,6 @@
             </table>
         </div>
 
-        <a href="/divelog/WEB-INF/jsp/spot.jsp" class="btn btn-primary">Lisää uusi</a>
+        <a href="spot" class="btn btn-primary">Lisää uusi</a>
     </body>
 </html>

@@ -5,23 +5,24 @@ package tsoha.divelog.model;
  * @author jani
  */
 public class Diver {
-    
+
     private int diverId;
     private String diverFirstName;
     private String diverLastName;
     private String diverClass;
     private String diverPhone;
     private String diverEmail;
-    private String DiverPassword;
 
-    public Diver(int diverId, String diverFirstName, String diverLastName, String diverClass, String diverPhone, String diverEmail, String DiverPassword) {
+    public Diver(int diverId, String diverFirstName, String diverLastName, String diverClass, String diverPhone, String diverEmail) {
         this.diverId = diverId;
         this.diverFirstName = diverFirstName;
         this.diverLastName = diverLastName;
         this.diverClass = diverClass;
         this.diverPhone = diverPhone;
         this.diverEmail = diverEmail;
-        this.DiverPassword = DiverPassword;
+    }
+
+    private Diver() {
     }
 
     public int getDiverId() {
@@ -48,10 +49,6 @@ public class Diver {
         return diverEmail;
     }
 
-    public String getDiverPassword() {
-        return DiverPassword;
-    }
-
     public void setDiverId(int diverId) {
         this.diverId = diverId;
     }
@@ -76,7 +73,12 @@ public class Diver {
         this.diverEmail = diverEmail;
     }
 
-    public void setDiverPassword(String DiverPassword) {
-        this.DiverPassword = DiverPassword;
+    public static Diver getDiver(String email, String password) {
+        String acceptMail = "test";
+        String acceptPass = "test";
+        if (email.equals(acceptMail) && password.equals(acceptPass)) {
+            return new Diver();
+        }
+        return null;
     }
 }
