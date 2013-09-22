@@ -13,16 +13,7 @@ public class Diver {
     private String diverPhone;
     private String diverEmail;
 
-    public Diver(int diverId, String diverFirstName, String diverLastName, String diverClass, String diverPhone, String diverEmail) {
-        this.diverId = diverId;
-        this.diverFirstName = diverFirstName;
-        this.diverLastName = diverLastName;
-        this.diverClass = diverClass;
-        this.diverPhone = diverPhone;
-        this.diverEmail = diverEmail;
-    }
-
-    private Diver() {
+    public Diver() {
     }
 
     public int getDiverId() {
@@ -49,28 +40,34 @@ public class Diver {
         return diverEmail;
     }
 
-    public void setDiverId(int diverId) {
+    public Diver setDiverId(int diverId) {
         this.diverId = diverId;
+        return this;
     }
 
-    public void setDiverFirstName(String diverFirstName) {
+    public Diver setDiverFirstName(String diverFirstName) {
         this.diverFirstName = diverFirstName;
+        return this;
     }
 
-    public void setDiverLastName(String diverLastName) {
+    public Diver setDiverLastName(String diverLastName) {
         this.diverLastName = diverLastName;
+        return this;
     }
 
-    public void setDiverClass(String diverClass) {
+    public Diver setDiverClass(String diverClass) {
         this.diverClass = diverClass;
+        return this;
     }
 
-    public void setDiverPhone(String diverPhone) {
+    public Diver setDiverPhone(String diverPhone) {
         this.diverPhone = diverPhone;
+        return this;
     }
 
-    public void setDiverEmail(String diverEmail) {
+    public Diver setDiverEmail(String diverEmail) {
         this.diverEmail = diverEmail;
+        return this;
     }
 
     public static Diver getDiver(String email, String password) {

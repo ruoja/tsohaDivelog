@@ -74,6 +74,7 @@
             </div>
         </div>
         <div class="btn-toolbar pull-right">
+            <button type="button" class="btn btn-primary">Poista</button>
             <a href="divestats" class="btn btn-primary">Peruuta</a>
             <button type="button" class="btn btn-primary">Tallenna</button>
         </div>

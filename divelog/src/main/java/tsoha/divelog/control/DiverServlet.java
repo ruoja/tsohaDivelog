@@ -1,18 +1,15 @@
-package tsoha.divelog.servlet;
+package tsoha.divelog.control;
 
-import tsoha.divelog.model.Common;
-import tsoha.divelog.model.Diver;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author jani
  */
-public class LoginServlet extends Common {
+public class DiverServlet extends BaseServlet {
 
     /**
      * Processes requests for both HTTP
@@ -27,7 +24,8 @@ public class LoginServlet extends Common {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        showPage(request, response, "login");
+        if (!isLogged(request, response))kickOutNotLogged(request, response);
+        showPage(request, response, "diver");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,18 +56,7 @@ public class LoginServlet extends Common {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        if (Diver.getDiver(username, password) != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("loggedInDiver", new Diver(1, "Erkki", "Esimerkki", "P3", "555-123456", "erkki@internez.net"));
-            response.sendRedirect("divestats");
-        } else {
-            request.setAttribute("errorMessage", "Kirjautuminen epäonnistui!");
-            showPage(request, response, "login");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -79,6 +66,6 @@ public class LoginServlet extends Common {
      */
     @Override
     public String getServletInfo() {
-        return "";
+        return "Short description";
     }// </editor-fold>
 }

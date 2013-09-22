@@ -3,39 +3,39 @@
     <display-name>divelog</display-name>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>tsoha.divelog.servlet.LoginServlet</servlet-class>
+        <servlet-class>tsoha.divelog.control.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DiveServlet</servlet-name>
-        <servlet-class>tsoha.divelog.servlet.DiveServlet</servlet-class>
+        <servlet-class>tsoha.divelog.control.DiveServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DiveListServlet</servlet-name>
-        <servlet-class>tsoha.divelog.servlet.DiveListServlet</servlet-class>
+        <servlet-class>tsoha.divelog.control.DiveListServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DiverServlet</servlet-name>
-        <servlet-class>tsoha.divelog.servlet.DiverServlet</servlet-class>
+        <servlet-class>tsoha.divelog.control.DiverServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DiveStatsServlet</servlet-name>
-        <servlet-class>tsoha.divelog.servlet.DiveStatsServlet</servlet-class>
+        <servlet-class>tsoha.divelog.control.DiveStatsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>tsoha.divelog.servlet.RegisterServlet</servlet-class>
+        <servlet-class>tsoha.divelog.control.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SpotServlet</servlet-name>
-        <servlet-class>tsoha.divelog.servlet.SpotServlet</servlet-class>
+        <servlet-class>tsoha.divelog.control.SpotServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SpotslistServlet</servlet-name>
-        <servlet-class>tsoha.divelog.servlet.SpotlistServlet</servlet-class>
+        <servlet-class>tsoha.divelog.control.SpotlistServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>tsoha.divelog.servlet.LogoutServlet</servlet-class>
+        <servlet-class>tsoha.divelog.control.LogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

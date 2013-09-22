@@ -1,16 +1,15 @@
-package tsoha.divelog.servlet;
+package tsoha.divelog.control;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tsoha.divelog.model.Common;
 
 /**
  *
  * @author jani
  */
-public class DiveListServlet extends Common {
+public class LogoutServlet extends BaseServlet {
 
     /**
      * Processes requests for both HTTP
@@ -25,8 +24,9 @@ public class DiveListServlet extends Common {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        isLogged(request, response);
-        showPage(request, response, "divelist");
+        
+        request.getSession().removeAttribute("loggedInDiver");
+        showPage(request, response, "login");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

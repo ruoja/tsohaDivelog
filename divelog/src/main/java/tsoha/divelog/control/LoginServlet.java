@@ -1,16 +1,16 @@
-package tsoha.divelog.servlet;
+package tsoha.divelog.control;
 
+import tsoha.divelog.model.Diver;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tsoha.divelog.model.Common;
 
 /**
  *
  * @author jani
  */
-public class LogoutServlet extends Common {
+public class LoginServlet extends BaseServlet {
 
     /**
      * Processes requests for both HTTP
@@ -25,8 +25,6 @@ public class LogoutServlet extends Common {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        request.getSession().removeAttribute("loggedInDiver");
         showPage(request, response, "login");
     }
 
@@ -58,7 +56,15 @@ public class LogoutServlet extends Common {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        if (Diver.getDiver(username, password) != null) {
+            acceptLogin(request, response);
+        } else {
+            showError(request, response, "login", "Kirjautuminen epäonnistui, tarkista käyttäjätunnus ja salasana.");
+        }
     }
 
     /**
