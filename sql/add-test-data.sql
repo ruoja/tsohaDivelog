@@ -1,8 +1,8 @@
-INSERT INTO DIVER (FIRSTNAME, LASTNAME, CLASSIFICATION, PHONENUMBER, EMAIL)
-    VALUES ('Erkki', 'Esimerkki', 'NAUI MSD', '555-123456', 'erkki@internez.net');
+INSERT INTO DIVER (FIRSTNAME, LASTNAME, CLASSIFICATION, PHONENUMBER, EMAIL, PSWD)
+    VALUES ('Erkki', 'Esimerkki', 'NAUI MSD', '555-123456', 'erkki@internez.net', 'erkki');
 
-INSERT INTO DIVER (FIRSTNAME, LASTNAME, PHONENUMBER, EMAIL)
-    VALUES ('Sanna', 'Sukeltaja', '123-227774', 'sannas@dive.org');
+INSERT INTO DIVER (FIRSTNAME, LASTNAME, PHONENUMBER, EMAIL, PSWD)
+    VALUES ('Sanna', 'Sukeltaja', '123-227774', 'sannas@dive.org', 'sanna');
     
 INSERT INTO SPOT (NAME, LOCATION, SPOTTYPE, MINDEPTH, DESCRIPTION)
     VALUES('Coolaroo', 'Helsinki', 'wreck', 15, 'Kyljellään makaava teräslaivan hylky');
