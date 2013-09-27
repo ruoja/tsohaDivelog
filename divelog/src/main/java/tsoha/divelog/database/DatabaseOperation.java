@@ -6,30 +6,25 @@ import java.sql.*;
  * @author jani
  */
 public class DatabaseOperation {
-    
+
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
-    private DatabaseConnection connection;
+    private DatabaseAccess connection;
 
-    public DatabaseOperation() {
-        connection = new DatabaseConnection();
-    }
-    
     public ResultSet query(String sql) throws SQLException, Exception {
         try {
-            preparedStatement = connection.openConnection().prepareStatement(sql);
+            connection = new DatabaseAccess();
+            preparedStatement = connection.connectDatabase().prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException ex) {
             throw ex;
-        } finally {
-            try {
-                connection.closeConnection();
-            } catch (Exception ex) {
-                throw ex;
-            }
         }
         return resultSet;
-        
     }
     
+    public void closeAll() throws SQLException, Exception {
+        this.resultSet.close();
+        this.preparedStatement.close();
+        this.connection.closeConnection();
+    }
 }

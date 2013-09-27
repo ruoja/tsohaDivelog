@@ -1,6 +1,11 @@
 package tsoha.divelog.control;
 
+import tsoha.divelog.database.DatabaseOperation;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,12 +27,22 @@ public class DiveStatsServlet extends BaseServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         if (!isLogged(request, response))kickOutNotLogged(request, response);
        
-        request.setAttribute("diverName", "Erkki Esimerkki");
+        request.setAttribute("diverName", testDb()+"!");
         showPage(request, response, "divestats");
+    }
+    
+    private String testDb() throws SQLException, Exception {
+        DatabaseOperation operation = new DatabaseOperation();
+        ResultSet result = operation.query("SELECT firstname as name FROM diver WHERE diver_id=2");
+        if(result.next()) {
+            String name = result.getString("name");
+            return name;
+        }
+        return "not found!";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -43,7 +58,13 @@ public class DiveStatsServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(DiveStatsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DiveStatsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -58,7 +79,13 @@ public class DiveStatsServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(DiveStatsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DiveStatsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

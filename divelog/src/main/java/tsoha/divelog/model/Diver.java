@@ -1,10 +1,12 @@
 package tsoha.divelog.model;
 
+import tsoha.divelog.database.DatabaseOperation;
+
 /**
  *
  * @author jani
  */
-public class Diver {
+public class Diver extends DatabaseOperation {
 
     private int diverId;
     private String diverFirstName;
