@@ -1,12 +1,14 @@
 package tsoha.divelog.model;
 
-import tsoha.divelog.database.DatabaseOperation;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import tsoha.divelog.database.DatabaseQuery;
 
 /**
  *
  * @author jani
  */
-public class Diver extends DatabaseOperation {
+public class Diver extends DatabaseQuery {
 
     private int diverId;
     private String diverFirstName;
@@ -72,11 +74,16 @@ public class Diver extends DatabaseOperation {
         return this;
     }
 
-    public static Diver getDiver(String email, String password) {
-        String acceptMail = "test";
-        String acceptPass = "test";
-        if (email.equals(acceptMail) && password.equals(acceptPass)) {
-            return new Diver();
+    public static Diver getDiverLogin(String email, String password) throws SQLException, Exception {
+        DatabaseQuery query = new DatabaseQuery();
+        ResultSet result;
+        result = query.query("SELECT email, pswd FROM diver");
+        while (result.next()) {
+            String acceptMail = result.getString("email");
+            String acceptPassword = result.getString("pswd");
+            if (acceptMail.equals(email) && acceptPassword.equals(password)) {
+                return new Diver(); //TODO: hae kannasta sukeltaja olio
+            }
         }
         return null;
     }

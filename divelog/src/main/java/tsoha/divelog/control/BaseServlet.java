@@ -36,9 +36,13 @@ public class BaseServlet extends HttpServlet {
         showPage(request, response, page);
     }
 
-    public void acceptLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void acceptLogin(HttpServletRequest request, HttpServletResponse response, Diver registeredUser) throws IOException {
         HttpSession session = request.getSession();
-        session.setAttribute("loggedInDiver", new Diver().setDiverId(1).setDiverFirstName("Erkki").setDiverLastName("Esimerkki").setDiverClass("CMAS P3").setDiverPhone("555-123456").setDiverEmail("erkki@internez.net"));
+        session.setAttribute("loggedInDiver", registeredUser);
         response.sendRedirect("divestats");
+    }
+    
+    public Diver getLoggedDiver(HttpServletRequest request) {
+        return null; //TODO
     }
 }

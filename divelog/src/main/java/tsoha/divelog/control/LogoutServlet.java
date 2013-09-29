@@ -26,6 +26,7 @@ public class LogoutServlet extends BaseServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         request.getSession().removeAttribute("loggedInDiver");
+        request.setAttribute("goodbye", "Olet kirjautunut ulos. Tervetuloa uudelleen!");
         showPage(request, response, "login");
     }
 

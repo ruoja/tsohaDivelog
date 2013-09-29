@@ -28,51 +28,60 @@
                             <input type="text" class="form-control" id="inputEtunimi" placeholder="Etunimi">
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="inputSukunimi" class="col-md-2 control-label">Sukunimi</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" id="inputSukunimi" placeholder="Sukunimi">
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="inputLuokitus" class="col-md-2 control-label">Luokitus</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" id="inputLuokitus" placeholder="Sukeltajaluokka">
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="inputPuhelin" class="col-md-2 control-label">Puhelinnumero</label>
                         <div class="col-md-6">
                             <input type="tel" class="form-control" id="inputPuhelin" placeholder="Puhelinnumero">
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="inputEmail" class="col-md-2 control-label">Email</label>
                         <div class="col-md-6">
                             <input type="email" class="form-control" id="inputEmail" placeholder="Email">
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="inputSalasana" class="col-md-2 control-label">Salasana</label>
                         <div class="col-md-6">
                             <input type="password" class="form-control" id="inputSalasana" placeholder="Salasana">
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="inputUusiSalasana" class="col-md-2 control-label">Uusi salasana</label>
                         <div class="col-md-6">
                             <input type="password" class="form-control" id="inputUusiSalasana" placeholder="Uusi salasana">
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="inputVahvistaUusiSalasana" class="col-md-2 control-label">Vahvista salasanan vaihto</label>
                         <div class="col-md-6">
                             <input type="password" class="form-control" id="inputVahvistaUusiSalasana" placeholder="Uusi salasana uudelleen">
                         </div>
                     </div>
+                    
                 </form>
             </div>
         </div>
+        
         <div class="btn-toolbar pull-right">
             <button type="button" class="btn btn-primary">Poista</button>
             <a href="divestats" class="btn btn-primary">Peruuta</a>

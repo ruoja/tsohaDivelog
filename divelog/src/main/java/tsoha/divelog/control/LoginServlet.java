@@ -2,6 +2,9 @@ package tsoha.divelog.control;
 
 import tsoha.divelog.model.Diver;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,11 +62,17 @@ public class LoginServlet extends BaseServlet {
         
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
-        if (Diver.getDiver(username, password) != null) {
-            acceptLogin(request, response);
-        } else {
-            showError(request, response, "login", "Kirjautuminen epäonnistui, tarkista käyttäjätunnus ja salasana.");
+        try {
+            if (Diver.getDiverLogin(username, password) != null) {
+                Diver registeredUser = Diver.getDiverLogin(username, password);
+                acceptLogin(request, response, registeredUser);
+            } else {
+                showError(request, response, "login", "Kirjautuminen epäonnistui, tarkista käyttäjätunnus ja salasana.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

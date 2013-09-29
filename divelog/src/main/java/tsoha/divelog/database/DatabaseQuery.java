@@ -5,7 +5,7 @@ import java.sql.*;
  *
  * @author jani
  */
-public class DatabaseOperation {
+public class DatabaseQuery {
 
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;

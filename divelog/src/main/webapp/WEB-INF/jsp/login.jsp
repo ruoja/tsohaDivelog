@@ -27,7 +27,10 @@
             <c:if test="${errorMessage != null}">
                 <div class="alert alert-danger">${errorMessage}</div>
             </c:if>
+            <c:if test="${goodbye != null}">
+                  <div class="alert alert-success">${goodbye}</div>
+            </c:if>
 
-        </div>
-    </body>
+    </div>
+</body>
 </html>

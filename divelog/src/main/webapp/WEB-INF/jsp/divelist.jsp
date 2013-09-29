@@ -9,6 +9,7 @@
         <link href="/divelog/bootstrap-3.0.0/dist/css/main.css" rel="stylesheet">
         <title>Divelog</title>
     </head>
+    
     <body>
         <ul class="nav nav-tabs">
             <li><a href="divestats">Yhteenveto</a></li>
@@ -20,9 +21,11 @@
         <div class="panel panel-default">
             <p></p>
             <div class="panel-heading">Sukellukset</div>
+            
             <div class="panel-body">
                 <p>Valitse sukellus nähdäksesi tarkemmat tiedot ja muokataksesi sukellusta</p>
             </div>
+            
             <table class="table">
                 <thead>
                     <tr>
