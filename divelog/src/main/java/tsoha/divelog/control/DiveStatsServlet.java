@@ -3,6 +3,7 @@ package tsoha.divelog.control;
 import tsoha.divelog.database.DatabaseQuery;
 import tsoha.divelog.model.Diver;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -32,21 +33,23 @@ public class DiveStatsServlet extends BaseServlet {
         response.setContentType("text/html;charset=UTF-8");
         if (!isLogged(request, response)) {
             kickOutNotLogged(request, response);
+            return;
         }
-
-        request.setAttribute("diverName", testDb() + "!");
         showPage(request, response, "divestats");
     }
 
-    private String testDb() throws SQLException, Exception {
-        DatabaseQuery operation = new DatabaseQuery();
-        ResultSet result = operation.query("SELECT CONCAT(firstname,', ',lastname AS NAME FROM diver WHERE diver_id=1");
+    /**private String getDiverName(Diver diver) throws SQLException, Exception {
+        int id = diver.getDiverId();
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT CONCAT(firstname,' ',lastname) AS name FROM diver WHERE diver_id=?");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
         if (result.next()) {
             return result.getString("name");
         }
         return null;
 
-    }
+    }**/
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

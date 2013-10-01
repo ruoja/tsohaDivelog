@@ -1,5 +1,6 @@
 package tsoha.divelog.model;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import tsoha.divelog.database.DatabaseQuery;
@@ -74,16 +75,41 @@ public class Diver extends DatabaseQuery {
         return this;
     }
 
-    public static Diver getDiverLogin(String email, String password) throws SQLException, Exception {
+    public Diver getDiverLogin(String email, String password) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
-        ResultSet result;
-        result = query.query("SELECT email, pswd FROM diver");
-        while (result.next()) {
-            String acceptMail = result.getString("email");
-            String acceptPassword = result.getString("pswd");
-            if (acceptMail.equals(email) && acceptPassword.equals(password)) {
-                return new Diver(); //TODO: hae kannasta sukeltaja olio
-            }
+        PreparedStatement statement = query.query("SELECT diver_id FROM diver WHERE email=? AND pswd=?");
+        statement.setString(1, email);
+        statement.setNString(2, password);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            int id = result.getInt("diver_id");
+            return getDiverById(id);
+        }
+        return null;
+    }
+
+    private Diver getDiverById(int id) throws SQLException, Exception {
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT * FROM diver WHERE diver_id=?");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            int diver_id = result.getInt("diver_id");
+            String firstname = result.getString("firstname");
+            String lastname = result.getString("lastname");
+            String classification = result.getString("classification");
+            String phonenumber = result.getString("phonenumber");
+            String email = result.getString("email");
+
+            Diver diver = new Diver();
+            diver.setDiverId(diver_id);
+            diver.setDiverFirstName(firstname);
+            diver.setDiverLastName(lastname);
+            diver.setDiverClass(classification);
+            diver.setDiverPhone(phonenumber);
+            diver.setDiverEmail(email);
+
+            return diver;
         }
         return null;
     }

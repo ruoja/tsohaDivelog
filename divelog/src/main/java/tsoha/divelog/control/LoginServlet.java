@@ -59,15 +59,16 @@ public class LoginServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        Diver diver = new Diver();
         try {
-            if (Diver.getDiverLogin(username, password) != null) {
-                Diver registeredUser = Diver.getDiverLogin(username, password);
-                acceptLogin(request, response, registeredUser);
-            } else {
+            diver = diver.getDiverLogin(username, password);
+            if (diver == null) {
                 showError(request, response, "login", "Kirjautuminen epäonnistui, tarkista käyttäjätunnus ja salasana.");
+            } else {
+                acceptLogin(request, response, diver);
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
