@@ -38,7 +38,8 @@ public class DiveStatsServlet extends BaseServlet {
         showPage(request, response, "divestats");
     }
 
-    /**private String getDiverName(Diver diver) throws SQLException, Exception {
+    //tarviiko tätä?
+    private String getDiverName(Diver diver) throws SQLException, Exception {
         int id = diver.getDiverId();
         DatabaseQuery query = new DatabaseQuery();
         PreparedStatement statement = query.query("SELECT CONCAT(firstname,' ',lastname) AS name FROM diver WHERE diver_id=?");
@@ -49,9 +50,9 @@ public class DiveStatsServlet extends BaseServlet {
         }
         return null;
 
-    }**/
-
+    }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP
      * <code>GET</code> method.

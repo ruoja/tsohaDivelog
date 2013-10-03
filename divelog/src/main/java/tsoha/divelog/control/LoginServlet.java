@@ -62,13 +62,15 @@ public class LoginServlet extends BaseServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        int id;
         Diver diver = new Diver();
         try {
-            diver = diver.getDiverLogin(username, password);
-            if (diver == null) {
+            id = diver.loginDiver(username, password);
+            if (id == -1) {
                 showError(request, response, "login", "Kirjautuminen epäonnistui, tarkista käyttäjätunnus ja salasana.");
             } else {
-                acceptLogin(request, response, diver);
+                request.setAttribute("diverId", id);
+                acceptLogin(request, response);
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);

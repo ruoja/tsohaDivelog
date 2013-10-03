@@ -36,11 +36,9 @@ public class BaseServlet extends HttpServlet {
         showPage(request, response, page);
     }
 
-    public void acceptLogin(HttpServletRequest request, HttpServletResponse response, Diver registeredUser) throws IOException {
+    public void acceptLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        session.setAttribute("loggedInDiver", registeredUser);
-        request.setAttribute("diverFirstName", registeredUser.getDiverFirstName());
-        request.setAttribute("diverLastName", registeredUser.getDiverLastName());
+        session.setAttribute("loggedInDiver", new Diver());
         response.sendRedirect("divestats");
     }
     

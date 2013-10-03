@@ -75,7 +75,7 @@ public class Diver extends DatabaseQuery {
         return this;
     }
 
-    public Diver getDiverLogin(String email, String password) throws SQLException, Exception {
+    public int loginDiver(String email, String password) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
         PreparedStatement statement = query.query("SELECT diver_id FROM diver WHERE email=? AND pswd=?");
         statement.setString(1, email);
@@ -83,12 +83,12 @@ public class Diver extends DatabaseQuery {
         ResultSet result = statement.executeQuery();
         if (result.next()) {
             int id = result.getInt("diver_id");
-            return getDiverById(id);
+            return id;
         }
-        return null;
+        return -1;
     }
 
-    private Diver getDiverById(int id) throws SQLException, Exception {
+    /**private Diver getDiverById(int id) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
         PreparedStatement statement = query.query("SELECT * FROM diver WHERE diver_id=?");
         statement.setInt(1, id);
@@ -108,9 +108,11 @@ public class Diver extends DatabaseQuery {
             diver.setDiverClass(classification);
             diver.setDiverPhone(phonenumber);
             diver.setDiverEmail(email);
+            
+            result.close();
 
             return diver;
-        }
+        
         return null;
-    }
+    }**/
 }

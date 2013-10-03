@@ -24,7 +24,7 @@
         </ul>
         
         <div class="page-header">
-            <h1>Tervetuloa ${diverFirstName} ${diverLastName}</h1>
+            <h1>Tervetuloa ${diverId}</h1>
             <h2>Statistiikkaa sukellukelluksistasi</h2>
         </div>
             

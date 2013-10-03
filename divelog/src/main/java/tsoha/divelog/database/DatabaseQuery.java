@@ -12,9 +12,12 @@ public class DatabaseQuery {
     private PreparedStatement preparedStatement;
     private DatabaseAccess connection;
 
+    public DatabaseQuery() {
+        this.connection = new DatabaseAccess();
+    }
+
     public PreparedStatement query(String sql) throws SQLException, Exception {
         try {
-            connection = new DatabaseAccess();
             preparedStatement = connection.connectDatabase().prepareStatement(sql);
         } catch (SQLException ex) {
             throw ex;
