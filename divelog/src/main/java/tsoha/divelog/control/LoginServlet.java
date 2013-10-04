@@ -8,12 +8,15 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author jani
  */
 public class LoginServlet extends BaseServlet {
+
+    private static Diver diver;
 
     /**
      * Processes requests for both HTTP
@@ -60,17 +63,18 @@ public class LoginServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        int id;
-        Diver diver = new Diver();
+        String email = request.getParameter("email");
+        String pswd = request.getParameter("pswd");
+        diver = new Diver();
+
         try {
-            id = diver.loginDiver(username, password);
-            if (id == -1) {
+            diver = diver.getDiverByLogin(email, pswd);
+            if (diver == null) {
                 showError(request, response, "login", "Kirjautuminen epäonnistui, tarkista käyttäjätunnus ja salasana.");
             } else {
-                request.setAttribute("diverId", id);
-                acceptLogin(request, response);
+                HttpSession session = request.getSession();
+                session.setAttribute("loggedInDiver", diver);
+                response.sendRedirect("divestats");
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,4 +92,8 @@ public class LoginServlet extends BaseServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    public static Diver getLoggedDiver() {
+        return diver;
+    }
 }

@@ -24,7 +24,7 @@ public class Dive {
     private int startpressure;
     private int endpressure;
     private String gastype;
-    private int oxydenPercentage;
+    private int oxygenPercentage;
     private String description;
 
     public int getDive_id() {
@@ -91,8 +91,8 @@ public class Dive {
         return gastype;
     }
 
-    public int getOxydenPercentage() {
-        return oxydenPercentage;
+    public int getOxygenPercentage() {
+        return oxygenPercentage;
     }
 
     public String getDescription() {
@@ -179,8 +179,8 @@ public class Dive {
         return this;
     }
 
-    public Dive setOxydenPercentage(int oxydenPercentage) {
-        this.oxydenPercentage = oxydenPercentage;
+    public Dive setOxygenPercentage(int oxydenPercentage) {
+        this.oxygenPercentage = oxydenPercentage;
         return this;
     }
 

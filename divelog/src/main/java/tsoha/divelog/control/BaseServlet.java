@@ -5,8 +5,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import tsoha.divelog.model.Diver;
 
 /**
  *
@@ -34,15 +32,5 @@ public class BaseServlet extends HttpServlet {
     public void showError(HttpServletRequest request, HttpServletResponse response, String page, String message) throws ServletException, IOException {
         request.setAttribute("errorMessage", message);
         showPage(request, response, page);
-    }
-
-    public void acceptLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        session.setAttribute("loggedInDiver", new Diver());
-        response.sendRedirect("divestats");
-    }
-    
-    public Diver getLoggedDiver(HttpServletRequest request) {
-        return null; //TODO
     }
 }

@@ -3,6 +3,7 @@ package tsoha.divelog.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import tsoha.divelog.database.DatabaseQuery;
 
 /**
@@ -17,9 +18,7 @@ public class Diver extends DatabaseQuery {
     private String diverClass;
     private String diverPhone;
     private String diverEmail;
-
-    public Diver() {
-    }
+    private ArrayList<Dive> diveList;
 
     public int getDiverId() {
         return diverId;
@@ -45,74 +44,90 @@ public class Diver extends DatabaseQuery {
         return diverEmail;
     }
 
-    public Diver setDiverId(int diverId) {
+    private Diver setDiverId(int diverId) {
         this.diverId = diverId;
         return this;
     }
 
-    public Diver setDiverFirstName(String diverFirstName) {
+    private Diver setDiverFirstName(String diverFirstName) {
         this.diverFirstName = diverFirstName;
         return this;
     }
 
-    public Diver setDiverLastName(String diverLastName) {
+    private Diver setDiverLastName(String diverLastName) {
         this.diverLastName = diverLastName;
         return this;
     }
 
-    public Diver setDiverClass(String diverClass) {
+    private Diver setDiverClass(String diverClass) {
         this.diverClass = diverClass;
         return this;
     }
 
-    public Diver setDiverPhone(String diverPhone) {
+    private Diver setDiverPhone(String diverPhone) {
         this.diverPhone = diverPhone;
         return this;
     }
 
-    public Diver setDiverEmail(String diverEmail) {
+    private Diver setDiverEmail(String diverEmail) {
         this.diverEmail = diverEmail;
         return this;
     }
 
-    public int loginDiver(String email, String password) throws SQLException, Exception {
+    public Diver getDiverByLogin(String email, String pswd) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT diver_id FROM diver WHERE email=? AND pswd=?");
+        PreparedStatement statement = query.query("SELECT * FROM diver WHERE email=? AND pswd=?");
         statement.setString(1, email);
-        statement.setNString(2, password);
+        statement.setString(2, pswd);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
-            int id = result.getInt("diver_id");
-            return id;
+            this.setDiverId(result.getInt(1));
+            this.setDiverFirstName(result.getString(2));
+            this.setDiverLastName(result.getString(3));
+            this.setDiverClass(result.getString(4));
+            this.setDiverPhone(result.getString(5));
+            this.setDiverEmail(result.getString(6));
+            this.setDiveList(getDivesByDiverId(this.diverId));
+            return this;
         }
-        return -1;
+        return null;
     }
 
-    /**private Diver getDiverById(int id) throws SQLException, Exception {
+    private ArrayList<Dive> getDivesByDiverId(int id) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT * FROM diver WHERE diver_id=?");
+        PreparedStatement statement = query.query("SELECT * FROM dive WHERE diver_id=?");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
-        if (result.next()) {
-            int diver_id = result.getInt("diver_id");
-            String firstname = result.getString("firstname");
-            String lastname = result.getString("lastname");
-            String classification = result.getString("classification");
-            String phonenumber = result.getString("phonenumber");
-            String email = result.getString("email");
-
-            Diver diver = new Diver();
-            diver.setDiverId(diver_id);
-            diver.setDiverFirstName(firstname);
-            diver.setDiverLastName(lastname);
-            diver.setDiverClass(classification);
-            diver.setDiverPhone(phonenumber);
-            diver.setDiverEmail(email);
-            
-            result.close();
-
-            return diver;
-        
-        return null;
-    }**/
+        while (result.next()) {
+            Dive dive = new Dive();
+            dive.setDive_id(result.getInt(1));
+            dive.setSpot_id(result.getInt(3));
+            dive.setDiveNumber(result.getInt(4));
+            dive.setDivedate(result.getDate(5));
+            dive.setDivetimeInMinutes(result.getInt(6));
+            dive.setBottomtimeInMinutes(result.getInt(7));
+            dive.setMaxdepth(result.getInt(8));
+            dive.setVisibility(result.getInt(9));
+            dive.setAirtemp(result.getInt(10));
+            dive.setWatertemp(result.getInt(11));
+            dive.setSuittype(result.getString(12));
+            dive.setTanksize(result.getInt(13));
+            dive.setStartpressure(result.getInt(14));
+            dive.setEndpressure(result.getInt(15));
+            dive.setGastype(result.getString(16));
+            dive.setOxygenPercentage(result.getInt(17));
+            dive.setDescription(result.getString(18));
+            diveList.add(dive);
+        }
+        return diveList;
+    }
+    
+    private Diver setDiveList(ArrayList<Dive> diveList){
+        this.diveList = diveList;
+        return this;
+    }
+    
+    public ArrayList<Dive> getDiveList() {
+        return diveList;
+    }
 }

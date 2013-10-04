@@ -6,17 +6,22 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tsoha.divelog.model.Dive;
 
 /**
  *
  * @author jani
  */
 public class DiveStatsServlet extends BaseServlet {
+
+    private static ArrayList<Integer> diveList;
 
     /**
      * Processes requests for both HTTP
@@ -35,24 +40,15 @@ public class DiveStatsServlet extends BaseServlet {
             kickOutNotLogged(request, response);
             return;
         }
+        Diver diver = LoginServlet.getLoggedDiver();
+        request.setAttribute("diver", diver);
+        request.setAttribute("totalDives", diver.getDiveList().size());
         showPage(request, response, "divestats");
     }
 
-    //tarviiko tätä?
-    private String getDiverName(Diver diver) throws SQLException, Exception {
-        int id = diver.getDiverId();
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT CONCAT(firstname,' ',lastname) AS name FROM diver WHERE diver_id=?");
-        statement.setInt(1, id);
-        ResultSet result = statement.executeQuery();
-        if (result.next()) {
-            return result.getString("name");
-        }
-        return null;
+    
 
-    }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP
      * <code>GET</code> method.
@@ -67,10 +63,6 @@ public class DiveStatsServlet extends BaseServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-
-
-
-
         } catch (SQLException ex) {
             Logger.getLogger(DiveStatsServlet.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -94,10 +86,6 @@ public class DiveStatsServlet extends BaseServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-
-
-
-
         } catch (SQLException ex) {
             Logger.getLogger(DiveStatsServlet.class
                     .getName()).log(Level.SEVERE, null, ex);
