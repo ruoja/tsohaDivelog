@@ -3,6 +3,6 @@ tsohaDivelog
 
 Sukelluspäiväkirja. Tietokantasovellus syksy 2013. 
 
-Kirjautumistunnukset testaamista varten:
-email: test
-password: test
+Testata voi vaikka 'Sanna Sukeltajan' tunnuksin:
+email: sannas@dive.org
+password: sanna
