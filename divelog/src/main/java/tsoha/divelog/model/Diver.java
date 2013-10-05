@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import tsoha.divelog.database.DatabaseQuery;
 
 /**
@@ -18,7 +19,7 @@ public class Diver extends DatabaseQuery {
     private String diverClass;
     private String diverPhone;
     private String diverEmail;
-    private ArrayList<Dive> diveList;
+    private List<Dive> diveList = new ArrayList<Dive>();
 
     public int getDiverId() {
         return diverId;
@@ -87,13 +88,13 @@ public class Diver extends DatabaseQuery {
             this.setDiverClass(result.getString(4));
             this.setDiverPhone(result.getString(5));
             this.setDiverEmail(result.getString(6));
-            this.setDiveList(getDivesByDiverId(this.diverId));
+            this.setDiveList(getDivelistByDiverId(this.diverId));
             return this;
         }
         return null;
     }
 
-    private ArrayList<Dive> getDivesByDiverId(int id) throws SQLException, Exception {
+    private List<Dive> getDivelistByDiverId(int id) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
         PreparedStatement statement = query.query("SELECT * FROM dive WHERE diver_id=?");
         statement.setInt(1, id);
@@ -121,13 +122,13 @@ public class Diver extends DatabaseQuery {
         }
         return diveList;
     }
-    
-    private Diver setDiveList(ArrayList<Dive> diveList){
+
+    private Diver setDiveList(List<Dive> diveList) {
         this.diveList = diveList;
         return this;
     }
-    
-    public ArrayList<Dive> getDiveList() {
+
+    public List<Dive> getDiveList() {
         return diveList;
     }
 }

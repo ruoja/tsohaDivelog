@@ -16,37 +16,37 @@
             <li><a href="divelist">Sukellukset</a></li>
             <li><a href="spotslist">Kohteet</a></li>
             <li><a href="diver">Omat tiedot</a></li>
-            
+
             <form action="logout">
-            <button type="submit" class="btn btn-primary pull-right" >Kirjaudu ulos</button>
+                <button type="submit" class="btn btn-primary pull-right" >Kirjaudu ulos</button>
             </form>
-            
+
         </ul>
-        
+
         <div class="page-header">
             <h1>Tervetuloa ${diver.diverFirstName} ${diver.diverLastName} !</h1>
             <h2>Statistiikkaa sukellukelluksistasi</h2>
         </div>
-            
+
         <div class="row">
             <div class="col-md-4">Sukelluksia yhteensä: ${totalDives}</div>
             <div class="col-md-4">Viimeisin sukellus: ${lastDive}</div>
         </div>
-            
+
         <div class="row">
-            <div class="col-md-4">Pisin sukellus: ${longestDive}</div>
-            <div class="col-md-4">Sukellusaika yhteensä: ${totalDivetime}</div>
+            <div class="col-md-4">Pisin sukellus: ${longestDive} min</div>
+            <div class="col-md-4">Sukellusaika yhteensä: ${totalDivetime} min</div>
         </div>
-            
+
         <div class="row">
             <div class="col-md-4">Suosikkikohde: ${favoriteSpot}</div>
-            <div class="col-md-4">Suurin syvyys: ${maxDepth}</div>
+            <div class="col-md-4">Suurin syvyys: ${maxDepth} m</div>
         </div>
-            
+
         <div class="row">
             <div class="col-md-4">Sukelluksia Nitroxilla: ${nitroxDives}</div>
             <div class="col-md-4">Sukelluksia ilmalla: ${airDives}</div>
         </div>
-            
+
     </body>
 </html>
