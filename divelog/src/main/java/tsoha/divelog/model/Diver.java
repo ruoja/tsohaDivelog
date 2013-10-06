@@ -59,27 +59,27 @@ public class Diver extends DatabaseQuery {
         return this;
     }
 
-    private Diver setDiverFirstName(String diverFirstName) {
+    public Diver setDiverFirstName(String diverFirstName) {
         this.diverFirstname = diverFirstName;
         return this;
     }
 
-    private Diver setDiverLastName(String diverLastName) {
+    public Diver setDiverLastName(String diverLastName) {
         this.diverLastname = diverLastName;
         return this;
     }
 
-    private Diver setDiverClass(String diverClass) {
+    public Diver setDiverClass(String diverClass) {
         this.diverClass = diverClass;
         return this;
     }
 
-    private Diver setDiverPhone(String diverPhone) {
+    public Diver setDiverPhone(String diverPhone) {
         this.diverPhone = diverPhone;
         return this;
     }
 
-    private Diver setDiverEmail(String diverEmail) {
+    public Diver setDiverEmail(String diverEmail) {
         this.diverEmail = diverEmail;
         return this;
     }
@@ -89,7 +89,7 @@ public class Diver extends DatabaseQuery {
         return this;
     }
 
-    private Diver setDiveList(List<Dive> diveList) {
+    public Diver setDiveList(List<Dive> diveList) {
         this.diveList = diveList;
         return this;
     }
@@ -142,17 +142,16 @@ public class Diver extends DatabaseQuery {
         return diveList;
     }
 
-    private int insertNewDiverInDatabase() throws SQLException, Exception {
+    public void insertNewDiverInDatabase() throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
         PreparedStatement statement = query.query("INSERT INTO diver(firstname, lastname, classification, phoneneumber, email, pswd)"
                 + "VALUES(?, ?, ?, ?, ?, ?");
-        statement.setString(1, diverFirstname);
-        statement.setString(2, diverLastname);
-        statement.setString(3, diverClass);
-        statement.setString(4, diverPhone);
-        statement.setString(5, diverEmail);
-        statement.setString(6, diverPswd);
-        int result = statement.executeUpdate();
-        return result;
+        statement.setString(1, this.getDiverFirstName());
+        statement.setString(2, this.getDiverLastName());
+        statement.setString(3, this.getDiverClass());
+        statement.setString(4, this.getDiverPhone());
+        statement.setString(5, this.getDiverEmail());
+        statement.setString(6, this.getDiverPswd());
+        statement.executeUpdate();
     }
 }

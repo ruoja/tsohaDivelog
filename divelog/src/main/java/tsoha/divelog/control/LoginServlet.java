@@ -74,6 +74,7 @@ public class LoginServlet extends BaseServlet {
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedInDiver", diver);
+                setDiver(diver);
                 response.sendRedirect("divestats");
             }
         } catch (SQLException ex) {
@@ -92,8 +93,7 @@ public class LoginServlet extends BaseServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    public static Diver getLoggedDiver() {
-        return diver;
-    }
+    //public static Diver getLoggedDiver() {
+    // return diver;
+    //}
 }

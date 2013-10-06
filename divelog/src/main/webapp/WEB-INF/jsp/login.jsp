@@ -21,16 +21,15 @@
                 <input type="text" name="email" class="form-control" placeholder="sähköposti" autofocus>
                 <input type="password" name="pswd" class="form-control" placeholder="salasana">
                 <button type="submit" class="btn btn-lg btn-primary btn-block">Kirjaudu</button>
-                <button type="submit" formaction="register" class="btn btn-lg btn-primary btn-block">Rekisteröidy</button>
+                <button type="submit" formaction="register" formmethod="GET"class="btn btn-lg btn-primary btn-block">Rekisteröidy</button>
             </form>
-
             <c:if test="${errorMessage != null}">
                 <div class="alert alert-danger">${errorMessage}</div>
             </c:if>
             <c:if test="${goodbye != null}">
-                  <div class="alert alert-success">${goodbye}</div>
+                <div class="alert alert-success">${goodbye}</div>
             </c:if>
 
-    </div>
-</body>
+        </div>
+    </body>
 </html>
