@@ -14,11 +14,12 @@ import tsoha.divelog.database.DatabaseQuery;
 public class Diver extends DatabaseQuery {
 
     private int diverId;
-    private String diverFirstName;
-    private String diverLastName;
+    private String diverFirstname;
+    private String diverLastname;
     private String diverClass;
     private String diverPhone;
     private String diverEmail;
+    private String diverPswd;
     private List<Dive> diveList = new ArrayList<Dive>();
 
     public int getDiverId() {
@@ -26,11 +27,11 @@ public class Diver extends DatabaseQuery {
     }
 
     public String getDiverFirstName() {
-        return diverFirstName;
+        return diverFirstname;
     }
 
     public String getDiverLastName() {
-        return diverLastName;
+        return diverLastname;
     }
 
     public String getDiverClass() {
@@ -45,18 +46,26 @@ public class Diver extends DatabaseQuery {
         return diverEmail;
     }
 
+    public String getDiverPswd() {
+        return diverPswd;
+    }
+
+    public List<Dive> getDiveList() {
+        return diveList;
+    }
+
     private Diver setDiverId(int diverId) {
         this.diverId = diverId;
         return this;
     }
 
     private Diver setDiverFirstName(String diverFirstName) {
-        this.diverFirstName = diverFirstName;
+        this.diverFirstname = diverFirstName;
         return this;
     }
 
     private Diver setDiverLastName(String diverLastName) {
-        this.diverLastName = diverLastName;
+        this.diverLastname = diverLastName;
         return this;
     }
 
@@ -72,6 +81,16 @@ public class Diver extends DatabaseQuery {
 
     private Diver setDiverEmail(String diverEmail) {
         this.diverEmail = diverEmail;
+        return this;
+    }
+
+    public Diver setDiverPswd(String diverPswd) {
+        this.diverPswd = diverPswd;
+        return this;
+    }
+
+    private Diver setDiveList(List<Dive> diveList) {
+        this.diveList = diveList;
         return this;
     }
 
@@ -123,12 +142,17 @@ public class Diver extends DatabaseQuery {
         return diveList;
     }
 
-    private Diver setDiveList(List<Dive> diveList) {
-        this.diveList = diveList;
-        return this;
-    }
-
-    public List<Dive> getDiveList() {
-        return diveList;
+    private int insertNewDiverInDatabase() throws SQLException, Exception {
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("INSERT INTO diver(firstname, lastname, classification, phoneneumber, email, pswd)"
+                + "VALUES(?, ?, ?, ?, ?, ?");
+        statement.setString(1, diverFirstname);
+        statement.setString(2, diverLastname);
+        statement.setString(3, diverClass);
+        statement.setString(4, diverPhone);
+        statement.setString(5, diverEmail);
+        statement.setString(6, diverPswd);
+        int result = statement.executeUpdate();
+        return result;
     }
 }
