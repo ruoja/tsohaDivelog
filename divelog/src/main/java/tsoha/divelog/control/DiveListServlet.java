@@ -1,9 +1,13 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import tsoha.divelog.model.Diver;
 
 /**
  *
@@ -24,8 +28,19 @@ public class DiveListServlet extends BaseServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if (!isLogged(request, response))kickOutNotLogged(request, response);
-        showPage(request, response, "divelist");
+        if (!isLogged(request, response)) {
+            kickOutNotLogged(request, response);
+            return;
+        }
+        Diver diver = BaseServlet.getDiver();
+        List diveList = diver.getDiveList();
+        if (diveList.isEmpty()) {
+            showMessage(request, response, "divelist", "Et ole lisännyt vielä yhtään sukellusta.");
+        } else {
+            request.setAttribute("diveList", diveList);
+            showPage(request, response, "divelist");
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

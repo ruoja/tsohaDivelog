@@ -1,6 +1,8 @@
 package tsoha.divelog.database;
 
+import com.sun.rowset.JdbcRowSetImpl;
 import java.sql.*;
+import javax.sql.rowset.JdbcRowSet;
 
 /**
  *
@@ -23,6 +25,11 @@ public class DatabaseQuery {
             throw ex;
         }
         return preparedStatement;
+    }
+    
+    public JdbcRowSet getRowSet() throws Exception {
+        JdbcRowSetImpl rowSet = new JdbcRowSetImpl(connection.connectDatabase());
+        return rowSet;
     }
 
     public void closeAll() throws SQLException, Exception {

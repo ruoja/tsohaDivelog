@@ -38,10 +38,14 @@ public class DiveStatsServlet extends BaseServlet {
             kickOutNotLogged(request, response);
             return;
         }
-        Diver diver = getDiver();
+        Diver diver = BaseServlet.getDiver();
+        if (diver.getDiveList().isEmpty()) {
+            request.setAttribute("lastDive", noDives());
+        } else {
+            request.setAttribute("lastDive", getLastDiveDate(diver));
+        }
         request.setAttribute("diver", diver);
         request.setAttribute("totalDives", diver.getDiveList().size());
-        request.setAttribute("lastDive", getLastDiveDate(diver));
         request.setAttribute("longestDive", getLongestDive(diver));
         request.setAttribute("totalDivetime", getTotalDivetime(diver));
         request.setAttribute("favoriteSpot", getFavoriteSpot(diver));
@@ -111,13 +115,16 @@ public class DiveStatsServlet extends BaseServlet {
     private Date getLastDiveDate(Diver diver) {
         List<Dive> diveList = diver.getDiveList();
         if (diveList.isEmpty()) {
-            Date date = new Date();
-            return date;
+            return null;
         } else {
             int dives = diveList.size() - 1;
             Date lastDive = diveList.get(dives).getDivedate();
             return lastDive;
         }
+    }
+
+    private String noDives() {
+        return "Et ole lisännyt yhtään sukellusta.";
     }
 
     private int getLongestDive(Diver diver) throws SQLException, Exception {
@@ -154,7 +161,7 @@ public class DiveStatsServlet extends BaseServlet {
         if (result.next()) {
             return result.getString(1);
         }
-        return "Et ole lisännyt yhtään kohdetta";
+        return "Et ole lisännyt yhtään kohdetta.";
     }
 
     private int getMaxDepth(Diver diver) throws SQLException, Exception {

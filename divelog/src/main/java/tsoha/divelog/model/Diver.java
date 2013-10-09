@@ -1,10 +1,12 @@
 package tsoha.divelog.model;
 
+import com.sun.rowset.JdbcRowSetImpl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.sql.rowset.JdbcRowSet;
 import tsoha.divelog.database.DatabaseQuery;
 
 /**
@@ -122,6 +124,7 @@ public class Diver extends DatabaseQuery {
             Dive dive = new Dive();
             dive.setDive_id(result.getInt(1));
             dive.setSpot_id(result.getInt(3));
+            dive.setSpotNameById(result.getInt(3));
             dive.setDiveNumber(result.getInt(4));
             dive.setDivedate(result.getDate(5));
             dive.setDivetimeInMinutes(result.getInt(6));
@@ -140,18 +143,5 @@ public class Diver extends DatabaseQuery {
             diveList.add(dive);
         }
         return diveList;
-    }
-
-    public void insertNewDiverInDatabase() throws SQLException, Exception {
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("INSERT INTO diver(firstname, lastname, classification, phoneneumber, email, pswd)"
-                + "VALUES(?, ?, ?, ?, ?, ?");
-        statement.setString(1, this.getDiverFirstName());
-        statement.setString(2, this.getDiverLastName());
-        statement.setString(3, this.getDiverClass());
-        statement.setString(4, this.getDiverPhone());
-        statement.setString(5, this.getDiverEmail());
-        statement.setString(6, this.getDiverPswd());
-        statement.executeUpdate();
     }
 }

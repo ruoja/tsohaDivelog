@@ -16,8 +16,6 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginServlet extends BaseServlet {
 
-    private static Diver diver;
-
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -65,7 +63,7 @@ public class LoginServlet extends BaseServlet {
 
         String email = request.getParameter("email");
         String pswd = request.getParameter("pswd");
-        diver = new Diver();
+        Diver diver = BaseServlet.getDiver();
 
         try {
             diver = diver.getDiverByLogin(email, pswd);
@@ -74,7 +72,7 @@ public class LoginServlet extends BaseServlet {
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedInDiver", diver);
-                setDiver(diver);
+                BaseServlet.setDiver(diver);
                 response.sendRedirect("divestats");
             }
         } catch (SQLException ex) {

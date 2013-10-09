@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,7 @@
             <div class="panel-heading text-center">Omat Tiedot</div>
             <div class="panel-body">
 
-                <form class="form-horizontal" role="form">
+                <form action="diver" method="POST" class="form-horizontal">
                     <div class="form-group">
                         <label for="inputEtunimi" class="col-md-2 control-label">Etunimi</label>
                         <div class="col-md-6">
@@ -83,9 +83,9 @@
         </div>
         
         <div class="btn-toolbar pull-right">
-            <button type="button" class="btn btn-primary">Poista</button>
-            <a href="divestats" class="btn btn-primary">Peruuta</a>
-            <button type="button" class="btn btn-primary">Tallenna</button>
+            <button type="submit" class="btn btn-primary">Poista</button>
+            <button formaction="divestats" class="btn btn-primary">Peruuta</button>
+            <button type="submit" class="btn btn-primary">Tallenna</button>
         </div>
     </body>
 </html>

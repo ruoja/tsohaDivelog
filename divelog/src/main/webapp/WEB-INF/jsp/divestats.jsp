@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,7 @@
 
         <div class="page-header">
             <h1>Tervetuloa ${diver.diverFirstName} ${diver.diverLastName} !</h1>
-            <h2>Statistiikkaa sukellukelluksistasi</h2>
+            <h2>Statistiikkaa sukellukelluksistasi:</h2>
         </div>
 
         <div class="row">

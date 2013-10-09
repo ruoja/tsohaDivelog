@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -20,8 +20,8 @@
 
         <div class="panel panel-default">
             <p></p>
-            <div class="panel-heading">Kohteet</div>
-            <div class="panel-body">
+            <div class="panel-heading text-center text-primary">Kohteet</div>
+            <div class="panel-body text-center text-info">
                 <p>Valitse kohde nähdäksesi tarkemmat tiedot ja muokataksesi kohdetta</p>
             </div>
             
@@ -33,6 +33,8 @@
                         <th>Tyyppi</th>
                         <th>Minimisyvyys</th>
                     </tr>
+                    
+                    <tr></tr>
                 </thead>
             </table>
         </div>

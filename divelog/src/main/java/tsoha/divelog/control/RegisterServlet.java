@@ -2,12 +2,15 @@ package tsoha.divelog.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import tsoha.divelog.model.Dive;
 import tsoha.divelog.model.Diver;
 
 /**
@@ -15,13 +18,6 @@ import tsoha.divelog.model.Diver;
  * @author jani
  */
 public class RegisterServlet extends BaseServlet {
-
-    String firstname;
-    String lastname;
-    String classification;
-    String phonenumber;
-    String email;
-    String password;
 
     /**
      * Processes requests for both HTTP
@@ -67,31 +63,45 @@ public class RegisterServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            Diver diver = BaseServlet.getDiver();
+            String firstname = request.getParameter("inputEtunimi");
+            String lastname = request.getParameter("inputSukunimi");
+            String classification = request.getParameter("inputLuokitus");
+            String phonenumber = request.getParameter("inputPuhelin");
+            String email = request.getParameter("inputEmail");
+            String password = request.getParameter("inputSalasana");
+            String passwordConfirm = request.getParameter("inputVahvistaSalasana");
+            List<Dive> diveList = new ArrayList<Dive>();
+            diver.setDiverFirstName(firstname);
+            diver.setDiverLastName(lastname);
+            diver.setDiverClass(classification);
+            diver.setDiverPhone(phonenumber);
+            diver.setDiverEmail(email);
+            diver.setDiverPswd(password);
+            diver.setDiveList(diveList);
 
-        firstname = request.getParameter("inputEtunimi");
-        lastname = request.getParameter("inputSukunimi");
-        classification = request.getParameter("inputLuokitus");
-        phonenumber = request.getParameter("inputPuhelin");
-        email = request.getParameter("inputEmail");
-        password = request.getParameter("inputSalasana");
-        String passwordConfirm = request.getParameter("inputVahvistaSalasana");
-
-        if (!password.equals(passwordConfirm)) {
-            showError(request, response, "register", "Vahvista salasana kirjoittamalla sama salasana uudelleen!");
-        } else if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            showError(request, response, "register", "Täytä kaikki pakolliset kentät!");
-        } else {
-            try {
-                Diver diver = register();
-                HttpSession session = request.getSession();
-                session.setAttribute("loggedInDiver", diver);
-                setDiver(diver);
-                response.sendRedirect("divestats");
-            } catch (SQLException ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+            if (!password.equals(passwordConfirm)) {
+                showError(request, response, "register", "Vahvista salasana kirjoittamalla sama salasana uudelleen!");
+            } else if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                showError(request, response, "register", "Täytä kaikki pakolliset kentät!");
+            } else if (diver.getDiverByLogin(email, password) != null) {
+                showWarning(request, response, "register", "Olet jo rekisteröitynyt. Kirjaudu tunnuksillasi.");
+            } else {
+                try {
+                    insertNewDiverInDatabase(diver);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("loggedInDiver", diver);
+                    BaseServlet.setDiver(diver);
+                    response.sendRedirect("divestats");
+                } catch (Exception ex) {
+                    Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -104,16 +114,4 @@ public class RegisterServlet extends BaseServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private Diver register() throws SQLException, Exception {
-        Diver diver = new Diver();
-        diver.setDiverFirstName(firstname);
-        diver.setDiverLastName(lastname);
-        diver.setDiverClass(classification);
-        diver.setDiverPhone(phonenumber);
-        diver.setDiverEmail(email);
-        diver.setDiverPswd(password);
-        diver.insertNewDiverInDatabase();
-        return diver;
-    }
 }

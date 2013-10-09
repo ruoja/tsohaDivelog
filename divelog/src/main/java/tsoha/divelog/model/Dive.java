@@ -1,6 +1,10 @@
 package tsoha.divelog.model;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import tsoha.divelog.database.DatabaseQuery;
 
 /**
  *
@@ -26,6 +30,7 @@ public class Dive {
     private String gastype;
     private int oxygenPercentage;
     private String description;
+    private String spotNameById;
 
     public int getDive_id() {
         return dive_id;
@@ -97,6 +102,10 @@ public class Dive {
 
     public String getDescription() {
         return description;
+    }
+    
+    public String getSpotNameById() {
+        return this.spotNameById;
     }
 
     public Dive setDive_id(int dive_id) {
@@ -186,6 +195,19 @@ public class Dive {
 
     public Dive setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public Dive setSpotNameById(int id) throws SQLException, Exception {
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT name FROM spot WHERE spot_id =?");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            this.spotNameById = result.getString(1);
+        } else {
+            this.spotNameById = null;
+        }
         return this;
     }
 }
