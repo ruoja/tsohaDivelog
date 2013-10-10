@@ -26,11 +26,6 @@ public class DatabaseQuery {
         }
         return preparedStatement;
     }
-    
-    public JdbcRowSet getRowSet() throws Exception {
-        JdbcRowSetImpl rowSet = new JdbcRowSetImpl(connection.connectDatabase());
-        return rowSet;
-    }
 
     public void closeAll() throws SQLException, Exception {
         this.resultSet.close();

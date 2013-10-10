@@ -63,17 +63,15 @@ public class LoginServlet extends BaseServlet {
 
         String email = request.getParameter("email");
         String pswd = request.getParameter("pswd");
-        Diver diver = BaseServlet.getDiver();
 
         try {
-            diver = diver.getDiverByLogin(email, pswd);
-            if (diver == null) {
+            Diver diver = new Diver();
+            if (diver.getDiverByLogin(email, pswd) == false) {
                 showError(request, response, "login", "Kirjautuminen epäonnistui, tarkista käyttäjätunnus ja salasana.");
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedInDiver", diver);
-                BaseServlet.setDiver(diver);
-                response.sendRedirect("divestats");
+                showPage(request, response, "divestats");
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);

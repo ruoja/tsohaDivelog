@@ -103,7 +103,7 @@ public class Dive {
     public String getDescription() {
         return description;
     }
-    
+
     public String getSpotNameById() {
         return this.spotNameById;
     }

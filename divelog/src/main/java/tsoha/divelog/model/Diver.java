@@ -1,12 +1,11 @@
 package tsoha.divelog.model;
 
-import com.sun.rowset.JdbcRowSetImpl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import javax.sql.rowset.JdbcRowSet;
 import tsoha.divelog.database.DatabaseQuery;
 
 /**
@@ -96,7 +95,7 @@ public class Diver extends DatabaseQuery {
         return this;
     }
 
-    public Diver getDiverByLogin(String email, String pswd) throws SQLException, Exception {
+    public boolean getDiverByLogin(String email, String pswd) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
         PreparedStatement statement = query.query("SELECT * FROM diver WHERE email=? AND pswd=?");
         statement.setString(1, email);
@@ -110,9 +109,9 @@ public class Diver extends DatabaseQuery {
             this.setDiverPhone(result.getString(5));
             this.setDiverEmail(result.getString(6));
             this.setDiveList(getDivelistByDiverId(this.diverId));
-            return this;
+            return true;
         }
-        return null;
+        return false;
     }
 
     private List<Dive> getDivelistByDiverId(int id) throws SQLException, Exception {
@@ -143,5 +142,104 @@ public class Diver extends DatabaseQuery {
             diveList.add(dive);
         }
         return diveList;
+    }
+
+    public int getTotalDives() {
+        return this.diveList.size();
+    }
+
+    public Date getLastDiveDate() {
+        if (this.diveList.isEmpty()) {
+            return null;
+        } else {
+            int dives = diveList.size() - 1;
+            Date lastDive = diveList.get(dives).getDivedate();
+            return lastDive;
+        }
+    }
+
+    public int getLongestDive() throws SQLException, Exception {
+        int id = diverId;
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT MAX(divetime) FROM dive WHERE diver_id=?");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            return result.getInt(1);
+        }
+        return 0;
+    }
+
+    public int getTotalDivetime() throws SQLException, Exception {
+        int id = diverId;
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT SUM(divetime) FROM dive WHERE diver_id=?");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            return result.getInt(1);
+        }
+        return 0;
+    }
+
+    public String getFavoriteSpot() throws SQLException, Exception {
+        int id = diverId;
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT name from spot WHERE spot_id="
+                + "(SELECT spot_id FROM dive WHERE diver_id=? GROUP BY spot_id ORDER BY COUNT(*) DESC LIMIT 1)");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            return result.getString(1);
+        }
+        return "Et ole lisännyt yhtään kohdetta.";
+    }
+
+    public int getMaxDepth() throws SQLException, Exception {
+        int id = diverId;
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT MAX(maxdepth) FROM dive WHERE diver_id=?");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            return result.getInt(1);
+        }
+        return 0;
+    }
+
+    public int getNitroxDives() throws SQLException, Exception {
+        int id = diverId;
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT COUNT(gastype) FROM dive WHERE diver_id=? AND gastype='nitrox'");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            return result.getInt(1);
+        }
+        return 0;
+    }
+
+    public int getAirDives() throws SQLException, Exception {
+        int id = diverId;
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT COUNT(gastype) FROM dive WHERE diver_id=? AND gastype='air'");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            return result.getInt(1);
+        }
+        return 0;
+    }
+
+    public void insertInDatabase() throws SQLException, Exception {
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("INSERT INTO diver(firstname,lastname,classification,phonenumber,email,pswd) VALUES(?,?,?,?,?,?)");
+        statement.setString(1, this.diverFirstname);
+        statement.setString(2, this.diverLastname);
+        statement.setString(3, this.diverClass);
+        statement.setString(4, this.diverPhone);
+        statement.setString(5, this.diverEmail);
+        statement.setString(6, this.diverPswd);
+        statement.executeUpdate();
     }
 }

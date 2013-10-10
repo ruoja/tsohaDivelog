@@ -24,8 +24,7 @@ public class LogoutServlet extends BaseServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        //BaseServlet.setDiver(null);
+
         request.getSession().removeAttribute("loggedInDiver");
         request.setAttribute("goodbye", "Olet kirjautunut ulos. Tervetuloa uudelleen!");
         showPage(request, response, "login");

@@ -9,13 +9,18 @@
         <link href="/divelog/bootstrap-3.0.0/dist/css/main.css" rel="stylesheet">
         <title>Divelog</title>
     </head>
-    
+
     <body>
         <ul class="nav nav-tabs">
             <li><a href="divestats">Yhteenveto</a></li>
             <li><a href="divelist">Sukellukset</a></li>
             <li class="active"><a href="#">Kohteet</a></li>
             <li><a href="diver">Omat tiedot</a></li>
+
+            <form action="logout">
+                <button type="submit" class="btn btn-primary pull-right" >Kirjaudu ulos</button>
+            </form>
+
         </ul>
 
         <div class="panel panel-default">
@@ -24,7 +29,7 @@
             <div class="panel-body text-center text-info">
                 <p>Valitse kohde nähdäksesi tarkemmat tiedot ja muokataksesi kohdetta</p>
             </div>
-            
+
             <table class="table">
                 <thead>
                     <tr>
@@ -33,12 +38,14 @@
                         <th>Tyyppi</th>
                         <th>Minimisyvyys</th>
                     </tr>
-                    
+
                     <tr></tr>
                 </thead>
             </table>
         </div>
 
         <a href="spot" class="btn btn-primary">Lisää uusi</a>
+
     </body>
+
 </html>

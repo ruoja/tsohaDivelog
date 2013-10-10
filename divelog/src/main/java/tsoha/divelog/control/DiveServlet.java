@@ -24,7 +24,10 @@ public class DiveServlet extends BaseServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if (!isLogged(request, response))kickOutNotLogged(request, response);
+        if (!isLogged(request, response)) {
+            kickOutNotLogged(request, response);
+            return;
+        }
         showPage(request, response, "dive");
     }
 

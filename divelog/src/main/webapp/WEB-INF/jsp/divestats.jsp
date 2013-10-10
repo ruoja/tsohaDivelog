@@ -20,32 +20,31 @@
             <form action="logout">
                 <button type="submit" class="btn btn-primary pull-right" >Kirjaudu ulos</button>
             </form>
-
         </ul>
 
         <div class="page-header">
-            <h1>Tervetuloa ${diver.diverFirstName} ${diver.diverLastName} !</h1>
+            <h1>Tervetuloa ${loggedInDiver.diverFirstName} ${loggedInDiver.diverLastName} !</h1>
             <h2>Statistiikkaa sukellukelluksistasi:</h2>
         </div>
 
         <div class="row">
-            <div class="col-md-4">Sukelluksia yhteensä: ${totalDives}</div>
-            <div class="col-md-4">Viimeisin sukellus: ${lastDive}</div>
+            <div class="col-md-4">Sukelluksia yhteensä: ${loggedInDiver.totalDives}</div>
+            <div class="col-md-4">Viimeisin sukellus: ${loggedInDiver.lastDiveDate}</div>
         </div>
 
         <div class="row">
-            <div class="col-md-4">Pisin sukellus: ${longestDive} min</div>
-            <div class="col-md-4">Sukellusaika yhteensä: ${totalDivetime} min</div>
+            <div class="col-md-4">Pisin sukellus: ${loggedInDiver.longestDive} min</div>
+            <div class="col-md-4">Sukellusaika yhteensä: ${loggedInDiver.totalDivetime} min</div>
         </div>
 
         <div class="row">
-            <div class="col-md-4">Suosikkikohde: ${favoriteSpot}</div>
-            <div class="col-md-4">Suurin syvyys: ${maxDepth} m</div>
+            <div class="col-md-4">Suosikkikohde: ${loggedInDiver.favoriteSpot}</div>
+            <div class="col-md-4">Suurin syvyys: ${loggedInDiver.maxDepth} m</div>
         </div>
 
         <div class="row">
-            <div class="col-md-4">Sukelluksia Nitroxilla: ${nitroxDives}</div>
-            <div class="col-md-4">Sukelluksia ilmalla: ${airDives}</div>
+            <div class="col-md-4">Sukelluksia Nitroxilla: ${loggedInDiver.nitroxDives}</div>
+            <div class="col-md-4">Sukelluksia ilmalla: ${loggedInDiver.airDives}</div>
         </div>
 
     </body>

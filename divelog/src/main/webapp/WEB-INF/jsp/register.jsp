@@ -13,20 +13,22 @@
     <body>
         <div class="panel panel-default">
             <div class="panel-heading text-center">Rekisteröidy syöttämällä tietosi</div>
-            <div class="panel-body">
+            <div class="panel-body text-center text-warning">
+                <p>Tähdellä (*) merkityt kentät ovat pakollisia!</p>
+                </div>
 
                 <form action="register" method="POST" class="form-horizontal">
                     <div class="form-group">
                         <label for="inputEtunimi" class="col-md-2 control-label">Etunimi</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="inputEtunimi" placeholder="Etunimi">
+                            <input required type="text" class="form-control" name="inputEtunimi" placeholder="Etunimi *">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputSukunimi" class="col-md-2 control-label">Sukunimi</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="inputSukunimi" placeholder="Sukunimi">
+                            <input required type="text" class="form-control" name="inputSukunimi" placeholder="Sukunimi *">
                         </div>
                     </div>
 
@@ -47,31 +49,31 @@
                     <div class="form-group">
                         <label for="inputEmail" class="col-md-2 control-label">Email</label>
                         <div class="col-md-6">
-                            <input type="email" class="form-control" name="inputEmail" placeholder="Email">
+                            <input required type="email" class="form-control" name="inputEmail" placeholder="Email *">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputSalasana" class="col-md-2 control-label">Salasana</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" name="inputSalasana" placeholder="Salasana">
+                            <input required type="password" class="form-control" name="inputSalasana" placeholder="Salasana *">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputVahvistaSalasana" class="col-md-2 control-label">Vahvista salasana</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" name="inputVahvistaSalasana" placeholder="Salasana uudelleen">
+                            <input required type="password" class="form-control" name="inputVahvistaSalasana" placeholder="Salasana uudelleen *">
                         </div>
                     </div>
 
                     <div class="btn-toolbar pull-right">
-                        <button type="submit" formaction="login" formmethod="GET" class="btn btn-primary">Peruuta</button>
+                        <a href="login" class="btn btn-primary">Peruuta</a>
                         <button type="submit" class="btn btn-primary">Tallenna</button>
 
                     </div>
                 </form>
-            </div>
+            
         </div>
         <c:if test="${errorMessage != null}">
             <div class="alert alert-danger">${errorMessage}</div>

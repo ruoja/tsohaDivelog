@@ -9,7 +9,6 @@ import java.sql.*;
 public class DatabaseAccess {
 
     private Connection connection = null;
-    
     private final String USER = "root";
     private final String PSWD = "password";
     private final String DB_DRIVER = "com.mysql.jdbc.Driver";

@@ -37,12 +37,14 @@ public class Spot {
         return description;
     }
 
-    public void setSpot_id(int spot_id) {
+    public Spot setSpot_id(int spot_id) {
         this.spot_id = spot_id;
+        return this;
     }
 
-    public void setName(String name) {
+    public Spot setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Spot setLocation(String location) {

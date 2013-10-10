@@ -64,7 +64,7 @@ public class RegisterServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            Diver diver = BaseServlet.getDiver();
+            Diver diver = new Diver();
             String firstname = request.getParameter("inputEtunimi");
             String lastname = request.getParameter("inputSukunimi");
             String classification = request.getParameter("inputLuokitus");
@@ -83,17 +83,14 @@ public class RegisterServlet extends BaseServlet {
 
             if (!password.equals(passwordConfirm)) {
                 showError(request, response, "register", "Vahvista salasana kirjoittamalla sama salasana uudelleen!");
-            } else if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                showError(request, response, "register", "Täytä kaikki pakolliset kentät!");
-            } else if (diver.getDiverByLogin(email, password) != null) {
-                showWarning(request, response, "register", "Olet jo rekisteröitynyt. Kirjaudu tunnuksillasi.");
+            } else if (diver.getDiverByLogin(email, password) == true) {
+                showError(request, response, "register", "Olet jo rekisteröitynyt. Kirjaudu tunnuksillasi.");
             } else {
                 try {
-                    insertNewDiverInDatabase(diver);
+                    diver.insertInDatabase();
                     HttpSession session = request.getSession();
                     session.setAttribute("loggedInDiver", diver);
-                    BaseServlet.setDiver(diver);
-                    response.sendRedirect("divestats");
+                    showPage(request, response, "divestats");
                 } catch (Exception ex) {
                     Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }

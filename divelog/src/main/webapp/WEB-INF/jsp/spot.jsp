@@ -14,7 +14,7 @@
             <div class="panel-heading text-center">Kohde</div>
             <div class="panel-body">
 
-                <form class="form-horizontal" role="form">
+                <form action="spot" method="POST" class="form-horizontal" role="form">
                     
                     <div class="form-group">
                         <label for="inputNimi" class="col-md-2 control-label">Nimi</label>
@@ -69,9 +69,9 @@
         </div>
         
         <div class="btn-toolbar pull-right">
-            <button type="button" class="btn btn-primary">Poista</button>
-            <a href="divestats" class="btn btn-primary">Peruuta</a>
-            <button type="button" class="btn btn-primary">Tallenna</button>
+            <button type="submit" class="btn btn-primary">Poista</button>
+            <a href="spotlist" class="btn btn-primary">Peruuta</a>
+            <button type="submit" class="btn btn-primary">Tallenna</button>
         </div>
     </body>
 </html>

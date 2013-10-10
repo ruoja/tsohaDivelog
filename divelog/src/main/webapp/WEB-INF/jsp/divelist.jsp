@@ -16,6 +16,11 @@
             <li class="active"><a href="#">Sukellukset</a></li>
             <li><a href="spotslist">Kohteet</a></li>
             <li><a href="diver">Omat tiedot</a></li>
+
+            <form action="logout">
+                <button type="submit" class="btn btn-primary pull-right" >Kirjaudu ulos</button>
+            </form>
+
         </ul>
 
         <div class="panel panel-default">
@@ -39,7 +44,7 @@
 
                 <c:forEach var="dive" items="${diveList}">
                     <tr>
-                        <td>${dive.diveNumber}</td>
+                        <td><a href="/divelog/dive">${dive.diveNumber}</a></td>
                         <td>${dive.divedate}</td>
                         <td>${dive.spotNameById}</td>
                         <td>${dive.divetimeInMinutes}</td>
@@ -52,12 +57,12 @@
         <c:if test="${message != null}">
             <div class="alert alert-success">${message}</div>
         </c:if>
+            
         <c:if test="${warningMessage != null}">
             <div class="alert alert-warning">${warningMessage}</div>
         </c:if>
-
-        <form action="dive">
-            <button type="submit" class="btn btn-primary">Lisää uusi</button>
-        </form>
+            
+            <a href="dive" class="btn btn-primary">Lisää uusi</a>
+            
     </body>
 </html>

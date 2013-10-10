@@ -23,6 +23,7 @@
                 <button type="submit" class="btn btn-lg btn-primary btn-block">Kirjaudu</button>
                 <button type="submit" formaction="register" formmethod="GET"class="btn btn-lg btn-primary btn-block">Rekisteröidy</button>
             </form>
+            
             <c:if test="${errorMessage != null}">
                 <div class="alert alert-danger">${errorMessage}</div>
             </c:if>
