@@ -1,6 +1,5 @@
 package tsoha.divelog.model;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,20 +14,21 @@ public class Dive {
     private int dive_id;
     private int diver_id;
     private int spot_id;
-    private int diveNumber;
-    private Date divedate;
-    private int divetimeInMinutes;
-    private int bottomtimeInMinutes;
-    private int maxdepth;
-    private int visibility;
-    private int airtemp;
-    private int watertemp;
+    private String diveNumber;
+    private String divedate;
+    private String spotname;
+    private String divetimeInMinutes;
+    private String bottomtimeInMinutes;
+    private String maxdepth;
+    private String visibility;
+    private String airtemp;
+    private String watertemp;
     private String suittype;
-    private int tanksize;
-    private int startpressure;
-    private int endpressure;
+    private String tanksize;
+    private String startpressure;
+    private String endpressure;
     private String gastype;
-    private int oxygenPercentage;
+    private String oxygenPercentage;
     private String description;
     private String spotNameById;
 
@@ -44,35 +44,39 @@ public class Dive {
         return spot_id;
     }
 
-    public int getDiveNumber() {
+    public String getDiveNumber() {
         return diveNumber;
     }
 
-    public Date getDivedate() {
+    public String getDivedate() {
         return divedate;
     }
 
-    public int getDivetimeInMinutes() {
+    public String getSpotname() {
+        return spotname;
+    }
+
+    public String getDivetimeInMinutes() {
         return divetimeInMinutes;
     }
 
-    public int getBottomtimeInMinutes() {
+    public String getBottomtimeInMinutes() {
         return bottomtimeInMinutes;
     }
 
-    public int getMaxdepth() {
+    public String getMaxdepth() {
         return maxdepth;
     }
 
-    public int getVisibility() {
+    public String getVisibility() {
         return visibility;
     }
 
-    public int getAirtemp() {
+    public String getAirtemp() {
         return airtemp;
     }
 
-    public int getWatertemp() {
+    public String getWatertemp() {
         return watertemp;
     }
 
@@ -80,15 +84,15 @@ public class Dive {
         return suittype;
     }
 
-    public int getTanksize() {
+    public String getTanksize() {
         return tanksize;
     }
 
-    public int getStartpressure() {
+    public String getStartpressure() {
         return startpressure;
     }
 
-    public int getEndpressure() {
+    public String getEndpressure() {
         return endpressure;
     }
 
@@ -96,7 +100,7 @@ public class Dive {
         return gastype;
     }
 
-    public int getOxygenPercentage() {
+    public String getOxygenPercentage() {
         return oxygenPercentage;
     }
 
@@ -118,47 +122,50 @@ public class Dive {
         return this;
     }
 
-    public Dive setSpot_id(int spot_id) {
+    public void setSpot_id(int spot_id) {
         this.spot_id = spot_id;
-        return this;
     }
 
-    public Dive setDiveNumber(int diveNumber) {
+    public Dive setDiveNumber(String diveNumber) {
         this.diveNumber = diveNumber;
         return this;
     }
 
-    public Dive setDivedate(Date divedate) {
+    public Dive setDivedate(String divedate) {
         this.divedate = divedate;
         return this;
     }
 
-    public Dive setDivetimeInMinutes(int divetimeInMinutes) {
+    public void setSpotname(String spotname) {
+        this.spotname = spotname;
+    }
+
+    public Dive setDivetimeInMinutes(String divetimeInMinutes) {
         this.divetimeInMinutes = divetimeInMinutes;
         return this;
     }
 
-    public Dive setBottomtimeInMinutes(int bottomtimeInMinutes) {
+    public Dive setBottomtimeInMinutes(String bottomtimeInMinutes) {
         this.bottomtimeInMinutes = bottomtimeInMinutes;
         return this;
     }
 
-    public Dive setMaxdepth(int maxdepth) {
+    public Dive setMaxdepth(String maxdepth) {
         this.maxdepth = maxdepth;
         return this;
     }
 
-    public Dive setVisibility(int visibility) {
+    public Dive setVisibility(String visibility) {
         this.visibility = visibility;
         return this;
     }
 
-    public Dive setAirtemp(int airtemp) {
+    public Dive setAirtemp(String airtemp) {
         this.airtemp = airtemp;
         return this;
     }
 
-    public Dive setWatertemp(int watertemp) {
+    public Dive setWatertemp(String watertemp) {
         this.watertemp = watertemp;
         return this;
     }
@@ -168,17 +175,17 @@ public class Dive {
         return this;
     }
 
-    public Dive setTanksize(int tanksize) {
+    public Dive setTanksize(String tanksize) {
         this.tanksize = tanksize;
         return this;
     }
 
-    public Dive setStartpressure(int startpressure) {
+    public Dive setStartpressure(String startpressure) {
         this.startpressure = startpressure;
         return this;
     }
 
-    public Dive setEndpressure(int endpressure) {
+    public Dive setEndpressure(String endpressure) {
         this.endpressure = endpressure;
         return this;
     }
@@ -188,7 +195,7 @@ public class Dive {
         return this;
     }
 
-    public Dive setOxygenPercentage(int oxydenPercentage) {
+    public Dive setOxygenPercentage(String oxydenPercentage) {
         this.oxygenPercentage = oxydenPercentage;
         return this;
     }
@@ -197,7 +204,13 @@ public class Dive {
         this.description = description;
         return this;
     }
-
+    /**
+     * Haetaan tietokannasta sukelluskohteen nimi kohteen id-numeron perusteella
+     * @param id sukelluskohteen yksilöivä id-numero
+     * @return Kohteen nimi, jos kohde löytyy tietokannasta, muuten null.
+     * @throws SQLException
+     * @throws Exception 
+     */
     public Dive setSpotNameById(int id) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
         PreparedStatement statement = query.query("SELECT name FROM spot WHERE spot_id =?");
@@ -209,5 +222,18 @@ public class Dive {
             this.spotNameById = null;
         }
         return this;
+    }
+    /**
+     * Tallennetaan sukellus tietokantaan.
+     * @throws SQLException
+     * @throws Exception 
+     */
+    public void insertInDatabase() throws SQLException, Exception {
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("INSERT INTO dive(divenumber, divedate, divetimeInMinutes, bottomtimeInMinutes,"
+                + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygenPercentage"
+                + "description) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        statement.setInt(1, dive_id);
+        
     }
 }

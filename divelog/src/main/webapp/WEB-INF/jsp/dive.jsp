@@ -18,121 +18,121 @@
                 <form class="form-horizontal" role="form">
 
                     <div class="form-group">
-                        <label for="inputSukelluksenNumero" class="col-md-2 control-label">Sukellus no.</label>
+                        <label for="inputDivenumber" class="col-md-2 control-label">Sukellus no.</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputSukelluksenNumero" placeholder="Sukellus no.">
+                            <input type="number" class="form-control" id="inputDivenumber" placeholder="Sukellus no.">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputPvm" class="col-md-2 control-label">Päivämäärä</label>
+                        <label for="inputDate" class="col-md-2 control-label">Päivämäärä</label>
                         <div class="col-md-6">
-                            <input type="date" class="form-control" id="inputpvm" placeholder="Päivämäärä">
+                            <input type="date" class="form-control" id="inputDate" placeholder="Päivämäärä">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSukellusaika" class="col-md-2 control-label">Sukellusaika</label>
+                        <label for="inputDivetime" class="col-md-2 control-label">Sukellusaika</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputSukellusaika" placeholder="Sukellusaika minuutteina">
+                            <input type="number" class="form-control" id="inputDivetime" placeholder="Sukellusaika minuutteina">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputPohja-aika" class="col-md-2 control-label">Pohja-aika</label>
+                        <label for="inputBottomtime" class="col-md-2 control-label">Pohja-aika</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputPohja-aika" placeholder="Pohja-aika minuutteina">
+                            <input type="number" class="form-control" id="inputBottomtime" placeholder="Pohja-aika minuutteina">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputMaxSyvyys" class="col-md-2 control-label">Suurin syvyys</label>
+                        <label for="inputMaxdepth" class="col-md-2 control-label">Suurin syvyys</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputMaxSyvyys" placeholder="Maksimisyvyys metreinä">
+                            <input type="number" class="form-control" id="inputMaxdepth" placeholder="Maksimisyvyys metreinä">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputNäkyvyys" class="col-md-2 control-label">Näkyvyys</label>
+                        <label for="inputVisibility" class="col-md-2 control-label">Näkyvyys</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputNäkyvyys" placeholder="Näkyvyys metreinä">
+                            <input type="number" class="form-control" id="inputVisibility" placeholder="Näkyvyys metreinä">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputIlmanLämpö" class="col-md-2 control-label">Ilman lämpötila</label>
+                        <label for="inputAirtemp" class="col-md-2 control-label">Ilman lämpötila</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputIlmanLämpö" placeholder="Ilman lämpötila">
+                            <input type="number" class="form-control" id="inputAirtemp" placeholder="Ilman lämpötila">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputVedenLämpö" class="col-md-2 control-label">Veden lämpötila</label>
+                        <label for="inputWatertemp" class="col-md-2 control-label">Veden lämpötila</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputVedenLämpö" placeholder="Veden lämpötila">
+                            <input type="number" class="form-control" id="inputWatertemp" placeholder="Veden lämpötila">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputLaite" class="col-md-2 control-label">Laitteen koko</label>
+                        <label for="inputTanksize" class="col-md-2 control-label">Laitteen koko</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputLaite" placeholder="Laitteen koko">
+                            <input type="number" class="form-control" id="inputTanksize" placeholder="Laitteen koko">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputAlkupaine" class="col-md-2 control-label">Alkupaine</label>
+                        <label for="inputStartpressure" class="col-md-2 control-label">Alkupaine</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputAlkupaine" placeholder="Alkupaine bar">
+                            <input type="number" class="form-control" id="inputStartpressure" placeholder="Alkupaine bar">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputLoppupaine" class="col-md-2 control-label">Loppupaine</label>
+                        <label for="inputEndpressure" class="col-md-2 control-label">Loppupaine</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputLoppupaine" placeholder="Loppupaine">
+                            <input type="number" class="form-control" id="inputEndpressure" placeholder="Loppupaine">
                         </div>
                     </div>
 
-                    <label for="kaasuOptions" class="col-md-2 control-label">Kaasutyyppi</label>
+                    <label for="gasOptions" class="col-md-2 control-label">Kaasutyyppi</label>
                     <div class="radio-inline">
                         <label>
-                            <input type="radio" name="kaasuOptions" id="nitrox" value="nitrox" checked>
+                            <input type="radio" name="gasOptions" id="nitrox" value="nitrox" checked>
                             Nitrox
                         </label>
                     </div>
                     <div class="radio-inline">
                         <label>
-                            <input type="radio" name="kaasuOptions" id="ilma" value="ilma">
+                            <input type="radio" name="gasOptions" id="air" value="air">
                             Ilma
                         </label>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputHappiprosentti" class="col-md-2 control-label">Happiprosentti</label>
+                        <label for="inputOxygenPercentage" class="col-md-2 control-label">Happiprosentti</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputHappiprosentti" placeholder="Happiprosentti">
+                            <input type="number" class="form-control" id="inputOxygenPercentage" placeholder="Happiprosentti">
                         </div>
                     </div>
 
-                    <label for="pukuOptions" class="col-md-2 control-label">Pukutyyppi</label>
+                    <label for="suitOptions" class="col-md-2 control-label">Pukutyyppi</label>
                     <div class="radio-inline">
                         <label>
-                            <input type="radio" name="pukuOptions" id="kuivapuku" value="kuivapuku" checked>
+                            <input type="radio" name="suitOptions" id="kuivapuku" value="drysuit" checked>
                             Kuivapuku
                         </label>
                     </div>
                     <div class="radio-inline">
                         <label>
-                            <input type="radio" name="pukuOptions" id="märkäpuku" value="märkäpuku">
+                            <input type="radio" name="suitOptions" id="wetsuit" value="wetsuit">
                             Märkäpuku
                         </label>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputKuvaus" class="col-md-2 control-label">Kuvaus</label>
+                        <label for="inputDescription" class="col-md-2 control-label">Kuvaus</label>
                         <div class="col-md-6">
-                            <textarea class="form-control" id="inputKuvaus" placeholder="Kuvaus" rows="8"></textarea>                          
+                            <textarea class="form-control" id="inputDescription" placeholder="Kuvaus" rows="8"></textarea>                          
                         </div>
                     </div>
                 </form>

@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import tsoha.divelog.database.DatabaseQuery;
 
@@ -95,6 +94,15 @@ public class Diver extends DatabaseQuery {
         return this;
     }
 
+    /**
+     * Haetaan tietokannasta sukeltajan tiedot kirjautmistietojen perusteella.
+     *
+     * @param email sukeltajan käyttäjätunnuksena käytettävä email-osoite
+     * @param pswd sukeltajan salasana
+     * @return kirjautunut sukeltaja
+     * @throws SQLException
+     * @throws Exception
+     */
     public boolean getDiverByLogin(String email, String pswd) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
         PreparedStatement statement = query.query("SELECT * FROM diver WHERE email=? AND pswd=?");
@@ -114,6 +122,15 @@ public class Diver extends DatabaseQuery {
         return false;
     }
 
+    /**
+     * Haetaan lista sukeltajan kirjaamista sukelluksista sukeltajan id-numeron
+     * perusteella.
+     *
+     * @param id sukeltajan yksilöivä id-numero
+     * @return lista sukeltajan kirjaamista sukelluksista
+     * @throws SQLException
+     * @throws Exception
+     */
     private List<Dive> getDivelistByDiverId(int id) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
         PreparedStatement statement = query.query("SELECT * FROM dive WHERE diver_id=?");
@@ -124,40 +141,56 @@ public class Diver extends DatabaseQuery {
             dive.setDive_id(result.getInt(1));
             dive.setSpot_id(result.getInt(3));
             dive.setSpotNameById(result.getInt(3));
-            dive.setDiveNumber(result.getInt(4));
-            dive.setDivedate(result.getDate(5));
-            dive.setDivetimeInMinutes(result.getInt(6));
-            dive.setBottomtimeInMinutes(result.getInt(7));
-            dive.setMaxdepth(result.getInt(8));
-            dive.setVisibility(result.getInt(9));
-            dive.setAirtemp(result.getInt(10));
-            dive.setWatertemp(result.getInt(11));
+            dive.setDiveNumber(result.getString(4));
+            dive.setDivedate(result.getString(5));
+            dive.setDivetimeInMinutes(result.getString(6));
+            dive.setBottomtimeInMinutes(result.getString(7));
+            dive.setMaxdepth(result.getString(8));
+            dive.setVisibility(result.getString(9));
+            dive.setAirtemp(result.getString(10));
+            dive.setWatertemp(result.getString(11));
             dive.setSuittype(result.getString(12));
-            dive.setTanksize(result.getInt(13));
-            dive.setStartpressure(result.getInt(14));
-            dive.setEndpressure(result.getInt(15));
+            dive.setTanksize(result.getString(13));
+            dive.setStartpressure(result.getString(14));
+            dive.setEndpressure(result.getString(15));
             dive.setGastype(result.getString(16));
-            dive.setOxygenPercentage(result.getInt(17));
+            dive.setOxygenPercentage(result.getString(17));
             dive.setDescription(result.getString(18));
             diveList.add(dive);
         }
         return diveList;
     }
 
+    /**
+     *
+     * @return kirjattujen sukellusten määrä
+     */
     public int getTotalDives() {
         return this.diveList.size();
     }
 
-    public Date getLastDiveDate() {
+    /**
+     * haetaan viimeisimmän sukelluksen ajankohta
+     *
+     * @return edellisen sukelluksen päivämäärä. null jos sukelluksia ei ole
+     */
+    public String getLastDiveDate() {
         if (this.diveList.isEmpty()) {
             return null;
         } else {
             int dives = diveList.size() - 1;
-            Date lastDive = diveList.get(dives).getDivedate();
+            String lastDive = diveList.get(dives).getDivedate();
             return lastDive;
         }
     }
 
+    /**
+     * haetaan tietokannasta pisin sukellusaika
+     *
+     * @return pisin sukellusaika minuutteina
+     * @throws SQLException
+     * @throws Exception
+     */
     public int getLongestDive() throws SQLException, Exception {
         int id = diverId;
         DatabaseQuery query = new DatabaseQuery();
@@ -170,6 +203,13 @@ public class Diver extends DatabaseQuery {
         return 0;
     }
 
+    /**
+     * haetaan tietokannasta kaikkien sukellusten yhteiskesto
+     *
+     * @return sukellusten yhteiskesto minuutteina
+     * @throws SQLException
+     * @throws Exception
+     */
     public int getTotalDivetime() throws SQLException, Exception {
         int id = diverId;
         DatabaseQuery query = new DatabaseQuery();
@@ -182,6 +222,13 @@ public class Diver extends DatabaseQuery {
         return 0;
     }
 
+    /**
+     * haetaan tietokannasta suosituimman kohteen nimi
+     *
+     * @return sen kohteen nimi jossa sukeltajalla on eniten sukelluksia
+     * @throws SQLException
+     * @throws Exception
+     */
     public String getFavoriteSpot() throws SQLException, Exception {
         int id = diverId;
         DatabaseQuery query = new DatabaseQuery();
@@ -195,6 +242,13 @@ public class Diver extends DatabaseQuery {
         return "Et ole lisännyt yhtään kohdetta.";
     }
 
+    /**
+     * haetaan tietokannasta syvin sukellus
+     *
+     * @return suurin sukellussyvyys metreinä
+     * @throws SQLException
+     * @throws Exception
+     */
     public int getMaxDepth() throws SQLException, Exception {
         int id = diverId;
         DatabaseQuery query = new DatabaseQuery();
@@ -207,6 +261,13 @@ public class Diver extends DatabaseQuery {
         return 0;
     }
 
+    /**
+     * haetaan tietokannasta sukellukset joissa kaasutyyppinä on nitrox
+     *
+     * @return nitrox-sukellusten lukumäärä
+     * @throws SQLException
+     * @throws Exception
+     */
     public int getNitroxDives() throws SQLException, Exception {
         int id = diverId;
         DatabaseQuery query = new DatabaseQuery();
@@ -219,6 +280,13 @@ public class Diver extends DatabaseQuery {
         return 0;
     }
 
+    /**
+     * haetaan tietokannasta sukellukset joissa kaasutyyppinä on ilma
+     *
+     * @return ilmasukellusten lukumäärä
+     * @throws SQLException
+     * @throws Exception
+     */
     public int getAirDives() throws SQLException, Exception {
         int id = diverId;
         DatabaseQuery query = new DatabaseQuery();
@@ -231,6 +299,12 @@ public class Diver extends DatabaseQuery {
         return 0;
     }
 
+    /**
+     * tallennetaan sukeltajan tiedot tietokantaan
+     *
+     * @throws SQLException
+     * @throws Exception
+     */
     public void insertInDatabase() throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
         PreparedStatement statement = query.query("INSERT INTO diver(firstname,lastname,classification,phonenumber,email,pswd) VALUES(?,?,?,?,?,?)");
