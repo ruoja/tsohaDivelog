@@ -1,10 +1,14 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import tsoha.divelog.model.Dive;
+import tsoha.divelog.model.Spot;
 
 /**
  *
@@ -23,12 +27,13 @@ public class DiveServlet extends BaseServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         if (!isLogged(request, response)) {
             kickOutNotLogged(request, response);
             return;
         }
+        request.setAttribute("spotlist", Spot.getSpotlist());
         showPage(request, response, "dive");
     }
 
@@ -45,7 +50,13 @@ public class DiveServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -62,7 +73,7 @@ public class DiveServlet extends BaseServlet {
             throws ServletException, IOException {
 
         Dive dive = new Dive();
-        
+
         String divenumber = request.getParameter("inputDivenumber");
         String divedate = request.getParameter("inputDivedate");
         String divetime = request.getParameter("inputDivetime");
@@ -78,7 +89,7 @@ public class DiveServlet extends BaseServlet {
         String gastype = request.getParameter("inputGastype");
         String oxygenPercentage = request.getParameter("inputOxygenPercentage");
         String description = request.getParameter("inputDescription");
-        
+
         dive.setDiveNumber(divenumber);
         dive.setDivedate(divedate);
         dive.setDivetimeInMinutes(divetime);
@@ -94,8 +105,13 @@ public class DiveServlet extends BaseServlet {
         dive.setGastype(gastype);
         dive.setOxygenPercentage(oxygenPercentage);
         dive.setDescription(description);
-        
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

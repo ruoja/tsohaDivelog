@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tsoha.divelog.model.Diver;
 
 /**
  *
@@ -28,6 +29,13 @@ public class DiverServlet extends BaseServlet {
             kickOutNotLogged(request, response);
             return;
         }
+        Diver diver = (Diver) request.getSession().getAttribute("loggedInDiver");
+        request.setAttribute("firstName", diver.getDiverFirstName());
+        request.setAttribute("lastName", diver.getDiverLastName());
+        request.setAttribute("classification", diver.getDiverClass());
+        request.setAttribute("phonenumber", diver.getDiverPhone());
+        request.setAttribute("email", diver.getDiverEmail());
+  
         showPage(request, response, "diver");
     }
 

@@ -1,5 +1,12 @@
 package tsoha.divelog.model;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import tsoha.divelog.database.DatabaseQuery;
+
 /**
  *
  * @author jani
@@ -12,6 +19,7 @@ public class Spot {
     private String spottype;
     private int mindepth;
     private String description;
+    private static List<Spot> spotlist = new ArrayList<Spot>();
 
     public int getSpot_id() {
         return spot_id;
@@ -65,5 +73,22 @@ public class Spot {
     public Spot setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    public static List<Spot> getSpotlist() throws SQLException, Exception {
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT * FROM spot");
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            Spot spot = new Spot();
+            spot.setSpot_id(result.getInt(1));
+            spot.setName(result.getString(2));
+            spot.setLocation(result.getString(3));
+            spot.setSpottype(result.getString(4));
+            spot.setMindepth(result.getInt(5));
+            spot.setDescription(result.getString(6));
+            spotlist.add(spot);
+        }
+        return spotlist;
     }
 }

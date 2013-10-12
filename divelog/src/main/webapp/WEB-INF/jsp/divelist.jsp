@@ -14,7 +14,7 @@
         <ul class="nav nav-tabs">
             <li><a href="divestats">Yhteenveto</a></li>
             <li class="active"><a href="#">Sukellukset</a></li>
-            <li><a href="spotslist">Kohteet</a></li>
+            <li><a href="spotlist">Kohteet</a></li>
             <li><a href="diver">Omat tiedot</a></li>
 
             <form action="logout">

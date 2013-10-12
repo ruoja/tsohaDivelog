@@ -13,7 +13,7 @@
         <ul class="nav nav-tabs">
             <li><a href="divestats">Yhteenveto</a></li>
             <li><a href="divelist">Sukellukset</a></li>
-            <li><a href="spotslist">Kohteet</a></li>
+            <li><a href="spotlist">Kohteet</a></li>
             <li class="active"><a href="#">Omat tiedot</a></li>
 
             <form action="logout">
@@ -32,35 +32,35 @@
                 <div class="form-group">
                     <label for="inputEtunimi" class="col-md-2 control-label">Etunimi</label>
                     <div class="col-md-6">
-                        <input required type="text" class="form-control" id="inputEtunimi" placeholder="Etunimi">
+                        <input required type="text" class="form-control" id="inputEtunimi" placeholder="${firstName}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputSukunimi" class="col-md-2 control-label">Sukunimi</label>
                     <div class="col-md-6">
-                        <input required type="text" class="form-control" id="inputSukunimi" placeholder="Sukunimi">
+                        <input required type="text" class="form-control" id="inputSukunimi" placeholder="${lastName}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputLuokitus" class="col-md-2 control-label">Luokitus</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="inputLuokitus" placeholder="Sukeltajaluokka">
+                        <input type="text" class="form-control" id="inputLuokitus" placeholder="${classification}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputPuhelin" class="col-md-2 control-label">Puhelinnumero</label>
                     <div class="col-md-6">
-                        <input type="tel" class="form-control" id="inputPuhelin" placeholder="Puhelinnumero">
+                        <input type="tel" class="form-control" id="inputPuhelin" placeholder="${phonenumber}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputEmail" class="col-md-2 control-label">Email</label>
                     <div class="col-md-6">
-                        <input required type="email" class="form-control" id="inputEmail" placeholder="Email">
+                        <input required type="email" class="form-control" id="inputEmail" placeholder="${email}">
                     </div>
                 </div>
 

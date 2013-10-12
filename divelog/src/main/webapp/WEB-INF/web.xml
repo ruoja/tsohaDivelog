@@ -67,7 +67,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SpotslistServlet</servlet-name>
-        <url-pattern>/spotslist</url-pattern>
+        <url-pattern>/spotlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
