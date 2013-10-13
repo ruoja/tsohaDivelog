@@ -1,9 +1,14 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tsoha.divelog.model.Spot;
 
 /**
  *
@@ -22,13 +27,19 @@ public class SpotlistServlet extends BaseServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         if (!isLogged(request, response)) {
             kickOutNotLogged(request, response);
             return;
         }
-        showPage(request, response, "spotlist");
+        List allSpots = Spot.getAllSpots();
+        if (allSpots.isEmpty()) {
+            showMessage(request, response, "spotlist", "Ei näytettäviä kohteita.");
+        } else {
+            request.setAttribute("allSpots", allSpots);
+            showPage(request, response, "spotlist");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -44,7 +55,13 @@ public class SpotlistServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SpotlistServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(SpotlistServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -59,7 +76,13 @@ public class SpotlistServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SpotlistServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(SpotlistServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

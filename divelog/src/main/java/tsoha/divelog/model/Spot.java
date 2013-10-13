@@ -19,7 +19,7 @@ public class Spot {
     private String spottype;
     private int mindepth;
     private String description;
-    private static List<Spot> spotlist = new ArrayList<Spot>();
+    //private static List<Spot> allSpots = new ArrayList<Spot>();
 
     public int getSpot_id() {
         return spot_id;
@@ -75,9 +75,10 @@ public class Spot {
         return this;
     }
 
-    public static List<Spot> getSpotlist() throws SQLException, Exception {
+    public static List<Spot> getAllSpots() throws SQLException, Exception {
+        List<Spot> allSpots = new ArrayList<Spot>();
         DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT * FROM spot");
+        PreparedStatement statement = query.query("SELECT * FROM spot GROUP BY name");
         ResultSet result = statement.executeQuery();
         while (result.next()) {
             Spot spot = new Spot();
@@ -87,8 +88,8 @@ public class Spot {
             spot.setSpottype(result.getString(4));
             spot.setMindepth(result.getInt(5));
             spot.setDescription(result.getString(6));
-            spotlist.add(spot);
+            allSpots.add(spot);
         }
-        return spotlist;
+        return allSpots;
     }
 }

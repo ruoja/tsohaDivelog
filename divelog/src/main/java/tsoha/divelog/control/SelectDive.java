@@ -15,7 +15,7 @@ import tsoha.divelog.model.Spot;
  *
  * @author jani
  */
-public class DiveServlet extends BaseServlet {
+public class SelectDive extends BaseServlet {
 
     /**
      * Processes requests for both HTTP
@@ -30,13 +30,14 @@ public class DiveServlet extends BaseServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        if (!isLogged(request, response)) {
-            kickOutNotLogged(request, response);
-            return;
-        }
+
+        String diveNumber = request.getParameter("diveNumber");
+        Dive dive = Dive.getDiveByNumber(diveNumber);
         List allSpots = Spot.getAllSpots();
+        request.setAttribute("dive", dive);
         request.setAttribute("allSpots", allSpots);
         showPage(request, response, "dive");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,9 +56,9 @@ public class DiveServlet extends BaseServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SelectDive.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SelectDive.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -73,46 +74,12 @@ public class DiveServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Dive dive = new Dive();
-
-        String divenumber = request.getParameter("inputDivenumber");
-        String divedate = request.getParameter("inputDivedate");
-        String divetime = request.getParameter("inputDivetime");
-        String bottomtime = request.getParameter("inputBottomtime");
-        String maxdepth = request.getParameter("inputMaxdepth");
-        String visibility = request.getParameter("inputVisibility");
-        String airtemp = request.getParameter("inputWatertemp");
-        String watertemp = request.getParameter("inputWatertemp");
-        String suittype = request.getParameter("inputSuittype");
-        String tanksize = request.getParameter("inputTanksize");
-        String startpressure = request.getParameter("inputStartpressure");
-        String endpressure = request.getParameter("inputEndpressure");
-        String gastype = request.getParameter("inputGastype");
-        String oxygenPercentage = request.getParameter("inputOxygenPercentage");
-        String description = request.getParameter("inputDescription");
-
-        dive.setDiveNumber(divenumber);
-        dive.setDivedate(divedate);
-        dive.setDivetimeInMinutes(divetime);
-        dive.setBottomtimeInMinutes(bottomtime);
-        dive.setMaxdepth(maxdepth);
-        dive.setVisibility(visibility);
-        dive.setAirtemp(airtemp);
-        dive.setWatertemp(watertemp);
-        dive.setSuittype(suittype);
-        dive.setTanksize(tanksize);
-        dive.setStartpressure(startpressure);
-        dive.setEndpressure(endpressure);
-        dive.setGastype(gastype);
-        dive.setOxygenPercentage(oxygenPercentage);
-        dive.setDescription(description);
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SelectDive.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SelectDive.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

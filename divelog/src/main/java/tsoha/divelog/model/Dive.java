@@ -204,12 +204,14 @@ public class Dive {
         this.description = description;
         return this;
     }
+
     /**
      * Haetaan tietokannasta sukelluskohteen nimi kohteen id-numeron perusteella
+     *
      * @param id sukelluskohteen yksilöivä id-numero
      * @return Kohteen nimi, jos kohde löytyy tietokannasta, muuten null.
      * @throws SQLException
-     * @throws Exception 
+     * @throws Exception
      */
     public Dive setSpotNameById(int id) throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
@@ -223,10 +225,12 @@ public class Dive {
         }
         return this;
     }
+
     /**
      * Tallennetaan sukellus tietokantaan.
+     *
      * @throws SQLException
-     * @throws Exception 
+     * @throws Exception
      */
     public void insertInDatabase() throws SQLException, Exception {
         DatabaseQuery query = new DatabaseQuery();
@@ -234,6 +238,36 @@ public class Dive {
                 + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygenPercentage"
                 + "description) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         statement.setInt(1, dive_id);
-        
+
+    }
+
+    public static Dive getDiveByNumber(String divenumber) throws SQLException, Exception {
+        Dive dive = new Dive();
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("SELECT * FROM dive WHERE divenumber=?");
+        statement.setString(1, "divenumber");
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            dive.setDive_id(result.getInt(1));
+            dive.setDiver_id(result.getInt(2));
+            dive.setSpot_id(result.getInt(3));
+            dive.setDiveNumber(result.getString(4));
+            dive.setDivedate(result.getString(5));
+            dive.setDivetimeInMinutes(result.getString(6));
+            dive.setBottomtimeInMinutes(result.getString(7));
+            dive.setMaxdepth(result.getString(8));
+            dive.setVisibility(result.getString(9));
+            dive.setAirtemp(result.getString(10));
+            dive.setWatertemp(result.getString(11));
+            dive.setSuittype(result.getString(12));
+            dive.setTanksize(result.getString(13));
+            dive.setStartpressure(result.getString(14));
+            dive.setEndpressure(result.getString(15));
+            dive.setGastype(result.getString(16));
+            dive.setOxygenPercentage(result.getString(17));
+            dive.setDescription(result.getString(18));
+            return dive;
+        }
+        return dive;
     }
 }

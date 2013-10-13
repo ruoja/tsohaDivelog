@@ -7,6 +7,9 @@
         <link href="/divelog/bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
         <link href="/divelog/bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet">
         <link href="/divelog/bootstrap-3.0.0/dist/css/main.css" rel="stylesheet">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="/divelog/bootstrap-3.0.0/dist/js/bootstrap.min.js"></script>
+
         <title>Divelog</title>
     </head>
 
@@ -44,7 +47,7 @@
 
                 <c:forEach var="dive" items="${diveList}">
                     <tr>
-                        <td><a href="/divelog/dive">${dive.diveNumber}</a></td>
+                        <td><button id="diveNumber"><a href="/divelog/selectdive">${dive.diveNumber}</a></button></td>
                         <td>${dive.divedate}</td>
                         <td>${dive.spotNameById}</td>
                         <td>${dive.divetimeInMinutes}</td>
@@ -57,12 +60,12 @@
         <c:if test="${message != null}">
             <div class="alert alert-success">${message}</div>
         </c:if>
-            
+
         <c:if test="${warningMessage != null}">
             <div class="alert alert-warning">${warningMessage}</div>
         </c:if>
-            
-            <a href="dive" class="btn btn-primary">Lisää uusi</a>
-            
+
+        <a href="dive" class="btn btn-primary">Lisää uusi</a>
+
     </body>
 </html>

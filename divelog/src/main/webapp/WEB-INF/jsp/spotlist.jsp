@@ -39,7 +39,14 @@
                         <th>Minimisyvyys</th>
                     </tr>
 
-                    <tr></tr>
+                    <c:forEach var="spot" items="${allSpots}">
+                        <tr>
+                            <td><a href="/divelog/selectspot">${spot.name}</a></td>
+                            <td>${spot.location}</td>
+                            <td>${spot.spottype}</td>
+                            <td>${spot.mindepth}</td>
+                        </tr>
+                    </c:forEach>
                 </thead>
             </table>
         </div>

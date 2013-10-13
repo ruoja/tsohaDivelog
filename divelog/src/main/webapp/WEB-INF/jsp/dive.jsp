@@ -24,7 +24,7 @@
                     </button>
 
                     <ul class="dropdown-menu" role="menu">
-                        <c:forEach var="spot" items="${spotlist}">
+                        <c:forEach var="spot" items="${allSpots}">
                             <li><a href="#">${spot.name}</a></li>
                             </c:forEach>
                         <li class="divider"></li>
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label for="inputDivenumber" class="col-md-2 control-label">Sukellus no.</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputDivenumber" placeholder="Sukellus no.">
+                                <input type="number" class="form-control" id="inputDivenumber" placeholder="Sukelluksen no.">
                             </div>
                         </div>
 
