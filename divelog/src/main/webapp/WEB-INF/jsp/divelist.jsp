@@ -33,29 +33,31 @@
             <div class="panel-body text-center text-info">
                 <p>Valitse sukellus nähdäksesi tarkemmat tiedot ja muokataksesi sukellusta</p>
             </div>
-        </div>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>pvm</th>
-                    <th>Kohde</th>
-                    <th>Aika</th>
-                    <th>Syvyys</th>
-                </tr>
-
-                <c:forEach var="dive" items="${diveList}">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><button id="diveNumber"><a href="/divelog/selectdive">${dive.diveNumber}</a></button></td>
-                        <td>${dive.divedate}</td>
-                        <td>${dive.spotNameById}</td>
-                        <td>${dive.divetimeInMinutes}</td>
-                        <td>${dive.maxdepth}</td>
+                        <th>Valitse</th>
+                        <th>Sukelluksen no.</th>
+                        <th>Pvm</th>
+                        <th>Kohde</th>
+                        <th>Aika</th>
+                        <th>Syvyys</th>
                     </tr>
-                </c:forEach>
-            </thead>
-        </table>
+
+                    <c:forEach var="dive" items="${diveList}">
+                        <tr>
+                            <td><div class="checkbox"><input type="checkbox" value=""></div></td>
+                            <td>${dive.diveNumber}</td>
+                            <td>${dive.divedate}</td>
+                            <td>${dive.spotNameById}</td>
+                            <td>${dive.divetimeInMinutes}</td>
+                            <td>${dive.maxdepth}</td>
+                        </tr>
+                    </c:forEach>
+                </thead>
+            </table>
+        </div>
 
         <c:if test="${message != null}">
             <div class="alert alert-success">${message}</div>
@@ -65,7 +67,11 @@
             <div class="alert alert-warning">${warningMessage}</div>
         </c:if>
 
-        <a href="dive" class="btn btn-primary">Lisää uusi</a>
+        <div class="btn-toolbar pull-right">
+            <button type="button" class="btn btn-primary">Näytä valittu</button>
+            <button type="button" class="btn btn-primary">Poista valitut</button>
+            <a href="dive" class="btn btn-primary">Lisää uusi</a>
+        </div>
 
     </body>
 </html>

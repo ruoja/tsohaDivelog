@@ -33,6 +33,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Valitse</th>
                         <th>Nimi</th>
                         <th>Sijainti</th>
                         <th>Tyyppi</th>
@@ -41,7 +42,8 @@
 
                     <c:forEach var="spot" items="${allSpots}">
                         <tr>
-                            <td><a href="/divelog/selectspot">${spot.name}</a></td>
+                            <td><div class="checkbox"><input type="checkbox" name="spotSelection" id="selectedSpot" value="${spot.name}"></div>
+                            <td>${spot.name}</td>
                             <td>${spot.location}</td>
                             <td>${spot.spottype}</td>
                             <td>${spot.mindepth}</td>
@@ -51,7 +53,11 @@
             </table>
         </div>
 
-        <a href="spot" class="btn btn-primary">Lisää uusi</a>
+        <div class="btn-toolbar pull-right">
+            <button type="button" class="btn btn-primary">Näytä valittu</button>
+            <button type="button" class="btn btn-primary">Poista valitut</button>
+            <a href="spot" class="btn btn-primary">Lisää uusi</a>
+        </div>
 
     </body>
 

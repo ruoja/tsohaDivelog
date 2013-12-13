@@ -18,19 +18,6 @@
             <div class="panel-heading text-center">Sukellus</div>
             <div class="panel-body ">
 
-                <div class="btn-group">
-                    <button type="button" class="btn-primary dropdown-toggle" data-toggle="dropdown">
-                        Lisää sukelluskohde<span class="caret"></span>
-                    </button>
-
-                    <ul class="dropdown-menu" role="menu">
-                        <c:forEach var="spot" items="${allSpots}">
-                            <li><a href="#">${spot.name}</a></li>
-                            </c:forEach>
-                        <li class="divider"></li>
-                        <li><a href="spot">Lisää uusi kohde</a></li>
-                    </ul>
-                </div>
                 <div class="panel-body">
 
                     <form class="form-horizontal" role="form">
@@ -46,6 +33,18 @@
                             <label for="inputDate" class="col-md-2 control-label">Päivämäärä</label>
                             <div class="col-md-6">
                                 <input type="date" class="form-control" id="inputDate" placeholder="Päivämäärä">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputSpot" class="col-md-2 control-label">Kohde</label>
+                            <div class="col-md-6">
+                                <select class="form-control" id="inputSpot" placeholder="Sukelluskohde">
+                                    <option>Uusi kohde</option>
+                                    <c:forEach var="spot" items="${allSpots}">
+                                        <option><a href="#">${spot.name}</a></option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
 
