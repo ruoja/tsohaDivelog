@@ -1,14 +1,10 @@
 tsohaDivelog
 ============
 
-Sukelluspäiväkirja. Tietokantasovellus syksy 2013. 
+Sukelluspäiväkirja. Tietokantasovellus kevät2014. 
 
-Testata voi vaikka 'Sanna Sukeltajan' tunnuksin:
-email: sannas@dive.org
-password: sanna
-
-tai 'Erkki Esimerkki'
-email: erkki@internez.net
-password: erkki
+testitunnukset: 
+email: testi1@testi.net pass: testi1 tai
+email: testi2@testi.net pass: testi2
 
 Keskeneräinen testiversio osoitteessa: http://t-janiruot.users.cs.helsinki.fi/divelog
