@@ -1,4 +1,4 @@
 build
+dist
 nbproject/private
-/divelog/target/
-nbproject/dist
+divelog/src/main/webapp/META-INF/context.xml
