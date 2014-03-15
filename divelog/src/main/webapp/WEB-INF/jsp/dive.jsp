@@ -36,15 +36,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="inputSpot" class="col-md-2 control-label">Kohde</label>
-                            <div class="col-md-6">
-                                <select class="form-control" id="inputSpot" placeholder="Sukelluskohde">
-                                    <option>Uusi kohde</option>
+                        <div class="btn-group">
+                            <button type="button" class="btn-default">Lisää uusi kohde</button>
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    Valitse kohde
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
                                     <c:forEach var="spot" items="${allSpots}">
-                                        <option><a href="#">${spot.name}</a></option>
-                                    </c:forEach>
-                                </select>
+                                        <li><a href="#">${spot.name}</a></li>
+                                        </c:forEach>
+                                </ul>
                             </div>
                         </div>
 
