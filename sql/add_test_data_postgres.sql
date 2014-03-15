@@ -1,5 +1,5 @@
 INSERT INTO diver (firstname, lastname, classification, phonenumber, email, pswd)
-    VALUES ('Erkki', 'Esimerkki', 'NAUI MSD', '555-123456', 'testi1@testi.net', 'testi2');
+    VALUES ('Erkki', 'Esimerkki', 'NAUI MSD', '555-123456', 'testi1@testi.net', 'testi1');
 
 INSERT INTO diver (firstname, lastname, phonenumber, email, pswd)
     VALUES ('Sanna', 'Sukeltaja', '123-227774', 'testi2@testi.net', 'testi2');

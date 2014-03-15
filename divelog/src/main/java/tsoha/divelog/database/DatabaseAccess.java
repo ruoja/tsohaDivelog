@@ -9,10 +9,10 @@ import java.sql.*;
 public class DatabaseAccess {
 
     private Connection connection = null;
-    private final String USER = "root";
+    private final String USER = "janiruot";
     private final String PSWD = "password";
-    private final String DB_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DB_PATH = "jdbc:mysql://localhost/divelog";
+    private final String DB_DRIVER = "org.postgresql.Driver"; //"com.mysql.jdbc.Driver";
+    private final String DB_PATH = "jdbc:postgresql://localhost/janiruot"; //"jdbc:mysql://localhost/divelog";
 
     public Connection connectDatabase() throws Exception {
         if (!isOpen()) {
