@@ -11,7 +11,7 @@ import tsoha.divelog.database.DatabaseQuery;
  *
  * @author jani
  */
-public class Diver extends DatabaseQuery {
+public class Diver{
 
     private int diverId;
     private String diverFirstname;
@@ -117,8 +117,14 @@ public class Diver extends DatabaseQuery {
             this.setDiverPhone(result.getString(5));
             this.setDiverEmail(result.getString(6));
             this.setDiveList(getDivelistByDiverId(this.diverId));
+            query.closeConnection();
+            statement.close();
+            result.close();
             return true;
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return false;
     }
 
@@ -158,6 +164,9 @@ public class Diver extends DatabaseQuery {
             dive.setDescription(result.getString(18));
             diveList.add(dive);
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return diveList;
     }
 
@@ -198,8 +207,15 @@ public class Diver extends DatabaseQuery {
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
-            return result.getInt(1);
+            int longest = result.getInt(1);
+            query.closeConnection();
+            statement.close();
+            result.close();
+            return longest;
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return 0;
     }
 
@@ -217,8 +233,15 @@ public class Diver extends DatabaseQuery {
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
-            return result.getInt(1);
+            int totaltime = result.getInt(1);
+            query.closeConnection();
+            statement.close();
+            result.close();
+            return totaltime;
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return 0;
     }
 
@@ -237,8 +260,15 @@ public class Diver extends DatabaseQuery {
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
-            return result.getString(1);
+            String favourite = result.getString(1);
+            query.closeConnection();
+            statement.close();
+            result.close();
+            return favourite;
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return "Et ole lisännyt yhtään kohdetta.";
     }
 
@@ -256,8 +286,15 @@ public class Diver extends DatabaseQuery {
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
-            return result.getInt(1);
+            int maxdepth = result.getInt(1);
+            query.closeConnection();
+            statement.close();
+            result.close();
+            return maxdepth;
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return 0;
     }
 
@@ -275,8 +312,15 @@ public class Diver extends DatabaseQuery {
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
-            return result.getInt(1);
+            int nitroxDives = result.getInt(1);
+            query.closeConnection();
+            statement.close();
+            result.close();
+            return nitroxDives;
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return 0;
     }
 
@@ -294,8 +338,15 @@ public class Diver extends DatabaseQuery {
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
-            return result.getInt(1);
+            int airDives = result.getInt(1);
+            query.closeConnection();
+            statement.close();
+            result.close();
+            return airDives;
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return 0;
     }
 
@@ -315,5 +366,7 @@ public class Diver extends DatabaseQuery {
         statement.setString(5, this.diverEmail);
         statement.setString(6, this.diverPswd);
         statement.executeUpdate();
+        query.closeConnection();
+        statement.close();
     }
 }

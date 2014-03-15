@@ -223,6 +223,9 @@ public class Dive {
         } else {
             this.spotNameById = null;
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return this;
     }
 
@@ -238,7 +241,8 @@ public class Dive {
                 + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygenPercentage"
                 + "description) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         statement.setInt(1, dive_id);
-
+        query.closeConnection();
+        statement.close();
     }
 
     public static Dive getDiveByNumber(String divenumber) throws SQLException, Exception {
@@ -266,8 +270,14 @@ public class Dive {
             dive.setGastype(result.getString(16));
             dive.setOxygenPercentage(result.getString(17));
             dive.setDescription(result.getString(18));
+            query.closeConnection();
+            statement.close();
+            result.close();
             return dive;
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return dive;
     }
 }

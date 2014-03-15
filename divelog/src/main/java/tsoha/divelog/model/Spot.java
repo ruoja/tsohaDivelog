@@ -78,7 +78,7 @@ public class Spot {
     public static List<Spot> getAllSpots() throws SQLException, Exception {
         List<Spot> allSpots = new ArrayList<Spot>();
         DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT * FROM spot GROUP BY name");
+        PreparedStatement statement = query.query("SELECT * FROM spot");
         ResultSet result = statement.executeQuery();
         while (result.next()) {
             Spot spot = new Spot();
@@ -90,6 +90,9 @@ public class Spot {
             spot.setDescription(result.getString(6));
             allSpots.add(spot);
         }
+        query.closeConnection();
+        statement.close();
+        result.close();
         return allSpots;
     }
 }

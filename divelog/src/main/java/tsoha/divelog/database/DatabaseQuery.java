@@ -1,8 +1,7 @@
 package tsoha.divelog.database;
 
-import com.sun.rowset.JdbcRowSetImpl;
 import java.sql.*;
-import javax.sql.rowset.JdbcRowSet;
+import javax.naming.NamingException;
 
 /**
  *
@@ -10,26 +9,25 @@ import javax.sql.rowset.JdbcRowSet;
  */
 public class DatabaseQuery {
 
-    private ResultSet resultSet;
+    private Connection connection;
     private PreparedStatement preparedStatement;
-    private DatabaseAccess connection;
+    private DatabaseAccess database;
 
-    public DatabaseQuery() {
-        this.connection = new DatabaseAccess();
+    public DatabaseQuery() throws SQLException, NamingException {
+        this.database = new DatabaseAccess();
     }
 
     public PreparedStatement query(String sql) throws SQLException, Exception {
         try {
-            preparedStatement = connection.connectDatabase().prepareStatement(sql);
+            connection = database.connect();
+            preparedStatement = connection.prepareStatement(sql);
         } catch (SQLException ex) {
             throw ex;
         }
         return preparedStatement;
     }
 
-    public void closeAll() throws SQLException, Exception {
-        this.resultSet.close();
-        this.preparedStatement.close();
-        this.connection.closeConnection();
+    public void closeConnection() throws SQLException, Exception {
+        this.connection.close();
     }
 }

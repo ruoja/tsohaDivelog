@@ -1,14 +1,33 @@
 package tsoha.divelog.database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 /**
  *
  * @author jani
  */
-public class DatabaseAccess {
+public class DatabaseAccess{
+    
+    InitialContext cxt;
+    DataSource connectionPool;
 
-    private Connection connection = null;
+    public DatabaseAccess() throws SQLException, NamingException{
+        this.cxt = new InitialContext();
+        this.connectionPool = (DataSource) cxt.lookup("java:/comp/env/jdbc/tietokanta");
+    }
+
+    public Connection connect() throws SQLException {
+         Connection connection = connectionPool.getConnection();
+         return connection;
+    }
+    
+
+    /**private Connection connection = null;
     private final String USER = "janiruot";
     private final String PSWD = "password";
     private final String DB_DRIVER = "org.postgresql.Driver"; //"com.mysql.jdbc.Driver";
@@ -45,5 +64,5 @@ public class DatabaseAccess {
             return false;
         }
         return true;
-    }
+    }**/
 }
