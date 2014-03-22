@@ -89,10 +89,10 @@
 
         </div>
 
-        <div class="btn-toolbar pull-right">
-            <button type="submit" class="btn btn-primary">Poista</button>
+        <form action="diver" method="POST" class="btn-toolbar pull-right">
+            <button type="submit" formaction="removediver" formmethod="POST" class="btn btn-primary">Poista</button>
             <a href="divestats" class="btn btn-primary">Peruuta</a>
             <button type="submit" class="btn btn-primary">Tallenna</button>
-        </div>
+        </form>
     </body>
 </html>

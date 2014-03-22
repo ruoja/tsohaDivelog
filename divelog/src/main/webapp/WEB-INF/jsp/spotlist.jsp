@@ -53,11 +53,11 @@
             </table>
         </div>
 
-        <div class="btn-toolbar pull-right">
-            <button type="button" class="btn btn-primary">Näytä valittu</button>
-            <button type="button" class="btn btn-primary">Poista valitut</button>
+        <form action="selectspot" method="POST" class="btn-toolbar pull-right">
+            <button type="submit" class="btn btn-primary">Näytä valittu</button>
+            <button type="submit" formaction="removespot" formmethod="POST" class="btn btn-primary">Poista valitut</button>
             <a href="spot" class="btn btn-primary">Lisää uusi</a>
-        </div>
+        </form>
 
     </body>
 

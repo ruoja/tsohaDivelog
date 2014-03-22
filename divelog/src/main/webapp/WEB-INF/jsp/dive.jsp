@@ -160,10 +160,10 @@
                 </div>
             </div>
 
-            <div class="btn-toolbar pull-right">
-                <button type="button" class="btn btn-primary">Poista</button>
+            <form action="adddive" method="POST" class="btn-toolbar pull-right">
+                <button type="submit" formaction="removedive" formmethod="POST" class="btn btn-primary">Poista</button>
                 <a href="divelist" class="btn btn-primary">Peruuta</a>
-                <button type="button" class="btn btn-primary">Tallenna</button>
-            </div>
+                <button type="submit" class="btn btn-primary">Tallenna</button>
+            </form>
     </body>
 </html>

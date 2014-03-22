@@ -67,9 +67,9 @@
             <div class="alert alert-warning">${warningMessage}</div>
         </c:if>
 
-        <div class="btn-toolbar pull-right">
-            <button type="button" class="btn btn-primary">Näytä valittu</button>
-            <button type="button" class="btn btn-primary">Poista valitut</button>
+            <form action="selectdive" method="POST" class="btn-toolbar pull-right">
+            <button type="submit" class="btn btn-primary">Näytä valittu</button>
+            <button type="submit" formaction="removedive" formmethod="POST" class="btn btn-primary">Poista valitut</button>
             <a href="dive" class="btn btn-primary">Lisää uusi</a>
         </div>
 

@@ -111,23 +111,23 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RemoveDiveServlet</servlet-name>
-        <url-pattern>/RemoveDiveServlet</url-pattern>
+        <url-pattern>/removedive</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RemoveSpotServlet</servlet-name>
-        <url-pattern>/RemoveSpotServlet</url-pattern>
+        <url-pattern>/removespot</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RemoveDiverServlet</servlet-name>
-        <url-pattern>/RemoveDiverServlet</url-pattern>
+        <url-pattern>/removediver</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddDiveServlet</servlet-name>
-        <url-pattern>/AddDiveServlet</url-pattern>
+        <url-pattern>/adddive</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddSpotServlet</servlet-name>
-        <url-pattern>/AddSpotServlet</url-pattern>
+        <url-pattern>/addspot</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
