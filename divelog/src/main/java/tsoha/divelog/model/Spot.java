@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.NamingException;
 import tsoha.divelog.database.DatabaseQuery;
 
 /**
@@ -17,7 +18,7 @@ public class Spot {
     private String name;
     private String location;
     private String spottype;
-    private int mindepth;
+    private String mindepth;
     private String description;
     //private static List<Spot> allSpots = new ArrayList<Spot>();
 
@@ -37,7 +38,7 @@ public class Spot {
         return spottype;
     }
 
-    public int getMindepth() {
+    public String getMindepth() {
         return mindepth;
     }
 
@@ -60,7 +61,7 @@ public class Spot {
         return this;
     }
 
-    public Spot setMindepth(int mindepth) {
+    public Spot setMindepth(String mindepth) {
         this.mindepth = mindepth;
         return this;
     }
@@ -86,7 +87,7 @@ public class Spot {
             spot.setName(result.getString(2));
             spot.setLocation(result.getString(3));
             spot.setSpottype(result.getString(4));
-            spot.setMindepth(result.getInt(5));
+            spot.setMindepth(result.getString(5));
             spot.setDescription(result.getString(6));
             allSpots.add(spot);
         }
@@ -94,5 +95,19 @@ public class Spot {
         statement.close();
         result.close();
         return allSpots;
+    }
+
+    public void insertInDatabase() throws SQLException, NamingException, Exception {
+        DatabaseQuery query = new DatabaseQuery();
+        PreparedStatement statement = query.query("INSERT INTO spot(name, location, spottype, mindepth, description)"
+                + "VALUES(?, ?, ?::place, ?::int, ?)");
+        statement.setString(1, this.name);
+        statement.setString(2, this.location);
+        statement.setString(3, this.spottype);
+        statement.setString(4, this.mindepth);
+        statement.setString(5, this.description);
+        statement.executeUpdate();
+        query.closeConnection();
+        statement.close();
     }
 }

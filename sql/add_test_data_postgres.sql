@@ -1,8 +1,8 @@
 INSERT INTO diver (firstname, lastname, classification, phonenumber, email, pswd)
     VALUES ('Erkki', 'Esimerkki', 'NAUI MSD', '555-123456', 'testi1@testi.net', 'testi1');
 
-INSERT INTO diver (firstname, lastname, phonenumber, email, pswd)
-    VALUES ('Sanna', 'Sukeltaja', '123-227774', 'testi2@testi.net', 'testi2');
+INSERT INTO diver (firstname, lastname, classification, phonenumber, email, pswd)
+    VALUES ('Sanna', 'Sukeltaja', 'CMAS P1', '123-227774', 'testi2@testi.net', 'testi2');
     
 INSERT INTO spot (name, location, spottype, mindepth, description)
     VALUES('Coolaroo', 'Helsinki', 'wreck', 15, 'Kyljellään makaava teräslaivan hylky');

@@ -2,16 +2,22 @@ package tsoha.divelog.control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tsoha.divelog.model.Dive;
+import tsoha.divelog.model.Spot;
 
 /**
  *
  * @author jani
  */
-public class AddDiveServlet extends HttpServlet {
+public class AddDiveServlet extends BaseServlet {
 
     /**
      * Processes requests for both HTTP
@@ -25,25 +31,15 @@ public class AddDiveServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddDiveServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddDiveServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
+        if (!isLogged(request, response)) {
+            kickOutNotLogged(request, response);
+            return;
         }
+        showMessage(request, response, "divelist", "Sukelluksen lisäys onnistui!");
+        //showPage(request, response, "divelist");
     }
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.
@@ -71,7 +67,48 @@ public class AddDiveServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        Dive dive = new Dive();
+
+        String divenumber = request.getParameter("inputDivenumber");
+        String divedate = request.getParameter("inputDivedate");
+        String divetime = request.getParameter("inputDivetime");
+        String bottomtime = request.getParameter("inputBottomtime");
+        String maxdepth = request.getParameter("inputMaxdepth");
+        String visibility = request.getParameter("inputVisibility");
+        String airtemp = request.getParameter("inputWatertemp");
+        String watertemp = request.getParameter("inputWatertemp");
+        String suittype = request.getParameter("inputSuittype");
+        String tanksize = request.getParameter("inputTanksize");
+        String startpressure = request.getParameter("inputStartpressure");
+        String endpressure = request.getParameter("inputEndpressure");
+        String gastype = request.getParameter("inputGastype");
+        String oxygenPercentage = request.getParameter("inputOxygenPercentage");
+        String description = request.getParameter("inputDescription");
+
+        dive.setDiveNumber(divenumber);
+        dive.setDivedate(divedate);
+        dive.setDivetimeInMinutes(divetime);
+        dive.setBottomtimeInMinutes(bottomtime);
+        dive.setMaxdepth(maxdepth);
+        dive.setVisibility(visibility);
+        dive.setAirtemp(airtemp);
+        dive.setWatertemp(watertemp);
+        dive.setSuittype(suittype);
+        dive.setTanksize(tanksize);
+        dive.setStartpressure(startpressure);
+        dive.setEndpressure(endpressure);
+        dive.setGastype(gastype);
+        dive.setOxygenPercentage(oxygenPercentage);
+        dive.setDescription(description);
+        try {
+            dive.insertInDatabase();
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

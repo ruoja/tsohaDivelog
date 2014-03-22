@@ -240,7 +240,7 @@ public class Dive {
         PreparedStatement statement = query.query("INSERT INTO dive(divenumber, divedate, divetimeInMinutes, bottomtimeInMinutes,"
                 + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygenPercentage"
                 + "description) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        statement.setInt(1, dive_id);
+        //statement.setInt(1, dive_id);
         query.closeConnection();
         statement.close();
     }

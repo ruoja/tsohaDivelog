@@ -23,6 +23,14 @@
 
         </ul>
 
+        <c:if test="${message != null}">
+            <div class="alert alert-success">${message}</div>
+        </c:if>
+
+        <c:if test="${warningMessage != null}">
+            <div class="alert alert-warning">${warningMessage}</div>
+        </c:if>
+
         <div class="panel panel-default">
             <p></p>
             <div class="panel-heading text-center text-primary">Kohteet</div>

@@ -14,64 +14,65 @@
             <div class="panel-heading text-center">Kohde</div>
             <div class="panel-body">
 
-                <form action="spot" method="POST" class="form-horizontal" role="form">
+                <form action="addspot" method="POST" class="form-horizontal" role="form">
 
                     <div class="form-group">
-                        <label for="inputNimi" class="col-md-2 control-label">Nimi</label>
+                        <label for="inputName" class="col-md-2 control-label">Nimi</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="inputSukelluksenNumero" placeholder="Kohteen nimi">
+                            <input type="text" class="form-control" name="inputName" placeholder="Kohteen nimi">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSijainti" class="col-md-2 control-label">Sijainti</label>
+                        <label for="inputLocation" class="col-md-2 control-label">Sijainti</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="inputSukelluksenNumero" placeholder="Kohteen sijainti">
+                            <input type="text" class="form-control" name="inputLocation" placeholder="Kohteen sijainti">
                         </div>
                     </div>
 
-                    <label for="kohdeOptions" class="col-md-2 control-label">Kohdetyyppi</label>
+                    <label for="spotOptions" class="col-md-2 control-label">Kohdetyyppi</label>
                     <div class="radio-inline">
                         <label>
-                            <input type="radio" name="kohdeOptions" id="hylky" value="hylky" checked>
+                            <input type="radio" name="inputSpottype" id="inputWreck" value="wreck" checked>
                             Hylky
                         </label>
                     </div>
                     <div class="radio-inline">
                         <label>
-                            <input type="radio" name="kohdeOptions" id="bio" value="bio">
+                            <input type="radio" name="inputSpottype" id="inputBio" value="bio">
                             Bio
                         </label>
                     </div>
                     <div class="radio-inline">
                         <label>
-                            <input type="radio" name="kohdeOptions" id="kaivos" value="kaivos">
+                            <input type="radio" name="inputSpottype" id="inputmine" value="mine">
                             Kaivos
                         </label>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputMinimisyvyys" class="col-md-2 control-label">Minimisyvyys</label>
+                        <label for="inputMindepth" class="col-md-2 control-label">Minimisyvyys</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" id="inputSukelluksenNumero" placeholder="Minimisyvyys">
+                            <input type="number" class="form-control" name="inputMindepth" placeholder="Minimisyvyys">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputkuvaus" class="col-md-2 control-label">kuvaus</label>
+                        <label for="inputDescription" class="col-md-2 control-label">kuvaus</label>
                         <div class="col-md-6">
-                            <textarea type="text" class="form-control" id="inputSukelluksenNumero" placeholder="Kuvaus" rows="8"></textarea>
+                            <textarea type="text" class="form-control" name="inputDescription" placeholder="Kuvaus" rows="8"></textarea>
                         </div>
+                    </div>
+                    <div class="btn-toolbar pull-right">
+                        <button type="submit" formaction="removespot" formmethod="POST" class="btn btn-primary">Poista</button>
+                        <a href="spotlist" class="btn btn-primary">Peruuta</a>
+                        <button type="submit" class="btn btn-primary">Tallenna</button>
                     </div>
 
                 </form>
             </div>
         </div>
 
-        <form action="addspot" method="POST" class="btn-toolbar pull-right">
-            <button type="submit" formaction="removespot" formmethod="POST" class="btn btn-primary">Poista</button>
-            <a href="spotlist" class="btn btn-primary">Peruuta</a>
-            <button type="submit" class="btn btn-primary">Tallenna</button>
-        </form>
+
     </body>
 </html>

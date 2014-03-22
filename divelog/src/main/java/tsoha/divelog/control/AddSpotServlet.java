@@ -2,16 +2,21 @@ package tsoha.divelog.control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tsoha.divelog.model.Spot;
 
 /**
  *
  * @author jani
  */
-public class AddSpotServlet extends HttpServlet {
+public class AddSpotServlet extends BaseServlet {
 
     /**
      * Processes requests for both HTTP
@@ -26,21 +31,7 @@ public class AddSpotServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddSpotServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddSpotServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
-        }
+        response.sendRedirect("spotlist");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,7 +62,34 @@ public class AddSpotServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        if (!isLogged(request, response)) {
+            kickOutNotLogged(request, response);
+            return;
+        }
+        try {
+            Spot spot = new Spot();
+            String name = request.getParameter("inputName");
+            String location = request.getParameter("inputLocation");
+            String spottype = request.getParameter("inputSpottype");
+            String mindepth = request.getParameter("inputMindepth");
+            String description = request.getParameter("inputDescription");
+
+            spot.setName(name);
+            spot.setLocation(location);
+            spot.setSpottype(spottype);
+            spot.setMindepth(mindepth);
+            spot.setDescription(description);
+
+            spot.insertInDatabase();
+            response.sendRedirect("spotlist");
+        } catch (SQLException ex) {
+            Logger.getLogger(AddSpotServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(AddSpotServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AddSpotServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
