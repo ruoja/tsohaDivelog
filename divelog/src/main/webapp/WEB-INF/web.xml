@@ -39,11 +39,31 @@
     </servlet>
     <servlet>
         <servlet-name>SelectSpot</servlet-name>
-        <servlet-class>tsoha.divelog.control.SelectSpot</servlet-class>
+        <servlet-class>tsoha.divelog.control.SelectSpotServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SelectDive</servlet-name>
-        <servlet-class>tsoha.divelog.control.SelectDive</servlet-class>
+        <servlet-class>tsoha.divelog.control.SelectDiveServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveDiveServlet</servlet-name>
+        <servlet-class>tsoha.divelog.control.RemoveDiveServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveSpotServlet</servlet-name>
+        <servlet-class>tsoha.divelog.control.RemoveSpotServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveDiverServlet</servlet-name>
+        <servlet-class>tsoha.divelog.control.RemoveDiverServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddDiveServlet</servlet-name>
+        <servlet-class>tsoha.divelog.control.AddDiveServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSpotServlet</servlet-name>
+        <servlet-class>tsoha.divelog.control.AddSpotServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -88,6 +108,26 @@
     <servlet-mapping>
         <servlet-name>SelectDive</servlet-name>
         <url-pattern>/selectdive</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveDiveServlet</servlet-name>
+        <url-pattern>/RemoveDiveServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveSpotServlet</servlet-name>
+        <url-pattern>/RemoveSpotServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveDiverServlet</servlet-name>
+        <url-pattern>/RemoveDiverServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddDiveServlet</servlet-name>
+        <url-pattern>/AddDiveServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSpotServlet</servlet-name>
+        <url-pattern>/AddSpotServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

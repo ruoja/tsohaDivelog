@@ -1,21 +1,17 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tsoha.divelog.model.Dive;
-import tsoha.divelog.model.Spot;
 
 /**
  *
  * @author jani
  */
-public class SelectDive extends BaseServlet {
+public class AddSpotServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -28,16 +24,23 @@ public class SelectDive extends BaseServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, Exception {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String diveNumber = request.getParameter("diveNumber");
-        Dive dive = Dive.getDiveByNumber(diveNumber);
-        List allSpots = Spot.getAllSpots();
-        request.setAttribute("dive", dive);
-        request.setAttribute("allSpots", allSpots);
-        showPage(request, response, "dive");
-
+        PrintWriter out = response.getWriter();
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddSpotServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddSpotServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {            
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,13 +56,7 @@ public class SelectDive extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SelectDive.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(SelectDive.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -74,13 +71,7 @@ public class SelectDive extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SelectDive.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(SelectDive.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
