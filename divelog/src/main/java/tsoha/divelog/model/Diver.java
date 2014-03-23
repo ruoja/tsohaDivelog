@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import tsoha.divelog.database.DatabaseQuery;
+import tsoha.divelog.database.Database;
 
 /**
  *
@@ -104,8 +104,8 @@ public class Diver{
      * @throws Exception
      */
     public boolean getDiverByLogin(String email, String pswd) throws SQLException, Exception {
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT * FROM diver WHERE email=? AND pswd=?");
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT * FROM diver WHERE email=? AND pswd=?");
         statement.setString(1, email);
         statement.setString(2, pswd);
         ResultSet result = statement.executeQuery();
@@ -117,12 +117,10 @@ public class Diver{
             this.setDiverPhone(result.getString(5));
             this.setDiverEmail(result.getString(6));
             this.setDiveList(getDivelistByDiverId(this.diverId));
-            query.closeConnection();
             statement.close();
             result.close();
             return true;
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return false;
@@ -138,8 +136,8 @@ public class Diver{
      * @throws Exception
      */
     private List<Dive> getDivelistByDiverId(int id) throws SQLException, Exception {
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT * FROM dive WHERE diver_id=?");
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT * FROM dive WHERE diver_id=?");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         while (result.next()) {
@@ -164,7 +162,6 @@ public class Diver{
             dive.setDescription(result.getString(18));
             diveList.add(dive);
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return diveList;
@@ -202,18 +199,16 @@ public class Diver{
      */
     public int getLongestDive() throws SQLException, Exception {
         int id = diverId;
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT MAX(divetime) FROM dive WHERE diver_id=?");
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT MAX(divetime) FROM dive WHERE diver_id=?");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
             int longest = result.getInt(1);
-            query.closeConnection();
             statement.close();
             result.close();
             return longest;
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return 0;
@@ -228,18 +223,16 @@ public class Diver{
      */
     public int getTotalDivetime() throws SQLException, Exception {
         int id = diverId;
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT SUM(divetime) FROM dive WHERE diver_id=?");
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT SUM(divetime) FROM dive WHERE diver_id=?");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
             int totaltime = result.getInt(1);
-            query.closeConnection();
             statement.close();
             result.close();
             return totaltime;
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return 0;
@@ -254,19 +247,17 @@ public class Diver{
      */
     public String getFavoriteSpot() throws SQLException, Exception {
         int id = diverId;
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT name from spot WHERE spot_id="
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT name from spot WHERE spot_id="
                 + "(SELECT spot_id FROM dive WHERE diver_id=? GROUP BY spot_id ORDER BY COUNT(*) DESC LIMIT 1)");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
             String favourite = result.getString(1);
-            query.closeConnection();
             statement.close();
             result.close();
             return favourite;
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return "Et ole lisännyt yhtään kohdetta.";
@@ -281,18 +272,16 @@ public class Diver{
      */
     public int getMaxDepth() throws SQLException, Exception {
         int id = diverId;
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT MAX(maxdepth) FROM dive WHERE diver_id=?");
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT MAX(maxdepth) FROM dive WHERE diver_id=?");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
             int maxdepth = result.getInt(1);
-            query.closeConnection();
             statement.close();
             result.close();
             return maxdepth;
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return 0;
@@ -307,18 +296,16 @@ public class Diver{
      */
     public int getNitroxDives() throws SQLException, Exception {
         int id = diverId;
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT COUNT(gastype) FROM dive WHERE diver_id=? AND gastype='nitrox'");
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT COUNT(gastype) FROM dive WHERE diver_id=? AND gastype='nitrox'");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
             int nitroxDives = result.getInt(1);
-            query.closeConnection();
             statement.close();
             result.close();
             return nitroxDives;
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return 0;
@@ -333,18 +320,16 @@ public class Diver{
      */
     public int getAirDives() throws SQLException, Exception {
         int id = diverId;
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT COUNT(gastype) FROM dive WHERE diver_id=? AND gastype='air'");
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT COUNT(gastype) FROM dive WHERE diver_id=? AND gastype='air'");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
             int airDives = result.getInt(1);
-            query.closeConnection();
             statement.close();
             result.close();
             return airDives;
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return 0;
@@ -357,8 +342,8 @@ public class Diver{
      * @throws Exception
      */
     public void insertInDatabase() throws SQLException, Exception {
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("INSERT INTO diver(firstname,lastname,classification,phonenumber,email,pswd) VALUES(?,?,?,?,?,?)");
+        Database database = new Database();
+        PreparedStatement statement = database.query("INSERT INTO diver(firstname,lastname,classification,phonenumber,email,pswd) VALUES(?,?,?,?,?,?)");
         statement.setString(1, this.diverFirstname);
         statement.setString(2, this.diverLastname);
         statement.setString(3, this.diverClass);
@@ -366,7 +351,6 @@ public class Diver{
         statement.setString(5, this.diverEmail);
         statement.setString(6, this.diverPswd);
         statement.executeUpdate();
-        query.closeConnection();
         statement.close();
     }
 }

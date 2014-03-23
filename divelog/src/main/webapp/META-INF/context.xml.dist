@@ -2,7 +2,7 @@
 <Context antiJARLocking="true" path="/divelog">
     <Resource name="jdbc/tietokanta" auth="Container"
               type="javax.sql.DataSource" removeAbandoned="true"
-              removeAbandonedTimeout="30" maxActive="100"
+              removeAbandonedTimeout="30" maxActive="20"
               maxIdle="30" maxWait="10000" username=""
               password=""
               driverClassName="org.postgresql.Driver"

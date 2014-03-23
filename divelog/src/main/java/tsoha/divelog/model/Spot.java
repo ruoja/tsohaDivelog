@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
-import tsoha.divelog.database.DatabaseQuery;
+import tsoha.divelog.database.Database;
 
 /**
  *
@@ -78,8 +78,8 @@ public class Spot {
 
     public static List<Spot> getAllSpots() throws SQLException, Exception {
         List<Spot> allSpots = new ArrayList<Spot>();
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT * FROM spot");
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT * FROM spot");
         ResultSet result = statement.executeQuery();
         while (result.next()) {
             Spot spot = new Spot();
@@ -91,15 +91,31 @@ public class Spot {
             spot.setDescription(result.getString(6));
             allSpots.add(spot);
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return allSpots;
     }
+    
+    public static Spot getSpotById(int id) throws SQLException, Exception {
+        Spot spot = new Spot();
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT * FROM spot WHERE spot_id = ?");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        spot.setSpot_id(result.getInt(1));
+        spot.setName(result.getString(2));
+        spot.setLocation(result.getString(3));
+        spot.setSpottype(result.getString(4));
+        spot.setMindepth(result.getString(5));
+        spot.setDescription(result.getString(6));
+        statement.close();
+        result.close();
+        return spot;
+    }
 
     public void insertInDatabase() throws SQLException, NamingException, Exception {
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("INSERT INTO spot(name, location, spottype, mindepth, description)"
+        Database database = new Database();
+        PreparedStatement statement = database.query("INSERT INTO spot(name, location, spottype, mindepth, description)"
                 + "VALUES(?, ?, ?::place, ?::int, ?)");
         statement.setString(1, this.name);
         statement.setString(2, this.location);
@@ -107,7 +123,6 @@ public class Spot {
         statement.setString(4, this.mindepth);
         statement.setString(5, this.description);
         statement.executeUpdate();
-        query.closeConnection();
         statement.close();
     }
 }

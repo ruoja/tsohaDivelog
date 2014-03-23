@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import tsoha.divelog.model.Dive;
+import tsoha.divelog.model.Diver;
 import tsoha.divelog.model.Spot;
 
 /**
@@ -69,7 +70,9 @@ public class AddDiveServlet extends BaseServlet {
             throws ServletException, IOException {
 
         Dive dive = new Dive();
-
+        Diver diver = (Diver) request.getSession().getAttribute("loggedInDiver");
+        int diver_id = diver.getDiverId();
+        //int Spot_id
         String divenumber = request.getParameter("inputDivenumber");
         String divedate = request.getParameter("inputDivedate");
         String divetime = request.getParameter("inputDivetime");
@@ -86,6 +89,7 @@ public class AddDiveServlet extends BaseServlet {
         String oxygenPercentage = request.getParameter("inputOxygenPercentage");
         String description = request.getParameter("inputDescription");
 
+        dive.setDiver_id(diver_id);
         dive.setDiveNumber(divenumber);
         dive.setDivedate(divedate);
         dive.setDivetimeInMinutes(divetime);

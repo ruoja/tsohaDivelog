@@ -3,7 +3,7 @@ package tsoha.divelog.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import tsoha.divelog.database.DatabaseQuery;
+import tsoha.divelog.database.Database;
 
 /**
  *
@@ -214,8 +214,8 @@ public class Dive {
      * @throws Exception
      */
     public Dive setSpotNameById(int id) throws SQLException, Exception {
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT name FROM spot WHERE spot_id =?");
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT name FROM spot WHERE spot_id =?");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
@@ -223,7 +223,6 @@ public class Dive {
         } else {
             this.spotNameById = null;
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return this;
@@ -236,20 +235,33 @@ public class Dive {
      * @throws Exception
      */
     public void insertInDatabase() throws SQLException, Exception {
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("INSERT INTO dive(divenumber, divedate, divetimeInMinutes, bottomtimeInMinutes,"
+        Database database = new Database();
+        PreparedStatement statement = database.query("INSERT INTO dive(divenumber, divedate, divetimeInMinutes, bottomtimeInMinutes,"
                 + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygenPercentage"
-                + "description) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        //statement.setInt(1, dive_id);
-        query.closeConnection();
+                + "description) VALUES(?::int, ?, ?::int, ?::int, ?::int, ?::int, ?::int, ?::int, ?, ?::int, ?::int, ?::int, ?, ?::int, ?)");
+        statement.setString(1,this.diveNumber);
+        statement.setString(2, this.divedate);
+        statement.setString(3, this.divetimeInMinutes);
+        statement.setString(4, this.bottomtimeInMinutes);
+        statement.setString(5, this.maxdepth);
+        statement.setString(6,this.visibility);
+        statement.setString(7, this.airtemp);
+        statement.setString(8, this.watertemp);
+        statement.setString(9, this.suittype);
+        statement.setString(10, this.tanksize);
+        statement.setString(11, this.startpressure);
+        statement.setString(12, this.endpressure);
+        statement.setString(13, this.gastype);
+        statement.setString(14, this.oxygenPercentage);
+        statement.setString(15, this.description);
         statement.close();
     }
 
     public static Dive getDiveByNumber(String divenumber) throws SQLException, Exception {
         Dive dive = new Dive();
-        DatabaseQuery query = new DatabaseQuery();
-        PreparedStatement statement = query.query("SELECT * FROM dive WHERE divenumber=?");
-        statement.setString(1, "divenumber");
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT * FROM dive WHERE divenumber=?");
+        statement.setString(1, divenumber);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
             dive.setDive_id(result.getInt(1));
@@ -270,12 +282,10 @@ public class Dive {
             dive.setGastype(result.getString(16));
             dive.setOxygenPercentage(result.getString(17));
             dive.setDescription(result.getString(18));
-            query.closeConnection();
             statement.close();
             result.close();
             return dive;
         }
-        query.closeConnection();
         statement.close();
         result.close();
         return dive;
