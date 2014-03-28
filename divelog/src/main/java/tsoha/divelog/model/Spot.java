@@ -93,6 +93,7 @@ public class Spot {
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return allSpots;
     }
     
@@ -110,6 +111,7 @@ public class Spot {
         spot.setDescription(result.getString(6));
         statement.close();
         result.close();
+        database.closeConnection();
         return spot;
     }
 
@@ -124,5 +126,6 @@ public class Spot {
         statement.setString(5, this.description);
         statement.executeUpdate();
         statement.close();
+        database.closeConnection();
     }
 }

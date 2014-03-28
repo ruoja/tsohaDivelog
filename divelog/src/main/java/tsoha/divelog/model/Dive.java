@@ -225,6 +225,7 @@ public class Dive {
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return this;
     }
 
@@ -255,6 +256,7 @@ public class Dive {
         statement.setString(14, this.oxygenPercentage);
         statement.setString(15, this.description);
         statement.close();
+        database.closeConnection();
     }
 
     public static Dive getDiveByNumber(String divenumber) throws SQLException, Exception {
@@ -284,10 +286,12 @@ public class Dive {
             dive.setDescription(result.getString(18));
             statement.close();
             result.close();
+            database.closeConnection();
             return dive;
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return dive;
     }
 }

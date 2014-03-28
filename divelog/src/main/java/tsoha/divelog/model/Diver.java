@@ -119,10 +119,12 @@ public class Diver{
             this.setDiveList(getDivelistByDiverId(this.diverId));
             statement.close();
             result.close();
+            database.closeConnection();
             return true;
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return false;
     }
 
@@ -164,6 +166,7 @@ public class Diver{
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return diveList;
     }
 
@@ -211,6 +214,7 @@ public class Diver{
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return 0;
     }
 
@@ -235,6 +239,7 @@ public class Diver{
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return 0;
     }
 
@@ -256,10 +261,12 @@ public class Diver{
             String favourite = result.getString(1);
             statement.close();
             result.close();
+            database.closeConnection();
             return favourite;
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return "Et ole lisännyt yhtään kohdetta.";
     }
 
@@ -280,10 +287,12 @@ public class Diver{
             int maxdepth = result.getInt(1);
             statement.close();
             result.close();
+            database.closeConnection();
             return maxdepth;
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return 0;
     }
 
@@ -304,10 +313,12 @@ public class Diver{
             int nitroxDives = result.getInt(1);
             statement.close();
             result.close();
+            database.closeConnection();
             return nitroxDives;
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return 0;
     }
 
@@ -328,10 +339,12 @@ public class Diver{
             int airDives = result.getInt(1);
             statement.close();
             result.close();
+            database.closeConnection();
             return airDives;
         }
         statement.close();
         result.close();
+        database.closeConnection();
         return 0;
     }
 
@@ -352,5 +365,6 @@ public class Diver{
         statement.setString(6, this.diverPswd);
         statement.executeUpdate();
         statement.close();
+        database.closeConnection();
     }
 }

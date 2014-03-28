@@ -15,21 +15,25 @@ public final class Database {
 
     InitialContext cxt;
     DataSource connectionPool;
+    Connection connection;
     PreparedStatement preparedStatement;
 
     public Database() throws SQLException, NamingException {
         this.cxt = new InitialContext();
-        this.connectionPool = (DataSource) cxt.lookup("java:/comp/env/jdbc/tietokanta");
+        this.connectionPool = (DataSource) cxt.lookup("java:/comp/env/jdbc/janiruot");
     }
 
     public PreparedStatement query(String sql) throws SQLException, Exception {
         try {
-            Connection connection = this.connectionPool.getConnection();
+            connection = this.connectionPool.getConnection();
             preparedStatement = connection.prepareStatement(sql);
-            connection.close();
         } catch (SQLException ex) {
             throw ex;
         }
         return preparedStatement;
+    }
+    
+    public void closeConnection() throws SQLException {
+        this.connection.close();
     }
 }
