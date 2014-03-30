@@ -4,112 +4,118 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="/divelog/bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
-        <link href="/divelog/bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet">
-        <link href="/divelog/bootstrap-3.0.0/dist/css/main.css" rel="stylesheet">
+        <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet">
+        <link href="bootstrap-3.0.0/dist/css/main.css" rel="stylesheet">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script type="text/javascript" src="/divelog/bootstrap-3.0.0/dist/js/bootstrap.min.js"></script>
-
+        <script type="text/javascript" src="bootstrap-3.0.0/dist/js/bootstrap.min.js"></script>
         <title>Divelog</title>
     </head>
 
     <body>
-        <div class="panel panel-default">
-            <div class="panel-heading text-center">Sukellus</div>
-            <div class="panel-body ">
-
+        <div class="container text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Sukellus</div>
                 <div class="panel-body">
 
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" action="dive" method="GET" role="form">
 
                         <div class="form-group">
-                            <label for="inputDivenumber" class="col-md-2 control-label">Sukellus no.</label>
+                            <label for="Divenumber" class="col-md-2 control-label">Sukellus no.</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputDivenumber" placeholder="Sukelluksen no.">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputDate" class="col-md-2 control-label">Päivämäärä</label>
+                            <label for="Date" class="col-md-2 control-label">Päivämäärä</label>
                             <div class="col-md-6">
                                 <input type="date" class="form-control" id="inputDate" placeholder="Päivämäärä">
                             </div>
                         </div>
 
-                        <div class="btn-group">
-                            <button type="button" class="btn-default">Lisää uusi kohde</button>
+                        
+                        <div class="form-group">
+                            <label for="Date" class="col-md-2 control-label">Sukelluskohde</label>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default" tabindex="-1" >Uusi</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
 
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    Valitse kohde
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <c:forEach var="spot" items="${allSpots}">
-                                        <li><a href="#">${spot.name}</a></li>
-                                        </c:forEach>
-                                </ul>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <c:forEach var="spot" items="${allSpots}">
+                                                <li><a href="#">${spot.name}</a></li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
+                                    <input type="text" class="form-control" id="spotname" placeholder="Sukelluskohde">
+                                </div>
                             </div>
                         </div>
 
+
                         <div class="form-group">
-                            <label for="inputDivetime" class="col-md-2 control-label">Sukellusaika</label>
+                            <label for="Divetime" class="col-md-2 control-label">Sukellusaika</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputDivetime" placeholder="Sukellusaika minuutteina">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputBottomtime" class="col-md-2 control-label">Pohja-aika</label>
+                            <label for="Bottomtime" class="col-md-2 control-label">Pohja-aika</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputBottomtime" placeholder="Pohja-aika minuutteina">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputMaxdepth" class="col-md-2 control-label">Suurin syvyys</label>
+                            <label for="Maxdepth" class="col-md-2 control-label">Suurin syvyys</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputMaxdepth" placeholder="Maksimisyvyys metreinä">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputVisibility" class="col-md-2 control-label">Näkyvyys</label>
+                            <label for="Visibility" class="col-md-2 control-label">Näkyvyys</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputVisibility" placeholder="Näkyvyys metreinä">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputAirtemp" class="col-md-2 control-label">Ilman lämpötila</label>
+                            <label for="Airtemp" class="col-md-2 control-label">Ilman lämpötila</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputAirtemp" placeholder="Ilman lämpötila">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputWatertemp" class="col-md-2 control-label">Veden lämpötila</label>
+                            <label for="Watertemp" class="col-md-2 control-label">Veden lämpötila</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputWatertemp" placeholder="Veden lämpötila">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputTanksize" class="col-md-2 control-label">Laitteen koko</label>
+                            <label for="Tanksize" class="col-md-2 control-label">Laitteen koko</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputTanksize" placeholder="Laitteen koko">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputStartpressure" class="col-md-2 control-label">Alkupaine</label>
+                            <label for="Startpressure" class="col-md-2 control-label">Alkupaine</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputStartpressure" placeholder="Alkupaine bar">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEndpressure" class="col-md-2 control-label">Loppupaine</label>
+                            <label for="Endpressure" class="col-md-2 control-label">Loppupaine</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputEndpressure" placeholder="Loppupaine">
                             </div>
@@ -130,7 +136,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputOxygenPercentage" class="col-md-2 control-label">Happiprosentti</label>
+                            <label for="OxygenPercentage" class="col-md-2 control-label">Happiprosentti</label>
                             <div class="col-md-6">
                                 <input type="number" class="form-control" id="inputOxygenPercentage" placeholder="Happiprosentti">
                             </div>
@@ -151,19 +157,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputDescription" class="col-md-2 control-label">Kuvaus</label>
+                            <label for="Description" class="col-md-2 control-label">Kuvaus</label>
                             <div class="col-md-6">
                                 <textarea class="form-control" id="inputDescription" placeholder="Kuvaus" rows="8"></textarea>                          
                             </div>
                         </div>
+
+                        <div class="btn-toolbar pull-right">
+                            <button type="submit" formaction="removedive" formmethod="POST" class="btn btn-primary">Poista</button>
+                            <a href="divelist" class="btn btn-primary">Peruuta</a>
+                            <button type="submit" class="btn btn-primary">Tallenna</button>
+                        </div>
                     </form>
                 </div>
             </div>
-
-            <form action="adddive" method="POST" class="btn-toolbar pull-right">
-                <button type="submit" formaction="removedive" formmethod="POST" class="btn btn-primary">Poista</button>
-                <a href="divelist" class="btn btn-primary">Peruuta</a>
-                <button type="submit" class="btn btn-primary">Tallenna</button>
-            </form>
+        </div>
     </body>
 </html>

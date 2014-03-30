@@ -116,7 +116,7 @@ public class Diver{
             this.setDiverClass(result.getString(4));
             this.setDiverPhone(result.getString(5));
             this.setDiverEmail(result.getString(6));
-            this.setDiveList(getDivelistByDiverId(this.diverId));
+            setDivelistByDiverId(this.diverId);
             statement.close();
             result.close();
             database.closeConnection();
@@ -137,7 +137,7 @@ public class Diver{
      * @throws SQLException
      * @throws Exception
      */
-    private List<Dive> getDivelistByDiverId(int id) throws SQLException, Exception {
+    private void setDivelistByDiverId(int id) throws SQLException, Exception {
         Database database = new Database();
         PreparedStatement statement = database.query("SELECT * FROM dive WHERE diver_id=?");
         statement.setInt(1, id);
@@ -162,12 +162,12 @@ public class Diver{
             dive.setGastype(result.getString(16));
             dive.setOxygenPercentage(result.getString(17));
             dive.setDescription(result.getString(18));
-            diveList.add(dive);
+            this.diveList.add(dive);
         }
         statement.close();
         result.close();
         database.closeConnection();
-        return diveList;
+        
     }
 
     /**

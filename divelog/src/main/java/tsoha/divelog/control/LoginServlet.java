@@ -63,6 +63,12 @@ public class LoginServlet extends BaseServlet {
 
         String email = request.getParameter("email");
         String pswd = request.getParameter("pswd");
+        request.setAttribute("email", email);
+        
+        if(email.isEmpty() || pswd.isEmpty()) {
+            showError(request, response, "login", "Täytä molemmat kentät!");
+            return;
+        }
 
         try {
             Diver diver = new Diver();

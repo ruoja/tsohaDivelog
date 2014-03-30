@@ -237,24 +237,26 @@ public class Dive {
      */
     public void insertInDatabase() throws SQLException, Exception {
         Database database = new Database();
-        PreparedStatement statement = database.query("INSERT INTO dive(divenumber, divedate, divetimeInMinutes, bottomtimeInMinutes,"
+        PreparedStatement statement = database.query("INSERT INTO dive(diver_id, spot_id, divenumber, divedate, divetimeInMinutes, bottomtimeInMinutes,"
                 + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygenPercentage"
-                + "description) VALUES(?::int, ?, ?::int, ?::int, ?::int, ?::int, ?::int, ?::int, ?, ?::int, ?::int, ?::int, ?, ?::int, ?)");
-        statement.setString(1,this.diveNumber);
-        statement.setString(2, this.divedate);
-        statement.setString(3, this.divetimeInMinutes);
-        statement.setString(4, this.bottomtimeInMinutes);
-        statement.setString(5, this.maxdepth);
-        statement.setString(6,this.visibility);
-        statement.setString(7, this.airtemp);
-        statement.setString(8, this.watertemp);
-        statement.setString(9, this.suittype);
-        statement.setString(10, this.tanksize);
-        statement.setString(11, this.startpressure);
-        statement.setString(12, this.endpressure);
-        statement.setString(13, this.gastype);
-        statement.setString(14, this.oxygenPercentage);
-        statement.setString(15, this.description);
+                + "description) VALUES(?, ?, ?::int, ?, ?::int, ?::int, ?::int, ?::int, ?::int, ?::int, ?, ?::int, ?::int, ?::int, ?, ?::int, ?)");
+        statement.setInt(1, this.diver_id);
+        statement.setInt(2, this.spot_id);
+        statement.setString(3,this.diveNumber);
+        statement.setString(4, this.divedate);
+        statement.setString(5, this.divetimeInMinutes);
+        statement.setString(6, this.bottomtimeInMinutes);
+        statement.setString(7, this.maxdepth);
+        statement.setString(8,this.visibility);
+        statement.setString(9, this.airtemp);
+        statement.setString(10, this.watertemp);
+        statement.setString(11, this.suittype);
+        statement.setString(12, this.tanksize);
+        statement.setString(13, this.startpressure);
+        statement.setString(14, this.endpressure);
+        statement.setString(15, this.gastype);
+        statement.setString(16, this.oxygenPercentage);
+        statement.setString(17, this.description);
         statement.close();
         database.closeConnection();
     }

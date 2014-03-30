@@ -4,8 +4,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="/divelog/bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
-        <link href="/divelog/bootstrap-3.0.0/examples/signin/signin.css" rel="stylesheet">
+        <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap-3.0.0/examples/signin/signin.css" rel="stylesheet">
         <title>Divelog</title>
     </head>
 
@@ -18,7 +18,7 @@
 
             <form action="login" method="POST" class="form-signin" >
                 <h2 class="form-signin-heading text-center">Kirjaudu sisään</h2>
-                <input type="text" name="email" class="form-control" placeholder="sähköposti" autofocus>
+                <input type="text" name="email" value="${email}" class="form-control" placeholder="sähköposti" autofocus>
                 <input type="password" name="pswd" class="form-control" placeholder="salasana">
                 <button type="submit" class="btn btn-lg btn-primary btn-block">Kirjaudu</button>
                 <button type="submit" formaction="register" formmethod="GET"class="btn btn-lg btn-primary btn-block">Rekisteröidy</button>

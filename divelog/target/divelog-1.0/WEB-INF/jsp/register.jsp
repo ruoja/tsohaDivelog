@@ -4,17 +4,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="/divelog/bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
-        <link href="/divelog/bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet">
-        <link href="/divelog/bootstrap-3.0.0/dist/css/main.css" rel="stylesheet">
+        <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet">
+        <link href="bootstrap-3.0.0/dist/css/main.css" rel="stylesheet">
         <title>Divelog</title>
     </head>
 
     <body>
-        <div class="panel panel-default">
-            <div class="panel-heading text-center">Rekisteröidy syöttämällä tietosi</div>
-            <div class="panel-body text-center text-warning">
-                <p>Tähdellä (*) merkityt kentät ovat pakollisia!</p>
+        <div class="container text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Rekisteröidy syöttämällä tietosi</div>
+                <div class="panel-body text-warning">
+                    <p>Tähdellä (*) merkityt kentät ovat pakollisia!</p>
                 </div>
 
                 <form action="register" method="POST" class="form-horizontal">
@@ -73,10 +74,10 @@
 
                     </div>
                 </form>
-            
+            </div>
+            <c:if test="${errorMessage != null}">
+                <div class="alert alert-danger">${errorMessage}</div>
+            </c:if>
         </div>
-        <c:if test="${errorMessage != null}">
-            <div class="alert alert-danger">${errorMessage}</div>
-        </c:if>
     </body>
 </html>

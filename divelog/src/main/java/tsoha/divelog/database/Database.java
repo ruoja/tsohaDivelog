@@ -18,14 +18,14 @@ public final class Database {
     Connection connection;
     PreparedStatement preparedStatement;
 
-    public Database() throws SQLException, NamingException {
+     public Database() throws SQLException, NamingException {
         this.cxt = new InitialContext();
         this.connectionPool = (DataSource) cxt.lookup("java:/comp/env/jdbc/janiruot");
     }
 
     public PreparedStatement query(String sql) throws SQLException, Exception {
         try {
-            connection = this.connectionPool.getConnection();
+            connection = connectionPool.getConnection();
             preparedStatement = connection.prepareStatement(sql);
         } catch (SQLException ex) {
             throw ex;
