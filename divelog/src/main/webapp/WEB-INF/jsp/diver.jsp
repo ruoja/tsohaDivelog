@@ -33,56 +33,56 @@
                     <div class="form-group">
                         <label for="inputEtunimi" class="col-md-2 control-label">Etunimi</label>
                         <div class="col-md-6">
-                            <input required type="text" class="form-control" id="inputEtunimi" value="${firstName}">
+                            <input required type="text" class="form-control" id="Etunimi" value="${firstName}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputSukunimi" class="col-md-2 control-label">Sukunimi</label>
                         <div class="col-md-6">
-                            <input required type="text" class="form-control" id="inputSukunimi" value="${lastName}">
+                            <input required type="text" class="form-control" id="Sukunimi" value="${lastName}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputLuokitus" class="col-md-2 control-label">Luokitus</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="inputLuokitus" value="${classification}">
+                            <input type="text" class="form-control" id="Luokitus" value="${classification}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputPuhelin" class="col-md-2 control-label">Puhelinnumero</label>
                         <div class="col-md-6">
-                            <input type="tel" class="form-control" id="inputPuhelin" value="${phonenumber}">
+                            <input type="tel" class="form-control" id="Puhelin" value="${phonenumber}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputEmail" class="col-md-2 control-label">Email</label>
                         <div class="col-md-6">
-                            <input required type="email" class="form-control" id="inputEmail" value="${email}">
+                            <input required type="email" class="form-control" id="Email" value="${email}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputSalasana" class="col-md-2 control-label">Salasana</label>
                         <div class="col-md-6">
-                            <input required type="password" class="form-control" id="inputSalasana" placeholder="Salasana">
+                            <input required type="password" class="form-control" id="Salasana" placeholder="Salasana">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputUusiSalasana" class="col-md-2 control-label">Uusi salasana</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" id="inputUusiSalasana" placeholder="Uusi salasana">
+                            <input type="password" class="form-control" id="UusiSalasana" placeholder="Uusi salasana">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputVahvistaUusiSalasana" class="col-md-2 control-label">Vahvista salasanan vaihto</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" id="inputVahvistaUusiSalasana" placeholder="Vahvista uusi salasana">
+                            <input type="password" class="form-control" id="VahvistaUusiSalasana" placeholder="Vahvista uusi salasana">
                         </div>
                     </div>
 

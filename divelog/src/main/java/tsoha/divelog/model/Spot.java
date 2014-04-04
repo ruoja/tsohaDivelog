@@ -96,19 +96,21 @@ public class Spot {
         database.closeConnection();
         return allSpots;
     }
-    
+
     public static Spot getSpotById(int id) throws SQLException, Exception {
         Spot spot = new Spot();
         Database database = new Database();
         PreparedStatement statement = database.query("SELECT * FROM spot WHERE spot_id = ?");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
-        spot.setSpot_id(result.getInt(1));
-        spot.setName(result.getString(2));
-        spot.setLocation(result.getString(3));
-        spot.setSpottype(result.getString(4));
-        spot.setMindepth(result.getString(5));
-        spot.setDescription(result.getString(6));
+        while (result.next()) {
+            spot.setSpot_id(result.getInt(1));
+            spot.setName(result.getString(2));
+            spot.setLocation(result.getString(3));
+            spot.setSpottype(result.getString(4));
+            spot.setMindepth(result.getString(5));
+            spot.setDescription(result.getString(6));
+        }
         statement.close();
         result.close();
         database.closeConnection();

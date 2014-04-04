@@ -28,7 +28,6 @@
                 <h1>Tervetuloa ${loggedInDiver.diverFirstName} ${loggedInDiver.diverLastName} !</h1>
                 <h2>Statistiikkaa sukelluksistasi:</h2>
             </div>
-
             <div class="row">
                 <div class="col-md-4">Sukelluksia yhteensä: ${loggedInDiver.totalDives}</div>
                 <div class="col-md-4">Viimeisin sukellus: ${loggedInDiver.lastDiveDate}</div>

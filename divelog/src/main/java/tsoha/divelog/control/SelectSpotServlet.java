@@ -1,9 +1,13 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tsoha.divelog.model.Spot;
 
 /**
  *
@@ -41,7 +45,22 @@ public class SelectSpotServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        if (!isLogged(request, response)) {
+            kickOutNotLogged(request, response);
+            return;
+        }
+        try {
+            int id = Integer.parseInt(request.getParameter("spotSelection"));
+            Spot spot = Spot.getSpotById(id);
+            request.setAttribute("spot", spot);
+            showPage(request, response, "spot");
+        } catch (SQLException ex) {
+            Logger.getLogger(SelectSpotServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(SelectSpotServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**

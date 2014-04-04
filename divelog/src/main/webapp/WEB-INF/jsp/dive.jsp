@@ -34,13 +34,13 @@
                             </div>
                         </div>
 
-                        
+
                         <div class="form-group">
                             <label for="Date" class="col-md-2 control-label">Sukelluskohde</label>
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default" tabindex="-1" >Uusi</button>
+                                        <button type="button" class="btn btn-default" tabindex="-1" data-toggle="collapse" data-target="#add" onclick="changeContent()">Uusi</button>
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
                                             <span class="caret"></span>
                                             <span class="sr-only">Toggle Dropdown</span>
@@ -49,10 +49,19 @@
                                         <ul class="dropdown-menu" role="menu">
                                             <c:forEach var="spot" items="${allSpots}">
                                                 <li><a href="#">${spot.name}</a></li>
-                                            </c:forEach>
+                                                </c:forEach>
                                         </ul>
+
                                     </div>
                                     <input type="text" class="form-control" id="spotname" placeholder="Sukelluskohde">
+                                </div>
+                                <div class="panel-collapse collapse" id="add">
+                                    <div class="panel-body" id="addBody" >
+                                        <script> function changeContent() {
+                                                $('#addSpot').load('spot.jsp');
+                                            }
+                                        </script>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -121,39 +130,47 @@
                             </div>
                         </div>
 
-                        <label for="gasOptions" class="col-md-2 control-label">Kaasutyyppi</label>
-                        <div class="radio-inline">
-                            <label>
-                                <input type="radio" name="gasOptions" id="nitrox" value="nitrox" checked>
-                                Nitrox
-                            </label>
-                        </div>
-                        <div class="radio-inline">
-                            <label>
-                                <input type="radio" name="gasOptions" id="air" value="air">
-                                Ilma
-                            </label>
+                        <div class="form-group">
+                            <label for="gasOptions" class="col-md-2 control-label">Kaasutyyppi</label>
+                            <div class="col-md-4">
+                                <div class="radio-inline pull-left">
+                                    <label>
+                                        <input type="radio" name="gasOptions" id="nitrox" value="nitrox">
+                                        Nitrox
+                                    </label>
+                                </div>
+                                <div class="radio-inline pull-left">
+                                    <label>
+                                        <input type="radio" name="gasOptions" id="air" value="air" checked>
+                                        Ilma
+                                    </label>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="OxygenPercentage" class="col-md-2 control-label">Happiprosentti</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputOxygenPercentage" placeholder="Happiprosentti">
+                                <input type="number" class="form-control" id="inputOxygenPercentage" value="21">
                             </div>
                         </div>
 
-                        <label for="suitOptions" class="col-md-2 control-label">Pukutyyppi</label>
-                        <div class="radio-inline">
-                            <label>
-                                <input type="radio" name="suitOptions" id="kuivapuku" value="drysuit" checked>
-                                Kuivapuku
-                            </label>
-                        </div>
-                        <div class="radio-inline">
-                            <label>
-                                <input type="radio" name="suitOptions" id="wetsuit" value="wetsuit">
-                                Märkäpuku
-                            </label>
+                        <div class="form-group">
+                            <label for="suitOptions" class="col-md-2 control-label">Pukutyyppi</label>
+                            <div class="col-md-4">
+                                <div class="radio-inline pull-left">
+                                    <label>
+                                        <input type="radio" name="suitOptions" id="kuivapuku" value="drysuit" checked>
+                                        Kuivapuku
+                                    </label>
+                                </div>
+                                <div class="radio-inline pull-left">
+                                    <label>
+                                        <input type="radio" name="suitOptions" id="wetsuit" value="wetsuit">
+                                        Märkäpuku
+                                    </label>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">

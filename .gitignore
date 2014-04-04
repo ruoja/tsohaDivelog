@@ -1,3 +1,5 @@
 build
 nbproject/private
 divelog/src/main/webapp/META-INF/context.xml
+target
+nb-configuration.xml

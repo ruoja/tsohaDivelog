@@ -45,7 +45,7 @@
 
                             <c:forEach var="spot" items="${allSpots}">
                                 <tr>
-                                    <td><div class="checkbox"><input type="checkbox" name="spotSelection" id="selectedSpot" value="${spot.name}"></div>
+                                    <td><div class="checkbox"><input type="checkbox" name="spotSelection" value="${spot.spot_id}"></div>
                                     <td>${spot.name}</td>
                                     <td>${spot.location}</td>
                                     <td>${spot.spottype}</td>
