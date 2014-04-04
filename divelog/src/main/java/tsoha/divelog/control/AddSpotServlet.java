@@ -62,6 +62,7 @@ public class AddSpotServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         if (!isLogged(request, response)) {
             kickOutNotLogged(request, response);
             return;

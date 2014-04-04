@@ -56,20 +56,18 @@
                     </table>
                 </div>
 
-                <c:if test="${message != null}">
-                    <div class="alert alert-success">${message}</div>
-                </c:if>
-
-                <c:if test="${warningMessage != null}">
-                    <div class="alert alert-warning">${warningMessage}</div>
-                </c:if>
-
-                    <div class="btn-toolbar pull-right">
+                <div class="btn-toolbar pull-right">
                     <button type="submit" class="btn btn-primary">Näytä valittu</button>
-                    <button type="submit" formaction="removespot" formmethod="POST" class="btn btn-primary">Poista valitut</button>
+                    <button type="submit" formaction="removespot" formmethod="GET" class="btn btn-primary">Poista valitut</button>
                     <a href="spot" class="btn btn-primary">Lisää uusi</a>
                 </div>
             </form>
         </div>
+        <c:if test="${message != null}">
+            <div class="alert alert-success">${message}</div>
+        </c:if>
+        <c:if test="${errorMessage != null}">
+            <div class="alert alert-danger">${errorMessage}</div>
+        </c:if>
     </body>
 </html>

@@ -117,6 +117,32 @@ public class Spot {
         return spot;
     }
 
+    public static void deleteSpotById(int id) throws SQLException, Exception {
+        Database database = new Database();
+        PreparedStatement statement = database.query("DELETE FROM spot WHERE spot_id = ?");
+        statement.setInt(1, id);
+        statement.executeUpdate();
+        statement.close();
+        database.closeConnection();
+    }
+    /*
+     * @TODO
+     */
+    public static void updateSpotById(int id) {
+       
+    }
+
+    public static boolean exists(int id) throws SQLException, Exception {
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT * FROM spot WHERE spot_id = ?");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.wasNull()) {
+            return false;
+        }
+        return true;
+    }
+
     public void insertInDatabase() throws SQLException, NamingException, Exception {
         Database database = new Database();
         PreparedStatement statement = database.query("INSERT INTO spot(name, location, spottype, mindepth, description)"

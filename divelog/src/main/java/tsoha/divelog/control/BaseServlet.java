@@ -30,12 +30,12 @@ public class BaseServlet extends HttpServlet {
     }
 
     public void showError(HttpServletRequest request, HttpServletResponse response, String page, String message) throws ServletException, IOException {
-        request.setAttribute("errorMessage", message);
+        request.setAttribute("errorMessage", "VIRHE: "+message);
         showPage(request, response, page);
     }
 
     public void showWarning(HttpServletRequest request, HttpServletResponse response, String page, String message) throws ServletException, IOException {
-        request.setAttribute("warningMessage", message);
+        request.setAttribute("warningMessage", "VAROITUS: "+message);
         showPage(request, response, page);
     }
 

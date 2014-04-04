@@ -17,7 +17,8 @@
                 <div class="panel-body">
 
                     <form action="addspot" method="POST" class="form-horizontal" role="form">
-
+                            
+                        <input type="hidden" name="spotSelection" value="${spot.spot_id}">
                         <div class="form-group">
                             <label for="Name" class="col-md-2 control-label">Nimi</label>
                             <div class="col-md-6">
@@ -73,7 +74,7 @@
                             </div>
                         </div>
                         <div class="btn-toolbar pull-right">
-                            <button type="submit" formaction="removespot" formmethod="POST" class="btn btn-primary">Poista</button>
+                            <button type="submit" formaction="removespot" formmethod="GET" class="btn btn-primary">Poista</button>
                             <a href="spotlist" class="btn btn-primary">Peruuta</a>
                             <button type="submit" class="btn btn-primary">Tallenna</button>
                         </div>
