@@ -16,7 +16,7 @@ import tsoha.divelog.model.Spot;
  *
  * @author jani
  */
-public class AddSpotServlet extends BaseServlet {
+public class UpdateSpotlistServlet extends BaseServlet {
 
     /**
      * Processes requests for both HTTP
@@ -69,26 +69,38 @@ public class AddSpotServlet extends BaseServlet {
         }
         try {
             Spot spot = new Spot();
+            String spot_id = request.getParameter("spotSelection");
             String name = request.getParameter("inputName");
             String location = request.getParameter("inputLocation");
             String spottype = request.getParameter("inputSpottype");
             String mindepth = request.getParameter("inputMindepth");
             String description = request.getParameter("inputDescription");
 
-            spot.setName(name);
-            spot.setLocation(location);
-            spot.setSpottype(spottype);
-            spot.setMindepth(mindepth);
-            spot.setDescription(description);
-
-            spot.insertInDatabase();
-            response.sendRedirect("spotlist");
+            if (!spot_id.isEmpty()) {
+                int id = Integer.parseInt(spot_id);
+                spot.setSpot_id(id);
+                spot.setName(name);
+                spot.setLocation(location);
+                spot.setSpottype(spottype);
+                spot.setMindepth(mindepth);
+                spot.setDescription(description);
+                spot.updateSpotById(id);
+                response.sendRedirect("spotlist");
+            } else {
+                spot.setName(name);
+                spot.setLocation(location);
+                spot.setSpottype(spottype);
+                spot.setMindepth(mindepth);
+                spot.setDescription(description);
+                spot.insertInDatabase();
+                response.sendRedirect("spotlist");
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(AddSpotServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateSpotlistServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(AddSpotServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateSpotlistServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(AddSpotServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateSpotlistServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

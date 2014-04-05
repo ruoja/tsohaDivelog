@@ -18,7 +18,7 @@ import tsoha.divelog.model.Spot;
  *
  * @author jani
  */
-public class AddDiveServlet extends BaseServlet {
+public class UpdateDivelistServlet extends BaseServlet {
 
     /**
      * Processes requests for both HTTP

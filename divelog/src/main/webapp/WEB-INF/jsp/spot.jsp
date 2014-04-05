@@ -16,8 +16,8 @@
                 <div class="panel-heading">Kohde</div>
                 <div class="panel-body">
 
-                    <form action="addspot" method="POST" class="form-horizontal" role="form">
-                            
+                    <form action="updatespotlist" method="POST" class="form-horizontal" role="form">
+
                         <input type="hidden" name="spotSelection" value="${spot.spot_id}">
                         <div class="form-group">
                             <label for="Name" class="col-md-2 control-label">Nimi</label>

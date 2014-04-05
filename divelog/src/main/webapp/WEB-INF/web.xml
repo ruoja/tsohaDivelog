@@ -58,12 +58,12 @@
         <servlet-class>tsoha.divelog.control.RemoveDiverServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddDiveServlet</servlet-name>
-        <servlet-class>tsoha.divelog.control.AddDiveServlet</servlet-class>
+        <servlet-name>UpdateDivelistServlet</servlet-name>
+        <servlet-class>tsoha.divelog.control.UpdateDivelistServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddSpotServlet</servlet-name>
-        <servlet-class>tsoha.divelog.control.AddSpotServlet</servlet-class>
+        <servlet-name>UpdateSpotlistServlet</servlet-name>
+        <servlet-class>tsoha.divelog.control.UpdateSpotlistServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -122,12 +122,12 @@
         <url-pattern>/removediver</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddDiveServlet</servlet-name>
-        <url-pattern>/adddive</url-pattern>
+        <servlet-name>UpdateDivelistServlet</servlet-name>
+        <url-pattern>/updatedivelist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddSpotServlet</servlet-name>
-        <url-pattern>/addspot</url-pattern>
+        <servlet-name>UpdateSpotlistServlet</servlet-name>
+        <url-pattern>/updatespotlist</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

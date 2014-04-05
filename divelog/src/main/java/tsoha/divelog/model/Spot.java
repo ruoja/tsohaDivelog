@@ -125,17 +125,27 @@ public class Spot {
         statement.close();
         database.closeConnection();
     }
-    /*
-     * @TODO
-     */
-    public static void updateSpotById(int id) {
-       
+
+    public void updateSpotById(int id) throws SQLException, Exception {
+        Database database = new Database();
+        PreparedStatement statement = database.query("UPDATE spot SET name = ?, location = ?, spottype = ?::place, mindepth = ?::int, description = ?"
+                + "WHERE spot_id = ?");
+        statement.setString(1, this.name);
+        statement.setString(2, this.location);
+        statement.setString(3, this.spottype);
+        statement.setString(4, this.mindepth);
+        statement.setString(5, this.description);
+        statement.setInt(6, id);
+        statement.executeUpdate();
+        statement.close();
+        database.closeConnection();
+
     }
 
-    public static boolean exists(int id) throws SQLException, Exception {
+    public boolean exists(String name) throws SQLException, Exception {
         Database database = new Database();
-        PreparedStatement statement = database.query("SELECT * FROM spot WHERE spot_id = ?");
-        statement.setInt(1, id);
+        PreparedStatement statement = database.query("SELECT * FROM spot WHERE name = ?");
+        statement.setString(1, name);
         ResultSet result = statement.executeQuery();
         if (result.wasNull()) {
             return false;
