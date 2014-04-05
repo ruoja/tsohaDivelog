@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label for="Name" class="col-md-2 control-label">Nimi</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="inputName" placeholder="Kohteen nimi" value="${spot.name}">
+                                <input required type="text" class="form-control" name="inputName" placeholder="Kohteen nimi" value="${spot.name}">
                             </div>
                         </div>
 
@@ -38,19 +38,19 @@
                             <div class="col-md-4">
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input type="radio" name="inputSpottype" id="inputWreck" value="wreck">
+                                        <input required type="radio" name="inputSpottype" id="inputWreck" value="wreck">
                                         Hylky
                                     </label>
                                 </div>
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input type="radio" name="inputSpottype" id="inputBio" value="bio">
+                                        <input required type="radio" name="inputSpottype" id="inputBio" value="bio">
                                         Bio
                                     </label>
                                 </div>
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input type="radio" name="inputSpottype" id="inputmine" value="mine">
+                                        <input required type="radio" name="inputSpottype" id="inputmine" value="mine">
                                         Kaivos
                                     </label>
                                 </div>

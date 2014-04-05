@@ -23,24 +23,24 @@
                         <div class="form-group">
                             <label for="Divenumber" class="col-md-2 control-label">Sukellus no.</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputDivenumber" placeholder="Sukelluksen no.">
+                                <input required type="number" class="form-control" id="inputDivenumber" placeholder="Sukelluksen no. *" value="${dive.diveNumber}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Date" class="col-md-2 control-label">Päivämäärä</label>
                             <div class="col-md-6">
-                                <input type="date" class="form-control" id="inputDate" placeholder="Päivämäärä">
+                                <input required type="date" class="form-control" id="inputDate" placeholder="Päivämäärä *" value="${dive.divedate}">
                             </div>
                         </div>
 
 
                         <div class="form-group">
-                            <label for="Date" class="col-md-2 control-label">Sukelluskohde</label>
+                            <label for="Spot" class="col-md-2 control-label">Sukelluskohde</label>
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default" tabindex="-1" data-toggle="collapse" data-target="#add" onclick="changeContent()">Uusi</button>
+                                        <button type="button" class="btn btn-default" tabindex="-1" data-toggle="collapse" data-target="#select">Uusi</button>
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
                                             <span class="caret"></span>
                                             <span class="sr-only">Toggle Dropdown</span>
@@ -53,14 +53,11 @@
                                         </ul>
 
                                     </div>
-                                    <input type="text" class="form-control" id="spotname" placeholder="Sukelluskohde">
+                                    <input required type="text" class="form-control" name="spotname" placeholder="Sukelluskohde *" value="${dive.spotNameById}">
                                 </div>
-                                <div class="panel-collapse collapse" id="add">
+                                <div class="panel-collapse collapse" id="select">
                                     <div class="panel-body" id="addBody" >
-                                        <script> function changeContent() {
-                                                $('#addSpot').load('spot.jsp');
-                                            }
-                                        </script>
+                                        <! TODO !>
                                     </div>
                                 </div>
                             </div>
@@ -70,63 +67,63 @@
                         <div class="form-group">
                             <label for="Divetime" class="col-md-2 control-label">Sukellusaika</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputDivetime" placeholder="Sukellusaika minuutteina">
+                                <input required type="number" class="form-control" name="divetime" placeholder="Sukellusaika minuutteina *" value="${dive.divetimeInMinutes}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Bottomtime" class="col-md-2 control-label">Pohja-aika</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputBottomtime" placeholder="Pohja-aika minuutteina">
+                                <input required type="number" class="form-control" name="bottomtime" placeholder="Pohja-aika minuutteina *" value="${dive.bottomtimeInMinutes}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Maxdepth" class="col-md-2 control-label">Suurin syvyys</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputMaxdepth" placeholder="Maksimisyvyys metreinä">
+                                <input required type="number" class="form-control" name="maxdepth" placeholder="Maksimisyvyys metreinä *" value="${dive.maxdepth}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Visibility" class="col-md-2 control-label">Näkyvyys</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputVisibility" placeholder="Näkyvyys metreinä">
+                                <input required type="number" class="form-control" name="visibility" placeholder="Näkyvyys metreinä *" value="${dive.visibility}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Airtemp" class="col-md-2 control-label">Ilman lämpötila</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputAirtemp" placeholder="Ilman lämpötila">
+                                <input required type="number" class="form-control" name="airtemp" placeholder="Ilman lämpötila *" value="${dive.airtemp}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Watertemp" class="col-md-2 control-label">Veden lämpötila</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputWatertemp" placeholder="Veden lämpötila">
+                                <input required type="number" class="form-control" name="watertemp" placeholder="Veden lämpötila *" value="${dive.watertemp}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Tanksize" class="col-md-2 control-label">Laitteen koko</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputTanksize" placeholder="Laitteen koko">
+                                <input required type="number" class="form-control" name="tanksize" placeholder="Laitteen koko *" value="${dive.tanksize}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Startpressure" class="col-md-2 control-label">Alkupaine</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputStartpressure" placeholder="Alkupaine bar">
+                                <input required type="number" class="form-control" name="startpressure" placeholder="Alkupaine bar *" value="${dive.startpressure}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Endpressure" class="col-md-2 control-label">Loppupaine</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputEndpressure" placeholder="Loppupaine">
+                                <input required type="number" class="form-control" name="endpressure" placeholder="Loppupaine *" value="${dive.endpressure}">
                             </div>
                         </div>
 
@@ -135,13 +132,13 @@
                             <div class="col-md-4">
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input type="radio" name="gasOptions" id="nitrox" value="nitrox">
+                                        <input required type="radio" name="gasOptions" value="nitrox" checked="${dive.gastype}">
                                         Nitrox
                                     </label>
                                 </div>
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input type="radio" name="gasOptions" id="air" value="air" checked>
+                                        <input required type="radio" name="gasOptions" value="air" checked="${dive.gastype}">
                                         Ilma
                                     </label>
                                 </div>
@@ -151,7 +148,7 @@
                         <div class="form-group">
                             <label for="OxygenPercentage" class="col-md-2 control-label">Happiprosentti</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="inputOxygenPercentage" value="21">
+                                <input required type="number" class="form-control" name="oxygenPercentage" value="${dive.oxygenPercentage}">
                             </div>
                         </div>
 
@@ -160,13 +157,13 @@
                             <div class="col-md-4">
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input type="radio" name="suitOptions" id="kuivapuku" value="drysuit" checked>
+                                        <input required type="radio" name="suitOptions" value="drysuit" checked ="${dive.suittype}">
                                         Kuivapuku
                                     </label>
                                 </div>
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input type="radio" name="suitOptions" id="wetsuit" value="wetsuit">
+                                        <input required type="radio" name="suitOptions" value="wetsuit" checked="${dive.suittype}">
                                         Märkäpuku
                                     </label>
                                 </div>
@@ -176,7 +173,7 @@
                         <div class="form-group">
                             <label for="Description" class="col-md-2 control-label">Kuvaus</label>
                             <div class="col-md-6">
-                                <textarea class="form-control" id="inputDescription" placeholder="Kuvaus" rows="8"></textarea>                          
+                                <textarea class="form-control" name="description" placeholder="Sukelluksen kuvaus" rows="8">${dive.description}</textarea>                          
                             </div>
                         </div>
 

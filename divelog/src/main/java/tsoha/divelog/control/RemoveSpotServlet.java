@@ -1,13 +1,8 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import tsoha.divelog.model.Spot;
@@ -50,27 +45,22 @@ public class RemoveSpotServlet extends BaseServlet {
             kickOutNotLogged(request, response);
             return;
         }
+        List allSpots = Spot.getAllSpots();
         try {
             int id = Integer.parseInt(request.getParameter("spotSelection"));
             Spot.deleteSpotById(id);
-            List allSpots = Spot.getAllSpots();
             if (allSpots.isEmpty()) {
                 showMessage(request, response, "spotlist", "Ei näytettäviä kohteita.");
-            } else {
+            } else if (Spot.hasDive(id)) {
                 request.setAttribute("allSpots", allSpots);
+                showError(request, response, "spotlist", "Et voi poistaa kohdetta joka on liitetty sukellukseen!");
+            } else {
+                request.setAttribute("allSpots", Spot.getAllSpots());
                 showMessage(request, response, "spotlist", "Kohteen poisto onnistui!");
             }
-        } catch (SQLException ex) {
-            try {
-                request.setAttribute("allSpots", Spot.getAllSpots());
-                showError(request, response, "spotlist", "Kohde on liitetty sukellukseen!");
-            } catch (SQLException ex1) {
-                showError(request, response, "spotlist", "Kohdelistan nouto epäonnistui!");
-            } catch (Exception ex1) {
-                showError(request, response, "spotlist", "Kohdelistan nouto epäonnistui");
-            }
         } catch (Exception ex) {
-            showError(request, response, "spotlist", "Kohdelistan nouto epäonnistui");
+            request.setAttribute("allSpots", allSpots);
+            showError(request, response, "spotlist", "Et ole valinnut poistettavaa kohdetta!");
 
         }
     }

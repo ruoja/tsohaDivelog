@@ -38,16 +38,16 @@
                         <thead>
                             <tr>
                                 <th>Valitse</th>
-                                <th>Sukelluksen no.</th>
-                                <th>Pvm</th>
-                                <th>Kohde</th>
-                                <th>Aika</th>
-                                <th>Syvyys</th>
+                                <th class="text-center">Sukelluksen no.</th>
+                                <th class="text-center">Pvm</th>
+                                <th class="text-center">Kohde</th>
+                                <th class="text-center">Aika</th>
+                                <th class="text-center">Syvyys</th>
                             </tr>
 
                             <c:forEach var="dive" items="${diveList}">
                                 <tr>
-                                    <td><div class="checkbox"><input type="checkbox" value="$dive.diveid"></div></td>
+                                    <td><div class="radio"><input type="radio" name="diveSelection" value="${dive.dive_id}"></div></td>
                                     <td>${dive.diveNumber}</td>
                                     <td>${dive.divedate}</td>
                                     <td>${dive.spotNameById}</td>
@@ -59,21 +59,19 @@
                     </table>
 
                     <div class="btn-toolbar pull-right">
-                        <button type="submit" action="dive" class="btn btn-primary">Näytä valittu</button>
-                        <button type="submit" formaction="removedive" formmethod="POST" class="btn btn-primary">Poista valitut</button>
+                        <button type="submit" class="btn btn-primary">Näytä valittu</button>
+                        <button type="submit" formaction="removedive" formmethod="POST" class="btn btn-primary">Poista valittu</button>
                         <a href="dive" class="btn btn-primary">Lisää uusi</a>
                     </div>
                 </div>
             </form>
-
             <c:if test="${message != null}">
-                <div class="alert alert-success">${message}</div>
+                <div class="alert alert-success col-md-4 text-center">${message}</div>
             </c:if>
 
-            <c:if test="${warningMessage != null}">
-                <div class="alert alert-warning">${warningMessage}</div>
+            <c:if test="${errorMessage != null}">
+                <div class="alert alert-danger col-md-4 text-center">${errorMessage}</div>
             </c:if>
-
         </div>
     </body>
 </html>

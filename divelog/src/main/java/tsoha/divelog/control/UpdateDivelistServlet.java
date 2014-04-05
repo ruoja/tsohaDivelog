@@ -1,18 +1,14 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import tsoha.divelog.model.Dive;
 import tsoha.divelog.model.Diver;
-import tsoha.divelog.model.Spot;
 
 /**
  *
@@ -71,7 +67,7 @@ public class UpdateDivelistServlet extends BaseServlet {
         try {
             String spotId = request.getParameter("spot.id");
             int id = Integer.parseInt(spotId);
-            
+
             Dive dive = new Dive();
             Diver diver = (Diver) request.getSession().getAttribute("loggedInDiver");
             int diver_id = diver.getDiverId();
@@ -112,8 +108,6 @@ public class UpdateDivelistServlet extends BaseServlet {
 
             dive.insertInDatabase();
             response.sendRedirect("divelist");
-        } catch (SQLException ex) {
-            Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,13 +1,7 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import tsoha.divelog.model.Spot;
@@ -67,42 +61,33 @@ public class UpdateSpotlistServlet extends BaseServlet {
             kickOutNotLogged(request, response);
             return;
         }
-        try {
-            Spot spot = new Spot();
-            String spot_id = request.getParameter("spotSelection");
-            String name = request.getParameter("inputName");
-            String location = request.getParameter("inputLocation");
-            String spottype = request.getParameter("inputSpottype");
-            String mindepth = request.getParameter("inputMindepth");
-            String description = request.getParameter("inputDescription");
+        Spot spot = new Spot();
+        String spot_id = request.getParameter("spotSelection");
+        String name = request.getParameter("inputName");
+        String location = request.getParameter("inputLocation");
+        String spottype = request.getParameter("inputSpottype");
+        String mindepth = request.getParameter("inputMindepth");
+        String description = request.getParameter("inputDescription");
 
-            if (!spot_id.isEmpty()) {
-                int id = Integer.parseInt(spot_id);
-                spot.setSpot_id(id);
-                spot.setName(name);
-                spot.setLocation(location);
-                spot.setSpottype(spottype);
-                spot.setMindepth(mindepth);
-                spot.setDescription(description);
-                spot.updateSpotById(id);
-                response.sendRedirect("spotlist");
-            } else {
-                spot.setName(name);
-                spot.setLocation(location);
-                spot.setSpottype(spottype);
-                spot.setMindepth(mindepth);
-                spot.setDescription(description);
-                spot.insertInDatabase();
-                response.sendRedirect("spotlist");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UpdateSpotlistServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(UpdateSpotlistServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(UpdateSpotlistServlet.class.getName()).log(Level.SEVERE, null, ex);
+        if (!spot_id.isEmpty()) {
+            int id = Integer.parseInt(spot_id);
+            spot.setSpot_id(id);
+            spot.setName(name);
+            spot.setLocation(location);
+            spot.setSpottype(spottype);
+            spot.setMindepth(mindepth);
+            spot.setDescription(description);
+            spot.updateSpotById(id);
+            response.sendRedirect("spotlist");
+        } else {
+            spot.setName(name);
+            spot.setLocation(location);
+            spot.setSpottype(spottype);
+            spot.setMindepth(mindepth);
+            spot.setDescription(description);
+            spot.insertInDatabase();
+            response.sendRedirect("spotlist");
         }
-
     }
 
     /**

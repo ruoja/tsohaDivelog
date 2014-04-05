@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tsoha.divelog.model.Diver;
 
 /**
  *
@@ -22,6 +23,10 @@ public class BaseServlet extends HttpServlet {
         } else {
             return false;
         }
+    }
+    
+    public Diver getDiver(HttpServletRequest request, HttpServletResponse response) {
+        return (Diver) request.getSession().getAttribute("loggedInDiver");
     }
 
     public void kickOutNotLogged(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -37,15 +37,15 @@
                         <thead>
                             <tr>
                                 <th>Valitse</th>
-                                <th>Nimi</th>
-                                <th>Sijainti</th>
-                                <th>Tyyppi</th>
-                                <th>Minimisyvyys</th>
+                                <th class="text-center">Nimi</th>
+                                <th class="text-center">Sijainti</th>
+                                <th class="text-center">Tyyppi</th>
+                                <th class="text-center">Minimisyvyys</th>
                             </tr>
 
                             <c:forEach var="spot" items="${allSpots}">
                                 <tr>
-                                    <td><div class="checkbox"><input type="checkbox" name="spotSelection" value="${spot.spot_id}"></div>
+                                    <td><div class="radio"><input type="radio" name="spotSelection" value="${spot.spot_id}"></div></td>
                                     <td>${spot.name}</td>
                                     <td>${spot.location}</td>
                                     <td>${spot.spottype}</td>
@@ -58,16 +58,16 @@
 
                 <div class="btn-toolbar pull-right">
                     <button type="submit" class="btn btn-primary">Näytä valittu</button>
-                    <button type="submit" formaction="removespot" formmethod="GET" class="btn btn-primary">Poista valitut</button>
+                    <button type="submit" formaction="removespot" formmethod="GET" class="btn btn-primary">Poista valittu</button>
                     <a href="spot" class="btn btn-primary">Lisää uusi</a>
                 </div>
             </form>
+            <c:if test="${message != null}">
+                <div class="alert alert-success col-md-4 text-center">${message}</div>
+            </c:if>
+            <c:if test="${errorMessage != null}">
+                <div class="alert alert-danger col-md-4 text-center">${errorMessage}</div>
+            </c:if>
         </div>
-        <c:if test="${message != null}">
-            <div class="alert alert-success">${message}</div>
-        </c:if>
-        <c:if test="${errorMessage != null}">
-            <div class="alert alert-danger">${errorMessage}</div>
-        </c:if>
     </body>
 </html>

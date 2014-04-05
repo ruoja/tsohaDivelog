@@ -30,12 +30,7 @@ public class SelectDiveServlet extends BaseServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-
-        String diveNumber = request.getParameter("diveNumber");
-        Dive dive = Dive.getDiveByNumber(diveNumber);
-        List allSpots = Spot.getAllSpots();
-        request.setAttribute("dive", dive);
-        request.setAttribute("allSpots", allSpots);
+        
         showPage(request, response, "dive");
 
     }
@@ -53,12 +48,19 @@ public class SelectDiveServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (!isLogged(request, response)) {
+            kickOutNotLogged(request, response);
+            return;
+        }
         try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SelectDiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            int id = Integer.parseInt(request.getParameter("diveSelection"));
+            Dive dive = Dive.getDiveById(id);
+            request.setAttribute("dive", dive);
+            request.setAttribute("allSpots", Spot.getAllSpots());
+            showPage(request, response, "dive");
         } catch (Exception ex) {
-            Logger.getLogger(SelectDiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("diveList", getDiver(request, response).getDiveList());
+            showError(request, response, "divelist", "Et ole valinnut näytettävää sukellusta!");
         }
     }
 

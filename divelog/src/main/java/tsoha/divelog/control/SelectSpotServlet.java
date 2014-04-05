@@ -1,9 +1,6 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,10 +52,9 @@ public class SelectSpotServlet extends BaseServlet {
             Spot spot = Spot.getSpotById(id);
             request.setAttribute("spot", spot);
             showPage(request, response, "spot");
-        } catch (SQLException ex) {
-            Logger.getLogger(SelectSpotServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(SelectSpotServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("allSpots", Spot.getAllSpots());
+            showError(request, response, "spotlist", "Et ole valinnut näytettävää kohdetta!");
         }
 
     }

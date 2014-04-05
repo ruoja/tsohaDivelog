@@ -3,6 +3,9 @@ package tsoha.divelog.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import tsoha.divelog.database.Database;
 
 /**
@@ -213,19 +216,27 @@ public class Dive {
      * @throws SQLException
      * @throws Exception
      */
-    public Dive setSpotNameById(int id) throws SQLException, Exception {
-        Database database = new Database();
-        PreparedStatement statement = database.query("SELECT name FROM spot WHERE spot_id =?");
-        statement.setInt(1, id);
-        ResultSet result = statement.executeQuery();
-        if (result.next()) {
-            this.spotNameById = result.getString(1);
-        } else {
-            this.spotNameById = null;
+    public Dive setSpotNameById(int id) {
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("SELECT name FROM spot WHERE spot_id =?");
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                this.spotNameById = result.getString(1);
+            } else {
+                this.spotNameById = null;
+            }
+            statement.close();
+            result.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
         }
-        statement.close();
-        result.close();
-        database.closeConnection();
         return this;
     }
 
@@ -235,65 +246,81 @@ public class Dive {
      * @throws SQLException
      * @throws Exception
      */
-    public void insertInDatabase() throws SQLException, Exception {
-        Database database = new Database();
-        PreparedStatement statement = database.query("INSERT INTO dive(diver_id, spot_id, divenumber, divedate, divetimeInMinutes, bottomtimeInMinutes,"
-                + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygenPercentage"
-                + "description) VALUES(?, ?, ?::int, ?, ?::int, ?::int, ?::int, ?::int, ?::int, ?::int, ?, ?::int, ?::int, ?::int, ?, ?::int, ?)");
-        statement.setInt(1, this.diver_id);
-        statement.setInt(2, this.spot_id);
-        statement.setString(3,this.diveNumber);
-        statement.setString(4, this.divedate);
-        statement.setString(5, this.divetimeInMinutes);
-        statement.setString(6, this.bottomtimeInMinutes);
-        statement.setString(7, this.maxdepth);
-        statement.setString(8,this.visibility);
-        statement.setString(9, this.airtemp);
-        statement.setString(10, this.watertemp);
-        statement.setString(11, this.suittype);
-        statement.setString(12, this.tanksize);
-        statement.setString(13, this.startpressure);
-        statement.setString(14, this.endpressure);
-        statement.setString(15, this.gastype);
-        statement.setString(16, this.oxygenPercentage);
-        statement.setString(17, this.description);
-        statement.close();
-        database.closeConnection();
+    public void insertInDatabase() {
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("INSERT INTO dive(diver_id, spot_id, divenumber, divedate, divetimeInMinutes, bottomtimeInMinutes,"
+                    + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygenPercentage"
+                    + "description) VALUES(?, ?, ?::int, ?, ?::int, ?::int, ?::int, ?::int, ?::int, ?::int, ?, ?::int, ?::int, ?::int, ?, ?::int, ?)");
+            statement.setInt(1, this.diver_id);
+            statement.setInt(2, this.spot_id);
+            statement.setString(3, this.diveNumber);
+            statement.setString(4, this.divedate);
+            statement.setString(5, this.divetimeInMinutes);
+            statement.setString(6, this.bottomtimeInMinutes);
+            statement.setString(7, this.maxdepth);
+            statement.setString(8, this.visibility);
+            statement.setString(9, this.airtemp);
+            statement.setString(10, this.watertemp);
+            statement.setString(11, this.suittype);
+            statement.setString(12, this.tanksize);
+            statement.setString(13, this.startpressure);
+            statement.setString(14, this.endpressure);
+            statement.setString(15, this.gastype);
+            statement.setString(16, this.oxygenPercentage);
+            statement.setString(17, this.description);
+            statement.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static Dive getDiveByNumber(String divenumber) throws SQLException, Exception {
+    public static Dive getDiveById(int id) {
         Dive dive = new Dive();
-        Database database = new Database();
-        PreparedStatement statement = database.query("SELECT * FROM dive WHERE divenumber=?");
-        statement.setString(1, divenumber);
-        ResultSet result = statement.executeQuery();
-        if (result.next()) {
-            dive.setDive_id(result.getInt(1));
-            dive.setDiver_id(result.getInt(2));
-            dive.setSpot_id(result.getInt(3));
-            dive.setDiveNumber(result.getString(4));
-            dive.setDivedate(result.getString(5));
-            dive.setDivetimeInMinutes(result.getString(6));
-            dive.setBottomtimeInMinutes(result.getString(7));
-            dive.setMaxdepth(result.getString(8));
-            dive.setVisibility(result.getString(9));
-            dive.setAirtemp(result.getString(10));
-            dive.setWatertemp(result.getString(11));
-            dive.setSuittype(result.getString(12));
-            dive.setTanksize(result.getString(13));
-            dive.setStartpressure(result.getString(14));
-            dive.setEndpressure(result.getString(15));
-            dive.setGastype(result.getString(16));
-            dive.setOxygenPercentage(result.getString(17));
-            dive.setDescription(result.getString(18));
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("SELECT * FROM dive WHERE dive_id = ?");
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                dive.setDive_id(result.getInt(1));
+                dive.setDiver_id(result.getInt(2));
+                dive.setSpot_id(result.getInt(3));
+                dive.setDiveNumber(result.getString(4));
+                dive.setDivedate(result.getString(5));
+                dive.setDivetimeInMinutes(result.getString(6));
+                dive.setBottomtimeInMinutes(result.getString(7));
+                dive.setMaxdepth(result.getString(8));
+                dive.setVisibility(result.getString(9));
+                dive.setAirtemp(result.getString(10));
+                dive.setWatertemp(result.getString(11));
+                dive.setSuittype(result.getString(12));
+                dive.setTanksize(result.getString(13));
+                dive.setStartpressure(result.getString(14));
+                dive.setEndpressure(result.getString(15));
+                dive.setGastype(result.getString(16));
+                dive.setOxygenPercentage(result.getString(17));
+                dive.setDescription(result.getString(18));
+                statement.close();
+                result.close();
+                database.closeConnection();
+                return dive;
+            }
             statement.close();
             result.close();
             database.closeConnection();
-            return dive;
+        } catch (SQLException ex) {
+            Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
         }
-        statement.close();
-        result.close();
-        database.closeConnection();
         return dive;
     }
 }

@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import tsoha.divelog.database.Database;
 
@@ -76,94 +78,143 @@ public class Spot {
         return this;
     }
 
-    public static List<Spot> getAllSpots() throws SQLException, Exception {
+    public static List<Spot> getAllSpots() {
         List<Spot> allSpots = new ArrayList<Spot>();
-        Database database = new Database();
-        PreparedStatement statement = database.query("SELECT * FROM spot");
-        ResultSet result = statement.executeQuery();
-        while (result.next()) {
-            Spot spot = new Spot();
-            spot.setSpot_id(result.getInt(1));
-            spot.setName(result.getString(2));
-            spot.setLocation(result.getString(3));
-            spot.setSpottype(result.getString(4));
-            spot.setMindepth(result.getString(5));
-            spot.setDescription(result.getString(6));
-            allSpots.add(spot);
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("SELECT * FROM spot");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Spot spot = new Spot();
+                spot.setSpot_id(result.getInt(1));
+                spot.setName(result.getString(2));
+                spot.setLocation(result.getString(3));
+                spot.setSpottype(result.getString(4));
+                spot.setMindepth(result.getString(5));
+                spot.setDescription(result.getString(6));
+                allSpots.add(spot);
+            }
+            statement.close();
+            result.close();
+            database.closeConnection();
+            return allSpots;
+        } catch (SQLException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
         }
-        statement.close();
-        result.close();
-        database.closeConnection();
         return allSpots;
     }
 
-    public static Spot getSpotById(int id) throws SQLException, Exception {
+    public static Spot getSpotById(int id) {
         Spot spot = new Spot();
-        Database database = new Database();
-        PreparedStatement statement = database.query("SELECT * FROM spot WHERE spot_id = ?");
-        statement.setInt(1, id);
-        ResultSet result = statement.executeQuery();
-        while (result.next()) {
-            spot.setSpot_id(result.getInt(1));
-            spot.setName(result.getString(2));
-            spot.setLocation(result.getString(3));
-            spot.setSpottype(result.getString(4));
-            spot.setMindepth(result.getString(5));
-            spot.setDescription(result.getString(6));
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("SELECT * FROM spot WHERE spot_id = ?");
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                spot.setSpot_id(result.getInt(1));
+                spot.setName(result.getString(2));
+                spot.setLocation(result.getString(3));
+                spot.setSpottype(result.getString(4));
+                spot.setMindepth(result.getString(5));
+                spot.setDescription(result.getString(6));
+            }
+            statement.close();
+            result.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
         }
-        statement.close();
-        result.close();
-        database.closeConnection();
         return spot;
     }
 
-    public static void deleteSpotById(int id) throws SQLException, Exception {
-        Database database = new Database();
-        PreparedStatement statement = database.query("DELETE FROM spot WHERE spot_id = ?");
-        statement.setInt(1, id);
-        statement.executeUpdate();
-        statement.close();
-        database.closeConnection();
-    }
-
-    public void updateSpotById(int id) throws SQLException, Exception {
-        Database database = new Database();
-        PreparedStatement statement = database.query("UPDATE spot SET name = ?, location = ?, spottype = ?::place, mindepth = ?::int, description = ?"
-                + "WHERE spot_id = ?");
-        statement.setString(1, this.name);
-        statement.setString(2, this.location);
-        statement.setString(3, this.spottype);
-        statement.setString(4, this.mindepth);
-        statement.setString(5, this.description);
-        statement.setInt(6, id);
-        statement.executeUpdate();
-        statement.close();
-        database.closeConnection();
-
-    }
-
-    public boolean exists(String name) throws SQLException, Exception {
-        Database database = new Database();
-        PreparedStatement statement = database.query("SELECT * FROM spot WHERE name = ?");
-        statement.setString(1, name);
-        ResultSet result = statement.executeQuery();
-        if (result.wasNull()) {
-            return false;
+    public static void deleteSpotById(int id) {
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("DELETE FROM spot WHERE spot_id = ?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return true;
     }
 
-    public void insertInDatabase() throws SQLException, NamingException, Exception {
-        Database database = new Database();
-        PreparedStatement statement = database.query("INSERT INTO spot(name, location, spottype, mindepth, description)"
-                + "VALUES(?, ?, ?::place, ?::int, ?)");
-        statement.setString(1, this.name);
-        statement.setString(2, this.location);
-        statement.setString(3, this.spottype);
-        statement.setString(4, this.mindepth);
-        statement.setString(5, this.description);
-        statement.executeUpdate();
-        statement.close();
-        database.closeConnection();
+    public void updateSpotById(int id) {
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("UPDATE spot SET name = ?, location = ?, spottype = ?::place, mindepth = ?::int, description = ?"
+                    + "WHERE spot_id = ?");
+            statement.setString(1, this.name);
+            statement.setString(2, this.location);
+            statement.setString(3, this.spottype);
+            statement.setString(4, this.mindepth);
+            statement.setString(5, this.description);
+            statement.setInt(6, id);
+            statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public static boolean hasDive(int id) {
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("SELECT * FROM dive WHERE spot_id = ?");
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public void insertInDatabase() {
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("INSERT INTO spot(name, location, spottype, mindepth, description)"
+                    + "VALUES(?, ?, ?::place, ?::int, ?)");
+            statement.setString(1, this.name);
+            statement.setString(2, this.location);
+            statement.setString(3, this.spottype);
+            statement.setString(4, this.mindepth);
+            statement.setString(5, this.description);
+            statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
