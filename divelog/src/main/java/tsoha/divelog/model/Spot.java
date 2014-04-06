@@ -22,7 +22,6 @@ public class Spot {
     private String spottype;
     private String mindepth;
     private String description;
-    //private static List<Spot> allSpots = new ArrayList<Spot>();
 
     public int getSpot_id() {
         return spot_id;
@@ -76,6 +75,17 @@ public class Spot {
     public Spot setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    public boolean isValid() {
+        try {
+            if (Integer.parseInt(this.mindepth) < 0) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
     public static List<Spot> getAllSpots() {
@@ -176,7 +186,7 @@ public class Spot {
         }
 
     }
-    
+
     public static boolean hasDive(int id) {
         try {
             Database database = new Database();

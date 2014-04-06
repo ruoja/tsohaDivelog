@@ -63,7 +63,7 @@
                         <div class="form-group">
                             <label for="Mindepth" class="col-md-2 control-label">Minimisyvyys</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" name="inputMindepth" placeholder="Minimisyvyys kohteella" value="${spot.mindepth}">
+                                <input required type="number" class="form-control" name="inputMindepth" placeholder="Minimisyvyys kohteella" value="${spot.mindepth}">
                             </div>
                         </div>
 
@@ -80,6 +80,9 @@
                         </div>
 
                     </form>
+                    <c:if test="${errorMessage != null}">
+                        <div class="alert alert-danger col-md-4 text-center">${errorMessage}</div>
+                    </c:if> 
                 </div>
             </div>
         </div>
