@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label for="Divenumber" class="col-md-2 control-label">Sukellus no.</label>
                             <div class="col-md-6">
-                                <input required type="number" class="form-control" id="inputDivenumber" placeholder="Sukelluksen no. *" value="${dive.diveNumber}">
+                                <input required type="number" class="form-control" id="inputDivenumber" placeholder="${defaultDiveNumber}" value="${dive.diveNumber}">
                             </div>
                         </div>
 

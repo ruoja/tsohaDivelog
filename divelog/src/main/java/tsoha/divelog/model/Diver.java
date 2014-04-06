@@ -139,7 +139,7 @@ public class Diver{
      */
     private void setDivelistByDiverId(int id) throws SQLException, Exception {
         Database database = new Database();
-        PreparedStatement statement = database.query("SELECT * FROM dive WHERE diver_id=?");
+        PreparedStatement statement = database.query("SELECT * FROM dive WHERE diver_id=? ORDER BY divedate");
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
         while (result.next()) {
@@ -168,6 +168,24 @@ public class Diver{
         result.close();
         database.closeConnection();
         
+    }
+    
+    public int defaultDiveNumber() throws SQLException, Exception {
+        int id = diverId;
+        Database database = new Database();
+        PreparedStatement statement = database.query("SELECT MAX(divenumber) FROM dive WHERE diver_id=?");
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            int maxdivenumber = result.getInt(1);
+            statement.close();
+            result.close();
+            return maxdivenumber + 1;
+        }
+        statement.close();
+        result.close();
+        database.closeConnection();
+        return 1;
     }
 
     /**

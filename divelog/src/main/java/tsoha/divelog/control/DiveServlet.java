@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import tsoha.divelog.model.Dive;
+import tsoha.divelog.model.Diver;
 import tsoha.divelog.model.Spot;
 
 /**
@@ -35,6 +36,8 @@ public class DiveServlet extends BaseServlet {
             return;
         }
         List allSpots = Spot.getAllSpots();
+        Diver diver = (Diver) request.getSession().getAttribute("loggedInDiver");
+        request.setAttribute("defaultDiveNumber", diver.defaultDiveNumber());
         request.setAttribute("allSpots", allSpots);
         showPage(request, response, "dive");
     }

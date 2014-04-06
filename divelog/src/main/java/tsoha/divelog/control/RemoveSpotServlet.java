@@ -46,6 +46,7 @@ public class RemoveSpotServlet extends BaseServlet {
             return;
         }
         List allSpots = Spot.getAllSpots();
+
         try {
             int id = Integer.parseInt(request.getParameter("spotSelection"));
             Spot.deleteSpotById(id);
@@ -58,10 +59,9 @@ public class RemoveSpotServlet extends BaseServlet {
                 request.setAttribute("allSpots", Spot.getAllSpots());
                 showMessage(request, response, "spotlist", "Kohteen poisto onnistui!");
             }
-        } catch (Exception ex) {
+        } catch (NumberFormatException ex) {
             request.setAttribute("allSpots", allSpots);
             showError(request, response, "spotlist", "Et ole valinnut poistettavaa kohdetta!");
-
         }
     }
 

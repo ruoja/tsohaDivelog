@@ -82,7 +82,7 @@ public class Spot {
         List<Spot> allSpots = new ArrayList<Spot>();
         try {
             Database database = new Database();
-            PreparedStatement statement = database.query("SELECT * FROM spot");
+            PreparedStatement statement = database.query("SELECT * FROM spot ORDER BY name");
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Spot spot = new Spot();
