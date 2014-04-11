@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import tsoha.divelog.model.Dive;
 import tsoha.divelog.model.Diver;
+import tsoha.divelog.model.Spot;
 
 /**
  *
@@ -65,31 +66,29 @@ public class UpdateDivelistServlet extends BaseServlet {
             return;
         }
         try {
-            String spotId = request.getParameter("spot.id");
-            int id = Integer.parseInt(spotId);
-
             Dive dive = new Dive();
             Diver diver = (Diver) request.getSession().getAttribute("loggedInDiver");
+            String spotname = request.getParameter("spotname");
             int diver_id = diver.getDiverId();
-            int Spot_id = id;
-            String divenumber = request.getParameter("inputDivenumber");
-            String divedate = request.getParameter("inputDivedate");
-            String divetime = request.getParameter("inputDivetime");
-            String bottomtime = request.getParameter("inputBottomtime");
-            String maxdepth = request.getParameter("inputMaxdepth");
-            String visibility = request.getParameter("inputVisibility");
-            String airtemp = request.getParameter("inputWatertemp");
-            String watertemp = request.getParameter("inputWatertemp");
-            String suittype = request.getParameter("inputSuittype");
-            String tanksize = request.getParameter("inputTanksize");
-            String startpressure = request.getParameter("inputStartpressure");
-            String endpressure = request.getParameter("inputEndpressure");
-            String gastype = request.getParameter("inputGastype");
-            String oxygenPercentage = request.getParameter("inputOxygenPercentage");
-            String description = request.getParameter("inputDescription");
+            int spot_id = Spot.getSpotIdByName(spotname);
+            String divenumber = request.getParameter("divenumber");
+            String divedate = request.getParameter("divedate");
+            String divetime = request.getParameter("divetime");
+            String bottomtime = request.getParameter("bottomtime");
+            String maxdepth = request.getParameter("maxdepth");
+            String visibility = request.getParameter("visibility");
+            String airtemp = request.getParameter("airtemp");
+            String watertemp = request.getParameter("watertemp");
+            String suittype = request.getParameter("suitOptions");
+            String tanksize = request.getParameter("tanksize");
+            String startpressure = request.getParameter("startpressure");
+            String endpressure = request.getParameter("endpressure");
+            String gastype = request.getParameter("gasOptions");
+            String oxygenPercentage = request.getParameter("oxygenPercentage");
+            String description = request.getParameter("description");
 
             dive.setDiver_id(diver_id);
-            dive.setSpot_id(Spot_id);
+            dive.setSpot_id(spot_id);
             dive.setDiveNumber(divenumber);
             dive.setDivedate(divedate);
             dive.setDivetimeInMinutes(divetime);
@@ -107,7 +106,7 @@ public class UpdateDivelistServlet extends BaseServlet {
             dive.setDescription(description);
 
             dive.insertInDatabase();
-            response.sendRedirect("divelist");
+            response.sendRedirect("divelist"); //ei talleta, ei virheilmoitusta????
         } catch (Exception ex) {
             Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

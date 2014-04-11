@@ -9,6 +9,7 @@
         <link href="bootstrap-3.0.0/dist/css/main.css" rel="stylesheet">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script type="text/javascript" src="bootstrap-3.0.0/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/divelog.js"></script>
         <title>Divelog</title>
     </head>
 
@@ -18,19 +19,19 @@
                 <div class="panel-heading">Sukellus</div>
                 <div class="panel-body">
 
-                    <form class="form-horizontal" action="dive" method="GET" role="form">
+                    <form class="form-horizontal" action="updatedivelist" method="POST" role="form">
 
                         <div class="form-group">
                             <label for="Divenumber" class="col-md-2 control-label">Sukellus no.</label>
                             <div class="col-md-6">
-                                <input required type="number" class="form-control" id="inputDivenumber" placeholder="${defaultDiveNumber}" value="${dive.diveNumber}">
+                                <input required type="number" class="form-control" name="divenumber" placeholder="${defaultDiveNumber}" value="${dive.diveNumber}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Date" class="col-md-2 control-label">Päivämäärä</label>
                             <div class="col-md-6">
-                                <input required type="date" class="form-control" id="inputDate" placeholder="Päivämäärä *" value="${dive.divedate}">
+                                <input required type="date" class="form-control" name="date" placeholder="Päivämäärä *" value="${dive.divedate}">
                             </div>
                         </div>
 
@@ -48,17 +49,14 @@
 
                                         <ul class="dropdown-menu" role="menu">
                                             <c:forEach var="spot" items="${allSpots}">
-                                                <li><a href="#">${spot.name}</a></li>
+                                                <li><a href="#" data-target="#spotname" hidden="${spot.spot_id}">${spot.name}</a></li>
                                                 </c:forEach>
                                         </ul>
-
                                     </div>
-                                    <input required type="text" class="form-control" name="spotname" placeholder="Sukelluskohde *" value="${dive.spotNameById}">
+                                    <input required type="text" class="form-control" id="spotname" name="spotname" placeholder="Sukelluskohde *" value="${spot.spot_id}" readonly>
                                 </div>
                                 <div class="panel-collapse collapse" id="select">
-                                    <div class="panel-body" id="addBody" >
-                                        <! TODO !>
-                                    </div>
+                                
                                 </div>
                             </div>
                         </div>
@@ -178,7 +176,7 @@
                         </div>
 
                         <div class="btn-toolbar pull-right">
-                            <button type="submit" formaction="removedive" formmethod="POST" class="btn btn-primary">Poista</button>
+                            <button type="submit" formaction="removedive" formmethod="GET" class="btn btn-primary">Poista</button>
                             <a href="divelist" class="btn btn-primary">Peruuta</a>
                             <button type="submit" class="btn btn-primary">Tallenna</button>
                         </div>

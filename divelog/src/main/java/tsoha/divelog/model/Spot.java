@@ -146,6 +146,27 @@ public class Spot {
         return spot;
     }
 
+    public static int getSpotIdByName(String name) { //toimiiko oikein???
+        int id = 0;
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("SELECT spot_id FROM spot WHERE name = ?");
+            statement.setString(1, name);
+            ResultSet result = statement.executeQuery();
+            id = result.getInt(1);
+            statement.close();
+            result.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
     public static void deleteSpotById(int id) {
         try {
             Database database = new Database();
