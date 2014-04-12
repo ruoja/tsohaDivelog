@@ -67,12 +67,16 @@ public class UpdateDivelistServlet extends BaseServlet {
         }
         try {
             Dive dive = new Dive();
+            Spot spot = new Spot();
             Diver diver = (Diver) request.getSession().getAttribute("loggedInDiver");
-            String spotname = request.getParameter("spotname");
             int diver_id = diver.getDiverId();
-            int spot_id = Spot.getSpotIdByName(spotname);
             String divenumber = request.getParameter("divenumber");
             String divedate = request.getParameter("divedate");
+            String name = request.getParameter("name");
+            String location = request.getParameter("location");
+            String spottype = request.getParameter("spottype");
+            String mindepth = request.getParameter("mindepth");
+            String spotDescription = request.getParameter("spotDescription");
             String divetime = request.getParameter("divetime");
             String bottomtime = request.getParameter("bottomtime");
             String maxdepth = request.getParameter("maxdepth");
@@ -85,10 +89,16 @@ public class UpdateDivelistServlet extends BaseServlet {
             String endpressure = request.getParameter("endpressure");
             String gastype = request.getParameter("gasOptions");
             String oxygenPercentage = request.getParameter("oxygenPercentage");
-            String description = request.getParameter("description");
+            String diveDescription = request.getParameter("diveDescription");
+
+            spot.setName(name);
+            spot.setLocation(location);
+            spot.setSpottype(spottype);
+            spot.setMindepth(mindepth);
+            spot.setDescription(spotDescription); //talleta tässä?
 
             dive.setDiver_id(diver_id);
-            dive.setSpot_id(spot_id);
+            dive.setSpot_id(spot.insertInDatabase());
             dive.setDiveNumber(divenumber);
             dive.setDivedate(divedate);
             dive.setDivetimeInMinutes(divetime);
@@ -103,7 +113,7 @@ public class UpdateDivelistServlet extends BaseServlet {
             dive.setEndpressure(endpressure);
             dive.setGastype(gastype);
             dive.setOxygenPercentage(oxygenPercentage);
-            dive.setDescription(description);
+            dive.setDescription(diveDescription);
 
             dive.insertInDatabase();
             response.sendRedirect("divelist"); //ei talleta, ei virheilmoitusta????
@@ -112,6 +122,22 @@ public class UpdateDivelistServlet extends BaseServlet {
         }
     }
 
+    /*protected int newSpot(HttpServletRequest request) {
+
+     Spot spot = new Spot();
+     String name = request.getParameter("name");
+     String location = request.getParameter("location");
+     String spottype = request.getParameter("spottype");
+     String mindepth = request.getParameter("mindepth");
+     String description = request.getParameter("spotDescription");
+
+     spot.setName(name);
+     spot.setLocation(location);
+     spot.setSpottype(spottype);
+     spot.setMindepth(mindepth);
+     spot.setDescription(description);
+     return spot.insertInDatabase();
+     }*/
     /**
      * Returns a short description of the servlet.
      *

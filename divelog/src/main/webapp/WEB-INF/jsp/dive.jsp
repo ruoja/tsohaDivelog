@@ -41,7 +41,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default" tabindex="-1" data-toggle="collapse" data-target="#select">Uusi</button>
+                                        <button type="button" class="btn btn-default" tabindex="-1" data-toggle="collapse" data-target="#newSpot">Uusi</button>
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
                                             <span class="caret"></span>
                                             <span class="sr-only">Toggle Dropdown</span>
@@ -49,16 +49,17 @@
 
                                         <ul class="dropdown-menu" role="menu">
                                             <c:forEach var="spot" items="${allSpots}">
-                                                <li><a href="#" data-target="#spotname" hidden="${spot.spot_id}">${spot.name}</a></li>
+                                                <li><a href="#" data-target="#spotSelect" hidden="${spot.spot_id}">${spot.name}</a></li>
                                                 </c:forEach>
                                         </ul>
                                     </div>
-                                    <input required type="text" class="form-control" id="spotname" name="spotname" placeholder="Sukelluskohde *" value="${spot.spot_id}" readonly>
-                                </div>
-                                <div class="panel-collapse collapse" id="select">
-                                
+                                    <input type="text" class="form-control" id="spotSelect" name="spotSelect" placeholder="Sukelluskohde *" value="${spot.spot_id}" readonly>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="panel-collapse collapse" id="newSpot">
+                            <%@include file="newspot.jsp"%>
                         </div>
 
 
@@ -171,7 +172,7 @@
                         <div class="form-group">
                             <label for="Description" class="col-md-2 control-label">Kuvaus</label>
                             <div class="col-md-6">
-                                <textarea class="form-control" name="description" placeholder="Sukelluksen kuvaus" rows="8">${dive.description}</textarea>                          
+                                <textarea class="form-control" name="diveDescription" placeholder="Sukelluksen kuvaus" rows="8">${dive.description}</textarea>                          
                             </div>
                         </div>
 

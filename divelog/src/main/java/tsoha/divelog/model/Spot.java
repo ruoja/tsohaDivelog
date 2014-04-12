@@ -227,17 +227,20 @@ public class Spot {
         return false;
     }
 
-    public void insertInDatabase() {
+    public int insertInDatabase() {
         try {
             Database database = new Database();
             PreparedStatement statement = database.query("INSERT INTO spot(name, location, spottype, mindepth, description)"
-                    + "VALUES(?, ?, ?::place, ?::int, ?)");
+                    + "VALUES(?, ?, ?::place, ?::int, ?) RETURNING spot_id");
             statement.setString(1, this.name);
             statement.setString(2, this.location);
             statement.setString(3, this.spottype);
             statement.setString(4, this.mindepth);
             statement.setString(5, this.description);
-            statement.executeUpdate();
+            ResultSet result = statement.executeQuery();
+            result.next();
+            this.spot_id = result.getInt(1);
+            result.close();
             statement.close();
             database.closeConnection();
         } catch (SQLException ex) {
@@ -246,6 +249,8 @@ public class Spot {
             Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return this.spot_id;
         }
     }
 }

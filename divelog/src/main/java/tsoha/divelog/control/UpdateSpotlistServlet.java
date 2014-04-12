@@ -63,11 +63,11 @@ public class UpdateSpotlistServlet extends BaseServlet {
         }
         Spot spot = new Spot();
         String spot_id = request.getParameter("spotSelection");
-        String name = request.getParameter("inputName");
-        String location = request.getParameter("inputLocation");
-        String spottype = request.getParameter("inputSpottype");
-        String mindepth = request.getParameter("inputMindepth");
-        String description = request.getParameter("inputDescription");
+        String name = request.getParameter("name");
+        String location = request.getParameter("location");
+        String spottype = request.getParameter("spottype");
+        String mindepth = request.getParameter("mindepth");
+        String description = request.getParameter("spotDescription");
 
         if (!spot_id.isEmpty()) {
             int id = Integer.parseInt(spot_id);
