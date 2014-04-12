@@ -249,9 +249,9 @@ public class Dive {
     public void insertInDatabase() {
         try {
             Database database = new Database();
-            PreparedStatement statement = database.query("INSERT INTO dive(diver_id, spot_id, divenumber, divedate, divetimeInMinutes, bottomtimeInMinutes,"
-                    + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygenPercentage"
-                    + "description) VALUES(?, ?, ?::int, ?, ?::int, ?::int, ?::int, ?::int, ?::int, ?::int, ?, ?::int, ?::int, ?::int, ?, ?::int, ?)");
+            PreparedStatement statement = database.query("INSERT INTO dive(diver_id, spot_id, divenumber, divedate, divetime, bottomtime,"
+                    + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygen_percentage,"
+                    + "description) VALUES(?, ?, ?::int, ?::date, ?::int, ?::int, ?::int, ?::int, ?::int, ?::int, ?::suit, ?::int, ?::int, ?::int, ?::gas, ?::int, ?)");
             statement.setInt(1, this.diver_id);
             statement.setInt(2, this.spot_id);
             statement.setString(3, this.diveNumber);
@@ -269,6 +269,7 @@ public class Dive {
             statement.setString(15, this.gastype);
             statement.setString(16, this.oxygenPercentage);
             statement.setString(17, this.description);
+            statement.executeUpdate();
             statement.close();
             database.closeConnection();
         } catch (SQLException ex) {

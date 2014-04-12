@@ -156,13 +156,13 @@
                             <div class="col-md-4">
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input required type="radio" name="suitOptions" value="drysuit" checked ="${dive.suittype}">
+                                        <input required type="radio" name="suitOptions" value="dry" checked ="${dive.suittype}">
                                         Kuivapuku
                                     </label>
                                 </div>
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input required type="radio" name="suitOptions" value="wetsuit" checked="${dive.suittype}">
+                                        <input required type="radio" name="suitOptions" value="wet" checked="${dive.suittype}">
                                         Märkäpuku
                                     </label>
                                 </div>

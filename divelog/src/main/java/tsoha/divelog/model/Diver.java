@@ -11,7 +11,7 @@ import tsoha.divelog.database.Database;
  *
  * @author jani
  */
-public class Diver{
+public class Diver {
 
     private int diverId;
     private String diverFirstname;
@@ -167,9 +167,12 @@ public class Diver{
         statement.close();
         result.close();
         database.closeConnection();
-        
     }
-    
+
+    public void addNewDive(Dive dive) {
+        this.diveList.add(dive);
+    }
+
     public int defaultDiveNumber() throws SQLException, Exception {
         int id = diverId;
         Database database = new Database();

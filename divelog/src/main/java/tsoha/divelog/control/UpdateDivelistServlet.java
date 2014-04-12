@@ -1,6 +1,7 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,7 +47,7 @@ public class UpdateDivelistServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -71,7 +72,7 @@ public class UpdateDivelistServlet extends BaseServlet {
             Diver diver = (Diver) request.getSession().getAttribute("loggedInDiver");
             int diver_id = diver.getDiverId();
             String divenumber = request.getParameter("divenumber");
-            String divedate = request.getParameter("divedate");
+            String date = request.getParameter("date");
             String name = request.getParameter("name");
             String location = request.getParameter("location");
             String spottype = request.getParameter("spottype");
@@ -95,12 +96,13 @@ public class UpdateDivelistServlet extends BaseServlet {
             spot.setLocation(location);
             spot.setSpottype(spottype);
             spot.setMindepth(mindepth);
-            spot.setDescription(spotDescription); //talleta tässä?
+            spot.setDescription(spotDescription);
+            int spot_id = spot.insertInDatabase();
 
             dive.setDiver_id(diver_id);
-            dive.setSpot_id(spot.insertInDatabase());
+            dive.setSpot_id(spot_id);
             dive.setDiveNumber(divenumber);
-            dive.setDivedate(divedate);
+            dive.setDivedate(date);
             dive.setDivetimeInMinutes(divetime);
             dive.setBottomtimeInMinutes(bottomtime);
             dive.setMaxdepth(maxdepth);
@@ -114,9 +116,11 @@ public class UpdateDivelistServlet extends BaseServlet {
             dive.setGastype(gastype);
             dive.setOxygenPercentage(oxygenPercentage);
             dive.setDescription(diveDescription);
-
+            dive.setSpotNameById(spot_id);
             dive.insertInDatabase();
-            response.sendRedirect("divelist"); //ei talleta, ei virheilmoitusta????
+            diver.addNewDive(dive);
+            request.getSession().setAttribute("loggedInDiver", diver);
+            response.sendRedirect("divelist");
         } catch (Exception ex) {
             Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
