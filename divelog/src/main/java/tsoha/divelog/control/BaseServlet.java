@@ -24,7 +24,7 @@ public class BaseServlet extends HttpServlet {
             return false;
         }
     }
-    
+
     public Diver getDiver(HttpServletRequest request, HttpServletResponse response) {
         return (Diver) request.getSession().getAttribute("loggedInDiver");
     }
@@ -35,12 +35,12 @@ public class BaseServlet extends HttpServlet {
     }
 
     public void showError(HttpServletRequest request, HttpServletResponse response, String page, String message) throws ServletException, IOException {
-        request.setAttribute("errorMessage", "VIRHE: "+message);
+        request.setAttribute("errorMessage", "VIRHE: " + message);
         showPage(request, response, page);
     }
 
     public void showWarning(HttpServletRequest request, HttpServletResponse response, String page, String message) throws ServletException, IOException {
-        request.setAttribute("warningMessage", "VAROITUS: "+message);
+        request.setAttribute("warningMessage", "VAROITUS: " + message);
         showPage(request, response, page);
     }
 

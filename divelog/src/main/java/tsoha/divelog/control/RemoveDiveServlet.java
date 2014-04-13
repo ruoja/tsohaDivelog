@@ -58,7 +58,6 @@ public class RemoveDiveServlet extends BaseServlet {
                 showMessage(request, response, "divelist", "Ei sukelluksia.");
             } else {
                 request.setAttribute("diveList", diveList);
-                //request.getSession().setAttribute("loggedInDiver", diver);
                 showMessage(request, response, "divelist", "Sukelluksen poisto onnistui!");
             }
         } catch (NumberFormatException ex) {

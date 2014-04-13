@@ -55,7 +55,7 @@
                                         </ul>
                                     </div>
                                     <input type="text" class="form-control" id="spotSelect" name="spotSelect" placeholder="Sukelluskohde *" value="${dive.spotname}" readonly>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                                         Märkäpuku
                                     </label>
                                 </div>
-                                        <div class="col-md-4">
+                                <div class="col-md-4">
                                     <span class="help-block"><b>${dive.suittype}suit</b></span>
                                 </div>
                             </div>

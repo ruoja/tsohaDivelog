@@ -77,26 +77,16 @@ public class UpdateSpotlistServlet extends BaseServlet {
             spot.setSpottype(spottype);
             spot.setMindepth(mindepth);
             spot.setDescription(description);
-            //if (spot.isValid()) {
             spot.updateSpotById(id);
             response.sendRedirect("spotlist");
-            //} else {
-            //  request.setAttribute("spot", spot);
-            //showError(request, response, "spot", "Minimisyvyys ei voi olla negatiivinen!");
-            //}
         } else {
             spot.setName(name);
             spot.setLocation(location);
             spot.setSpottype(spottype);
             spot.setMindepth(mindepth);
             spot.setDescription(description);
-            //if (spot.isValid()) {
             spot.insertInDatabase();
             response.sendRedirect("spotlist");
-            //} else {
-            //  request.setAttribute("spot", spot);
-            //showError(request, response, "spot", "Minimisyvyys ei voi olla negatiivinen!");
-            //}
         }
     }
 

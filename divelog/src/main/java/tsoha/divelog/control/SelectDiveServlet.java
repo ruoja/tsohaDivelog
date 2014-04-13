@@ -2,7 +2,6 @@ package tsoha.divelog.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -30,7 +29,6 @@ public class SelectDiveServlet extends BaseServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        
         showPage(request, response, "dive");
 
     }

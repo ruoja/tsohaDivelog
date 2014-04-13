@@ -200,12 +200,10 @@ public class Dive {
     }
 
     /**
-     * Haetaan tietokannasta sukelluskohteen nimi kohteen id-numeron perusteella
+     *Asetetaan sukellukseen liittyvän sukelluskohteen nimi kohteen id-numeron perusteella
      *
      * @param id sukelluskohteen yksilöivä id-numero
      * @return Kohteen nimi, jos kohde löytyy tietokannasta, muuten null.
-     * @throws SQLException
-     * @throws Exception
      */
     public Dive setSpotNameById(int id) {
         try {
@@ -232,10 +230,8 @@ public class Dive {
     }
 
     /**
-     * Tallennetaan sukellus tietokantaan.
-     *
-     * @throws SQLException
-     * @throws Exception
+     *Tallennetaan sukellus tietokantaan.
+     *@return talletetun sukelluksen id numero
      */
     public int insertInDatabase() {
         try {
@@ -274,7 +270,11 @@ public class Dive {
         }
         return this.dive_id;
     }
-
+/**
+ * haetaan tietty sukellus id-numeron perusteella
+ * @param id
+ * @return sukellus
+ */
     public static Dive getDiveById(int id) {
         Dive dive = new Dive();
         try {

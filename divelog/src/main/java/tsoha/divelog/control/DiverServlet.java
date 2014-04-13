@@ -107,7 +107,6 @@ public class DiverServlet extends BaseServlet {
             session.setAttribute("loggedInDiver", diver);
             processRequest(request, response);
         }
-
     }
 
     /**

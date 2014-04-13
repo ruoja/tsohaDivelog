@@ -92,7 +92,4 @@ public class LoginServlet extends BaseServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    //public static Diver getLoggedDiver() {
-    // return diver;
-    //}
 }

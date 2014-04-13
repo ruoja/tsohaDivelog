@@ -91,6 +91,7 @@ public class UpdateDivelistServlet extends BaseServlet {
             String oxygenPercentage = request.getParameter("oxygenPercentage");
             String diveDescription = request.getParameter("diveDescription");
 
+            //jos kohdetta ei ole valittu listasta, talletetaan uusi kohde
             if (request.getParameter("spotSelect").isEmpty()) {
                 spot.setName(name);
                 spot.setLocation(location);
@@ -99,6 +100,7 @@ public class UpdateDivelistServlet extends BaseServlet {
                 spot.setDescription(spotDescription);
                 spot_id = spot.insertInDatabase();
             } else {
+                //muuten liitetään sukellukseen olemassaolevan kohteen id
                 String spotname = request.getParameter("spotSelect");
                 spot_id = Spot.getSpotIdByName(spotname);
             }

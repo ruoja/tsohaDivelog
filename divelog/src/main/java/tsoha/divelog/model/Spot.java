@@ -77,17 +77,11 @@ public class Spot {
         return this;
     }
 
-    public boolean isValid() {
-        try {
-            if (Integer.parseInt(this.mindepth) < 0) {
-                return false;
-            }
-            return true;
-        } catch (NumberFormatException ex) {
-            return false;
-        }
-    }
-
+    /**
+     * kaikkien talletettujen kohteiden lista
+     *
+     * @return lista kohteista
+     */
     public static List<Spot> getAllSpots() {
         List<Spot> allSpots = new ArrayList<Spot>();
         try {
@@ -118,6 +112,12 @@ public class Spot {
         return allSpots;
     }
 
+    /**
+     * haetaan tietty kohde id-numeron perusteella
+     *
+     * @param id
+     * @return kohde
+     */
     public static Spot getSpotById(int id) {
         Spot spot = new Spot();
         try {
@@ -146,7 +146,13 @@ public class Spot {
         return spot;
     }
 
-    public static int getSpotIdByName(String name) { //toimiiko oikein???
+    /**
+     * haetaan kohteen id-numero kohteen nimen perusteella
+     *
+     * @param name
+     * @return kohteen id-numero
+     */
+    public static int getSpotIdByName(String name) {
         int id = -1;
         try {
             Database database = new Database();
@@ -168,6 +174,11 @@ public class Spot {
         return id;
     }
 
+    /**
+     * poistetaan kohde
+     *
+     * @param id
+     */
     public static void deleteSpotById(int id) {
         try {
             Database database = new Database();
@@ -185,6 +196,11 @@ public class Spot {
         }
     }
 
+    /**
+     * päivitetään kohteen tiedot
+     *
+     * @param id
+     */
     public void updateSpotById(int id) {
         try {
             Database database = new Database();
@@ -209,6 +225,12 @@ public class Spot {
 
     }
 
+    /**
+     * tarkistetaan onko kohteessa sukelluksia
+     *
+     * @param id
+     * @return true jos kohde liittyy johonkin sukellukseen, muuten false
+     */
     public static boolean hasDive(int id) {
         try {
             Database database = new Database();
@@ -228,6 +250,11 @@ public class Spot {
         return false;
     }
 
+    /**
+     * talletetaan kohde
+     *
+     * @return talletetun kohteen id-numero
+     */
     public int insertInDatabase() {
         try {
             Database database = new Database();

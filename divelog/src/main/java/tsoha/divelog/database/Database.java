@@ -18,7 +18,7 @@ public final class Database {
     Connection connection;
     PreparedStatement preparedStatement;
 
-     public Database() throws SQLException, NamingException {
+    public Database() throws SQLException, NamingException {
         this.cxt = new InitialContext();
         this.connectionPool = (DataSource) cxt.lookup("java:/comp/env/jdbc/janiruot");
     }
@@ -32,7 +32,7 @@ public final class Database {
         }
         return preparedStatement;
     }
-    
+
     public void closeConnection() throws SQLException {
         this.connection.close();
     }
