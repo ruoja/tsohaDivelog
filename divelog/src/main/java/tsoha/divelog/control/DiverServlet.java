@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import tsoha.divelog.model.Diver;
 
 /**
@@ -35,7 +36,7 @@ public class DiverServlet extends BaseServlet {
         request.setAttribute("classification", diver.getDiverClass());
         request.setAttribute("phonenumber", diver.getDiverPhone());
         request.setAttribute("email", diver.getDiverEmail());
-  
+
         showPage(request, response, "diver");
     }
 
@@ -67,7 +68,46 @@ public class DiverServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        if (!isLogged(request, response)) {
+            kickOutNotLogged(request, response);
+            return;
+        }
+        HttpSession session = request.getSession();
+        Diver diver = (Diver) session.getAttribute("loggedInDiver");
+        int diver_id = diver.getDiverId();
+        String firstname = request.getParameter("firstName");
+        String lastname = request.getParameter("lastName");
+        String classification = request.getParameter("classification");
+        String phonenumber = request.getParameter("phonenumber");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String newPassword = request.getParameter("newPassword");
+        String newPasswordAgain = request.getParameter("newPasswordAgain");
+
+        if (password.isEmpty()) {
+            request.setAttribute("errorMessage", "VIRHE! Kirjoita salasana!");
+            processRequest(request, response);
+        } else if (!newPassword.equals(newPasswordAgain)) {
+            request.setAttribute("errorMessage", "VIRHE! Salasanat eivät täsmää!");
+            processRequest(request, response);
+        } else if (!newPassword.isEmpty() && newPassword.equals(newPasswordAgain)) {
+            diver.changePswd(diver_id, newPassword);
+            request.setAttribute("message", "Salasana vaihdettu!");
+            session.setAttribute("loggedInDiver", diver);
+            processRequest(request, response);
+        } else {
+            diver.setDiverFirstName(firstname);
+            diver.setDiverLastName(lastname);
+            diver.setDiverClass(classification);
+            diver.setDiverPhone(phonenumber);
+            diver.setDiverEmail(email);
+            diver.setDiverPswd(password);
+            diver.updateDiver(diver_id);
+            request.setAttribute("message", "Tietojen muokkaus onnistui!");
+            session.setAttribute("loggedInDiver", diver);
+            processRequest(request, response);
+        }
+
     }
 
     /**

@@ -2,7 +2,6 @@ package tsoha.divelog.control;
 
 import tsoha.divelog.model.Diver;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -64,8 +63,8 @@ public class LoginServlet extends BaseServlet {
         String email = request.getParameter("email");
         String pswd = request.getParameter("pswd");
         request.setAttribute("email", email);
-        
-        if(email.isEmpty() || pswd.isEmpty()) {
+
+        if (email.isEmpty() || pswd.isEmpty()) {
             showError(request, response, "login", "Täytä molemmat kentät!");
             return;
         }
@@ -79,8 +78,6 @@ public class LoginServlet extends BaseServlet {
                 session.setAttribute("loggedInDiver", diver);
                 showPage(request, response, "divestats");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
