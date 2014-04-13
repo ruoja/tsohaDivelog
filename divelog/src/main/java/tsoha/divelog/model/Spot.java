@@ -147,12 +147,13 @@ public class Spot {
     }
 
     public static int getSpotIdByName(String name) { //toimiiko oikein???
-        int id = 0;
+        int id = -1;
         try {
             Database database = new Database();
             PreparedStatement statement = database.query("SELECT spot_id FROM spot WHERE name = ?");
             statement.setString(1, name);
             ResultSet result = statement.executeQuery();
+            result.next();
             id = result.getInt(1);
             statement.close();
             result.close();

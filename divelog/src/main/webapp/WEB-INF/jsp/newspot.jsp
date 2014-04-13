@@ -1,7 +1,7 @@
 <div class="form-group">
     <label for="Name" class="col-md-2 control-label">Nimi</label>
     <div class="col-md-6">
-        <input required="" type="text" class="form-control" name="name" placeholder="Kohteen nimi" value="${spot.name}">
+        <input type="text" class="form-control" name="name" placeholder="Kohteen nimi" value="${spot.name}">
     </div>
 </div>
 
@@ -42,7 +42,7 @@
 <div class="form-group">
     <label for="Mindepth" class="col-md-2 control-label">Minimisyvyys</label>
     <div class="col-md-6">
-        <input required="" type="number" class="form-control" name="mindepth" placeholder="Minimisyvyys kohteella" value="${spot.mindepth}">
+        <input type="number" class="form-control" name="mindepth" placeholder="Minimisyvyys kohteella" value="${spot.mindepth}">
     </div>
 </div>
 

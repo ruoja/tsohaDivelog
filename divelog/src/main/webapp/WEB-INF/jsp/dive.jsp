@@ -50,11 +50,12 @@
 
                                         <ul class="dropdown-menu" role="menu">
                                             <c:forEach var="spot" items="${allSpots}">
-                                                <li><a href="#" data-target="#spotSelect" hidden="${spot.spot_id}">${spot.name}</a></li>
+                                                <li><a href="#" data-target="#spotSelect">${spot.name}</a></li>
                                                 </c:forEach>
                                         </ul>
                                     </div>
                                     <input type="text" class="form-control" id="spotSelect" name="spotSelect" placeholder="Sukelluskohde *" value="${dive.spotname}" readonly>
+                                    
                                 </div>
                             </div>
                         </div>

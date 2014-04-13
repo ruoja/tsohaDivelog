@@ -1,8 +1,6 @@
 package tsoha.divelog.control;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -67,6 +65,7 @@ public class UpdateDivelistServlet extends BaseServlet {
             return;
         }
         try {
+            int spot_id;
             Dive dive = new Dive();
             Spot spot = new Spot();
             Diver diver = (Diver) request.getSession().getAttribute("loggedInDiver");
@@ -92,12 +91,17 @@ public class UpdateDivelistServlet extends BaseServlet {
             String oxygenPercentage = request.getParameter("oxygenPercentage");
             String diveDescription = request.getParameter("diveDescription");
 
-            spot.setName(name);
-            spot.setLocation(location);
-            spot.setSpottype(spottype);
-            spot.setMindepth(mindepth);
-            spot.setDescription(spotDescription);
-            int spot_id = spot.insertInDatabase();
+            if (request.getParameter("spotSelect").isEmpty()) {
+                spot.setName(name);
+                spot.setLocation(location);
+                spot.setSpottype(spottype);
+                spot.setMindepth(mindepth);
+                spot.setDescription(spotDescription);
+                spot_id = spot.insertInDatabase();
+            } else {
+                String spotname = request.getParameter("spotSelect");
+                spot_id = Spot.getSpotIdByName(spotname);
+            }
 
             dive.setDiver_id(diver_id);
             dive.setSpot_id(spot_id);
@@ -126,22 +130,6 @@ public class UpdateDivelistServlet extends BaseServlet {
         }
     }
 
-    /*protected int newSpot(HttpServletRequest request) {
-
-     Spot spot = new Spot();
-     String name = request.getParameter("name");
-     String location = request.getParameter("location");
-     String spottype = request.getParameter("spottype");
-     String mindepth = request.getParameter("mindepth");
-     String description = request.getParameter("spotDescription");
-
-     spot.setName(name);
-     spot.setLocation(location);
-     spot.setSpottype(spottype);
-     spot.setMindepth(mindepth);
-     spot.setDescription(description);
-     return spot.insertInDatabase();
-     }*/
     /**
      * Returns a short description of the servlet.
      *
