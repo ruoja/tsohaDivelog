@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import tsoha.divelog.database.Database;
 
 /**
@@ -103,7 +106,7 @@ public class Diver {
      * @throws SQLException
      * @throws Exception
      */
-    public boolean getDiverByLogin(String email, String pswd) throws SQLException, Exception {
+    public boolean loginDiver(String email, String pswd) throws SQLException, Exception {
         Database database = new Database();
         PreparedStatement statement = database.query("SELECT * FROM diver WHERE email=? AND pswd=?");
         statement.setString(1, email);
@@ -137,10 +140,11 @@ public class Diver {
      * @throws SQLException
      * @throws Exception
      */
-    private void setDivelistByDiverId(int id) throws SQLException, Exception {
+    public List<Dive> setDivelistByDiverId(int diver_id) throws SQLException, Exception {
+        this.diveList.clear();
         Database database = new Database();
         PreparedStatement statement = database.query("SELECT * FROM dive WHERE diver_id=? ORDER BY divedate");
-        statement.setInt(1, id);
+        statement.setInt(1, diver_id);
         ResultSet result = statement.executeQuery();
         while (result.next()) {
             Dive dive = new Dive();
@@ -167,10 +171,33 @@ public class Diver {
         statement.close();
         result.close();
         database.closeConnection();
+        return this.diveList;
     }
 
-    public void addNewDive(Dive dive) {
+    public List<Dive> addNewDive(Dive dive) {
         this.diveList.add(dive);
+        return this.diveList;
+    }
+
+    public List<Dive> deleteDiveById(int dive_id, int diver_id) {
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("DELETE FROM dive WHERE dive_id = ?");
+            statement.setInt(1, dive_id);
+            statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+            this.diveList.clear();
+            this.diveList = setDivelistByDiverId(diver_id);
+        } catch (SQLException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return this.diveList;
+
     }
 
     public int defaultDiveNumber() throws SQLException, Exception {

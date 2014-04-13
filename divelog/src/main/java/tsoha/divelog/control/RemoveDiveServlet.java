@@ -2,16 +2,23 @@ package tsoha.divelog.control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tsoha.divelog.model.Dive;
+import tsoha.divelog.model.Diver;
+import tsoha.divelog.model.Spot;
 
 /**
  *
  * @author jani
  */
-public class RemoveDiveServlet extends HttpServlet {
+public class RemoveDiveServlet extends BaseServlet {
 
     /**
      * Processes requests for both HTTP
@@ -25,22 +32,6 @@ public class RemoveDiveServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RemoveDiveServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RemoveDiveServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +47,31 @@ public class RemoveDiveServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        if (!isLogged(request, response)) {
+            kickOutNotLogged(request, response);
+            return;
+        }
+        Diver diver = (Diver) request.getSession().getAttribute("loggedInDiver");
+        int diver_id = diver.getDiverId();
+        List diveList = diver.getDiveList();
+
+        try {
+            int dive_id = Integer.parseInt(request.getParameter("diveSelection"));
+            diveList = diver.deleteDiveById(dive_id, diver_id);
+            if (diveList.isEmpty()) {
+                showMessage(request, response, "divelist", "Ei sukelluksia.");
+            } else {
+                request.setAttribute("diveList", diveList);
+                //request.getSession().setAttribute("loggedInDiver", diver);
+                showMessage(request, response, "divelist", "Sukelluksen poisto onnistui!");
+            }
+        } catch (NumberFormatException ex) {
+            request.setAttribute("diveList", diveList);
+            showError(request, response, "divelist", "Et ole valinnut poistettavaa sukellusta!");
+        } catch (Exception ex) {
+            Logger.getLogger(RemoveDiveServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

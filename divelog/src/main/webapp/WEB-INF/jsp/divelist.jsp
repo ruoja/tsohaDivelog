@@ -60,7 +60,7 @@
 
                     <div class="btn-toolbar pull-right">
                         <button type="submit" class="btn btn-primary">Näytä valittu</button>
-                        <button type="submit" formaction="removedive" formmethod="POST" class="btn btn-primary">Poista valittu</button>
+                        <button type="submit" formaction="removedive" formmethod="GET" class="btn btn-primary">Poista valittu</button>
                         <a href="dive" class="btn btn-primary">Lisää uusi</a>
                     </div>
                 </div>

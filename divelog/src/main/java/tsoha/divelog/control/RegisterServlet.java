@@ -83,7 +83,7 @@ public class RegisterServlet extends BaseServlet {
 
             if (!password.equals(passwordConfirm)) {
                 showError(request, response, "register", "Vahvista salasana kirjoittamalla sama salasana uudelleen!");
-            } else if (diver.getDiverByLogin(email, password) == true) {
+            } else if (diver.loginDiver(email, password) == true) {
                 showError(request, response, "register", "Olet jo rekisteröitynyt. Kirjaudu tunnuksillasi.");
             } else {
                 try {

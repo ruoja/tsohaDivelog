@@ -280,7 +280,9 @@ public class Dive {
             Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    
+    
     public static Dive getDiveById(int id) {
         Dive dive = new Dive();
         try {

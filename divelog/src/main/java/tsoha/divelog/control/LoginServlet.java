@@ -72,7 +72,7 @@ public class LoginServlet extends BaseServlet {
 
         try {
             Diver diver = new Diver();
-            if (diver.getDiverByLogin(email, pswd) == false) {
+            if (diver.loginDiver(email, pswd) == false) {
                 showError(request, response, "login", "Kirjautuminen epäonnistui, tarkista käyttäjätunnus ja salasana.");
             } else {
                 HttpSession session = request.getSession();
