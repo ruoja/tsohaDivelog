@@ -53,9 +53,11 @@ public class SelectDiveServlet extends BaseServlet {
             return;
         }
         try {
-            int id = Integer.parseInt(request.getParameter("diveSelection"));
-            Dive dive = Dive.getDiveById(id);
+            int dive_id = Integer.parseInt(request.getParameter("diveSelection"));
+            Dive dive = Dive.getDiveById(dive_id);
+            Spot spot = Spot.getSpotById(dive.getSpot_id());
             request.setAttribute("dive", dive);
+            request.setAttribute("spot", spot);
             request.setAttribute("allSpots", Spot.getAllSpots());
             showPage(request, response, "dive");
         } catch (Exception ex) {

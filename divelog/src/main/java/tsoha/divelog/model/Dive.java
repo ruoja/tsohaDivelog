@@ -33,7 +33,6 @@ public class Dive {
     private String gastype;
     private String oxygenPercentage;
     private String description;
-    private String spotNameById;
 
     public int getDive_id() {
         return dive_id;
@@ -111,10 +110,6 @@ public class Dive {
         return description;
     }
 
-    public String getSpotNameById() {
-        return this.spotNameById;
-    }
-
     public Dive setDive_id(int dive_id) {
         this.dive_id = dive_id;
         return this;
@@ -137,10 +132,6 @@ public class Dive {
     public Dive setDivedate(String divedate) {
         this.divedate = divedate;
         return this;
-    }
-
-    public void setSpotname(String spotname) {
-        this.spotname = spotname;
     }
 
     public Dive setDivetimeInMinutes(String divetimeInMinutes) {
@@ -223,9 +214,9 @@ public class Dive {
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
-                this.spotNameById = result.getString(1);
+                this.spotname = result.getString(1);
             } else {
-                this.spotNameById = null;
+                this.spotname = null;
             }
             statement.close();
             result.close();
@@ -246,12 +237,12 @@ public class Dive {
      * @throws SQLException
      * @throws Exception
      */
-    public void insertInDatabase() {
+    public int insertInDatabase() {
         try {
             Database database = new Database();
             PreparedStatement statement = database.query("INSERT INTO dive(diver_id, spot_id, divenumber, divedate, divetime, bottomtime,"
                     + "maxdepth, visibility, airtemp, watertemp, suittype, tanksize, startpressure, endpressure, gastype, oxygen_percentage,"
-                    + "description) VALUES(?, ?, ?::int, ?::date, ?::int, ?::int, ?::int, ?::int, ?::int, ?::int, ?::suit, ?::int, ?::int, ?::int, ?::gas, ?::int, ?)");
+                    + "description) VALUES(?, ?, ?::int, ?::date, ?::int, ?::int, ?::int, ?::int, ?::int, ?::int, ?::suit, ?::int, ?::int, ?::int, ?::gas, ?::int, ?) RETURNING dive_id");
             statement.setInt(1, this.diver_id);
             statement.setInt(2, this.spot_id);
             statement.setString(3, this.diveNumber);
@@ -269,7 +260,9 @@ public class Dive {
             statement.setString(15, this.gastype);
             statement.setString(16, this.oxygenPercentage);
             statement.setString(17, this.description);
-            statement.executeUpdate();
+            ResultSet result = statement.executeQuery();
+            result.next();
+            this.dive_id = result.getInt(1);
             statement.close();
             database.closeConnection();
         } catch (SQLException ex) {
@@ -279,10 +272,9 @@ public class Dive {
         } catch (Exception ex) {
             Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return this.dive_id;
     }
-    
-    
-    
+
     public static Dive getDiveById(int id) {
         Dive dive = new Dive();
         try {
@@ -294,6 +286,7 @@ public class Dive {
                 dive.setDive_id(result.getInt(1));
                 dive.setDiver_id(result.getInt(2));
                 dive.setSpot_id(result.getInt(3));
+                dive.setSpotNameById(result.getInt(3));
                 dive.setDiveNumber(result.getString(4));
                 dive.setDivedate(result.getString(5));
                 dive.setDivetimeInMinutes(result.getString(6));

@@ -77,39 +77,40 @@ public class DiveServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Dive dive = new Dive();
+        /*Dive dive = new Dive();
 
-        String divenumber = request.getParameter("inputDivenumber");
-        String divedate = request.getParameter("inputDivedate");
-        String divetime = request.getParameter("inputDivetime");
-        String bottomtime = request.getParameter("inputBottomtime");
-        String maxdepth = request.getParameter("inputMaxdepth");
-        String visibility = request.getParameter("inputVisibility");
-        String airtemp = request.getParameter("inputWatertemp");
-        String watertemp = request.getParameter("inputWatertemp");
-        String suittype = request.getParameter("inputSuittype");
-        String tanksize = request.getParameter("inputTanksize");
-        String startpressure = request.getParameter("inputStartpressure");
-        String endpressure = request.getParameter("inputEndpressure");
-        String gastype = request.getParameter("inputGastype");
-        String oxygenPercentage = request.getParameter("inputOxygenPercentage");
-        String description = request.getParameter("inputDescription");
+         String divenumber = request.getParameter("inputDivenumber");
+         String divedate = request.getParameter("inputDivedate");
+         String divetime = request.getParameter("inputDivetime");
+         String bottomtime = request.getParameter("inputBottomtime");
+         String maxdepth = request.getParameter("inputMaxdepth");
+         String visibility = request.getParameter("inputVisibility");
+         String airtemp = request.getParameter("inputWatertemp");
+         String watertemp = request.getParameter("inputWatertemp");
+         String suittype = request.getParameter("inputSuittype");
+         String tanksize = request.getParameter("inputTanksize");
+         String startpressure = request.getParameter("inputStartpressure");
+         String endpressure = request.getParameter("inputEndpressure");
+         String gastype = request.getParameter("inputGastype");
+         String oxygenPercentage = request.getParameter("inputOxygenPercentage");
+         String description = request.getParameter("inputDescription");
 
-        dive.setDiveNumber(divenumber);
-        dive.setDivedate(divedate);
-        dive.setDivetimeInMinutes(divetime);
-        dive.setBottomtimeInMinutes(bottomtime);
-        dive.setMaxdepth(maxdepth);
-        dive.setVisibility(visibility);
-        dive.setAirtemp(airtemp);
-        dive.setWatertemp(watertemp);
-        dive.setSuittype(suittype);
-        dive.setTanksize(tanksize);
-        dive.setStartpressure(startpressure);
-        dive.setEndpressure(endpressure);
-        dive.setGastype(gastype);
-        dive.setOxygenPercentage(oxygenPercentage);
-        dive.setDescription(description);
+         dive.setDiveNumber(divenumber);
+         dive.setDivedate(divedate);
+         dive.setDivetimeInMinutes(divetime);
+         dive.setBottomtimeInMinutes(bottomtime);
+         dive.setMaxdepth(maxdepth);
+         dive.setVisibility(visibility);
+         dive.setAirtemp(airtemp);
+         dive.setWatertemp(watertemp);
+         dive.setSuittype(suittype);
+         dive.setTanksize(tanksize);
+         dive.setStartpressure(startpressure);
+         dive.setEndpressure(endpressure);
+         dive.setGastype(gastype);
+         dive.setOxygenPercentage(oxygenPercentage);
+         dive.setDescription(description);
+         */
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
@@ -117,6 +118,7 @@ public class DiveServlet extends BaseServlet {
         } catch (Exception ex) {
             Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /**

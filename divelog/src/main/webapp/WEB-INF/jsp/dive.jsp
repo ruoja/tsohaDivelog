@@ -21,6 +21,7 @@
 
                     <form class="form-horizontal" action="updatedivelist" method="POST" role="form">
 
+                        <input type="hidden" name="diveSelection" value="${dive.dive_id}">
                         <div class="form-group">
                             <label for="Divenumber" class="col-md-2 control-label">Sukellus no.</label>
                             <div class="col-md-6">
@@ -53,7 +54,7 @@
                                                 </c:forEach>
                                         </ul>
                                     </div>
-                                    <input type="text" class="form-control" id="spotSelect" name="spotSelect" placeholder="Sukelluskohde *" value="${spot.spot_id}" readonly>
+                                    <input type="text" class="form-control" id="spotSelect" name="spotSelect" placeholder="Sukelluskohde *" value="${dive.spotname}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -131,15 +132,18 @@
                             <div class="col-md-4">
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input required type="radio" name="gasOptions" value="nitrox" checked="${dive.gastype}">
+                                        <input required type="radio" name="gasOptions" value="nitrox">
                                         Nitrox
                                     </label>
                                 </div>
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input required type="radio" name="gasOptions" value="air" checked="${dive.gastype}">
+                                        <input required type="radio" name="gasOptions" value="air">
                                         Ilma
                                     </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="help-block"><b>${dive.gastype}</b></span>
                                 </div>
                             </div>
                         </div>
@@ -156,15 +160,18 @@
                             <div class="col-md-4">
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input required type="radio" name="suitOptions" value="dry" checked ="${dive.suittype}">
+                                        <input required type="radio" name="suitOptions" value="dry">
                                         Kuivapuku
                                     </label>
                                 </div>
                                 <div class="radio-inline pull-left">
                                     <label>
-                                        <input required type="radio" name="suitOptions" value="wet" checked="${dive.suittype}">
+                                        <input required type="radio" name="suitOptions" value="wet">
                                         Märkäpuku
                                     </label>
+                                </div>
+                                        <div class="col-md-4">
+                                    <span class="help-block"><b>${dive.suittype}suit</b></span>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +188,11 @@
                             <a href="divelist" class="btn btn-primary">Peruuta</a>
                             <button type="submit" class="btn btn-primary">Tallenna</button>
                         </div>
+
                     </form>
+                    <c:if test="${errorMessage != null}">
+                        <div class="alert alert-danger col-md-4 text-center">${errorMessage}</div>
+                    </c:if> 
                 </div>
             </div>
         </div>

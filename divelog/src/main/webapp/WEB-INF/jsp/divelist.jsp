@@ -50,7 +50,7 @@
                                     <td><div class="radio"><input type="radio" name="diveSelection" value="${dive.dive_id}"></div></td>
                                     <td>${dive.diveNumber}</td>
                                     <td>${dive.divedate}</td>
-                                    <td>${dive.spotNameById}</td>
+                                    <td>${dive.spotname}</td>
                                     <td>${dive.divetimeInMinutes}</td>
                                     <td>${dive.maxdepth}</td>
                                 </tr>
