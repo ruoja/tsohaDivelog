@@ -48,11 +48,11 @@
                             <c:forEach var="dive" items="${diveList}">
                                 <tr>
                                     <td><div class="radio"><input type="radio" name="diveSelection" value="${dive.dive_id}"></div></td>
-                                    <td>${dive.diveNumber}</td>
-                                    <td>${dive.divedate}</td>
-                                    <td>${dive.spotname}</td>
-                                    <td>${dive.divetimeInMinutes}</td>
-                                    <td>${dive.maxdepth}</td>
+                                    <td><c:out value="${dive.diveNumber}"></c:out></td>
+                                    <td><c:out value="${dive.divedate}"></c:out></td>
+                                    <td><c:out value="${dive.spotname}"></c:out></td>
+                                    <td><c:out value="${dive.divetimeInMinutes}"></c:out></td>
+                                    <td><c:out value="${dive.maxdepth}"></c:out></td>
                                 </tr>
                             </c:forEach>
                         </thead>

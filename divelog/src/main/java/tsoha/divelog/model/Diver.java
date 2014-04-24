@@ -190,12 +190,18 @@ public class Diver {
         this.diveList.add(dive);
         return this.diveList;
     }
-/**
- * Poistetaan sukellus ja päivitetään samalla sukeltajan sukelluslistaa
- * @param dive_id
- * @param diver_id
- * @return Päivitetty sukelluslista
- */
+
+    public void clearDives() {
+        this.diveList.clear();
+    }
+
+    /**
+     * Poistetaan sukellus ja päivitetään samalla sukeltajan sukelluslistaa
+     *
+     * @param dive_id
+     * @param diver_id
+     * @return Päivitetty sukelluslista
+     */
     public List<Dive> deleteDiveById(int dive_id, int diver_id) {
         try {
             Database database = new Database();
@@ -216,11 +222,14 @@ public class Diver {
         return this.diveList;
 
     }
-/**
- * Haetaan sukelluksen kirjaussivulle näkyviin seuraavan sukelluksen oletusnumero,
- * eli yhtä suurempi kuin nyt kannassa olava suurin järjestysnumero.
- * @return sukelluksen oletusnumero
- */
+
+    /**
+     * Haetaan sukelluksen kirjaussivulle näkyviin seuraavan sukelluksen
+     * oletusnumero, eli yhtä suurempi kuin nyt kannassa olava suurin
+     * järjestysnumero.
+     *
+     * @return sukelluksen oletusnumero
+     */
     public int defaultDiveNumber() {
         try {
             int id = diverId;
@@ -485,10 +494,12 @@ public class Diver {
             Logger.getLogger(Diver.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-/**
- * päivitetään sukeltajan tiedot
- * @param id 
- */
+
+    /**
+     * päivitetään sukeltajan tiedot
+     *
+     * @param id
+     */
     public void updateDiver(int id) {
         try {
             Database database = new Database();
@@ -512,11 +523,13 @@ public class Diver {
             Logger.getLogger(Diver.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-/**
- * vaihdetaan sukeltajan salasana
- * @param id
- * @param pswd 
- */
+
+    /**
+     * vaihdetaan sukeltajan salasana
+     *
+     * @param id
+     * @param pswd
+     */
     public void changePswd(int id, String pswd) {
         try {
             Database database = new Database();

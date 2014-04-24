@@ -46,10 +46,10 @@
                             <c:forEach var="spot" items="${allSpots}">
                                 <tr>
                                     <td><div class="radio"><input type="radio" name="spotSelection" value="${spot.spot_id}"></div></td>
-                                    <td>${spot.name}</td>
-                                    <td>${spot.location}</td>
-                                    <td>${spot.spottype}</td>
-                                    <td>${spot.mindepth}</td>
+                                    <td><c:out value="${spot.name}"></c:out></td>
+                                    <td><c:out value="${spot.location}"></c:out></td>
+                                    <td><c:out value="${spot.spottype}"></c:out></td>
+                                    <td><c:out value="${spot.mindepth}"></c:out></td>
                                 </tr>
                             </c:forEach>
                         </thead>

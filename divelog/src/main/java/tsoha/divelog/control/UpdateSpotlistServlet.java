@@ -69,7 +69,7 @@ public class UpdateSpotlistServlet extends BaseServlet {
         String mindepth = request.getParameter("mindepth");
         String description = request.getParameter("spotDescription");
 
-        if (!spot_id.isEmpty()) {
+        if (!spot_id.isEmpty() && !spot_id.equals("0")) {
             int id = Integer.parseInt(spot_id);
             spot.setSpot_id(id);
             spot.setName(name);
@@ -77,16 +77,30 @@ public class UpdateSpotlistServlet extends BaseServlet {
             spot.setSpottype(spottype);
             spot.setMindepth(mindepth);
             spot.setDescription(description);
-            spot.updateSpotById(id);
-            response.sendRedirect("spotlist");
+            if (spot.getErrors().isEmpty()) {
+                spot.updateSpotById(id);
+                request.setAttribute("allSpots", Spot.getAllSpots());
+                showMessage(request,response,"spotlist","Kohteen muokkaus onnistui!");
+            } else {
+                request.setAttribute("spot", spot);
+                request.setAttribute("errors", spot.getErrors());
+                showPage(request, response, "spot");
+            }
         } else {
             spot.setName(name);
             spot.setLocation(location);
             spot.setSpottype(spottype);
             spot.setMindepth(mindepth);
             spot.setDescription(description);
-            spot.insertInDatabase();
-            response.sendRedirect("spotlist");
+            if (spot.getErrors().isEmpty()) {
+                spot.insertInDatabase();
+                request.setAttribute("allSpots", Spot.getAllSpots());
+                showMessage(request,response,"spotlist","Kohteen lisäys onnistui!");
+            } else {
+                request.setAttribute("spot", spot);
+                request.setAttribute("errors", spot.getErrors());
+                showPage(request, response, "spot");
+            }
         }
     }
 

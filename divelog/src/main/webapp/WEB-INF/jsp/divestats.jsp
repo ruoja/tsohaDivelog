@@ -12,40 +12,41 @@
     </head>
 
     <body>
-        <div class="container text-center">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#">Yhteenveto</a></li>
-                <li><a href="divelist">Sukellukset</a></li>
-                <li><a href="spotlist">Kohteet</a></li>
-                <li><a href="diver">Omat tiedot</a></li>
 
-                <form action="logout">
-                    <button type="submit" class="btn btn-primary pull-right" >Kirjaudu ulos</button>
-                </form>
-            </ul>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">Yhteenveto</a></li>
+            <li><a href="divelist">Sukellukset</a></li>
+            <li><a href="spotlist">Kohteet</a></li>
+            <li><a href="diver">Omat tiedot</a></li>
 
+            <form action="logout">
+                <button type="submit" class="btn btn-primary pull-right" >Kirjaudu ulos</button>
+            </form>
+        </ul>
+
+        <div class="container">
             <div class="page-header">
-                <h1>Tervetuloa ${loggedInDiver.diverFirstName} ${loggedInDiver.diverLastName} !</h1>
+                <h1>Tervetuloa <c:out value="${loggedInDiver.diverFirstName} ${loggedInDiver.diverLastName}!"></c:out></h1>
                 <h2>Statistiikkaa sukelluksistasi:</h2>
             </div>
             <div class="row">
-                <div class="col-md-4">Sukelluksia yhteensä: ${loggedInDiver.totalDives}</div>
-                <div class="col-md-4">Viimeisin sukellus: ${loggedInDiver.lastDiveDate}</div>
+                <div class="col-md-4">Sukelluksia yhteensä: <c:out value="${loggedInDiver.totalDives}"></c:out></div>
+            <div class="col-md-4">Viimeisin sukellus: <c:out value="${loggedInDiver.lastDiveDate}"></c:out></div>
             </div>
 
             <div class="row">
-                <div class="col-md-4">Pisin sukellus: ${loggedInDiver.longestDive} min</div>
-                <div class="col-md-4">Sukellusaika yhteensä: ${loggedInDiver.totalDivetime} min</div>
+                <div class="col-md-4">Pisin sukellus: <c:out value="${loggedInDiver.longestDive} min"></c:out></div>
+            <div class="col-md-4">Sukellusaika yhteensä: <c:out value="${loggedInDiver.totalDivetime} min"></c:out></div>
             </div>
 
             <div class="row">
-                <div class="col-md-4">Suosikkikohde: ${loggedInDiver.favoriteSpot}</div>
-                <div class="col-md-4">Suurin syvyys: ${loggedInDiver.maxDepth} m</div>
+                <div class="col-md-4">Suosikkikohde: <c:out value="${loggedInDiver.favoriteSpot}"></c:out></div>
+            <div class="col-md-4">Suurin syvyys: <c:out value="${loggedInDiver.maxDepth} m"></c:out></div>
             </div>
 
             <div class="row">
-                <div class="col-md-4">Sukelluksia Nitroxilla: ${loggedInDiver.nitroxDives}</div>
-                <div class="col-md-4">Sukelluksia ilmalla: ${loggedInDiver.airDives}</div>
+                <div class="col-md-4">Sukelluksia Nitroxilla: <c:out value="${loggedInDiver.nitroxDives}"></c:out></div>
+            <div class="col-md-4">Sukelluksia ilmalla: <c:out value="${loggedInDiver.airDives}"></c:out></div>
             </div>
         </div>
     </body>

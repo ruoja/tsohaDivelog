@@ -70,6 +70,8 @@ public class UpdateDivelistServlet extends BaseServlet {
             Spot spot = new Spot();
             Diver diver = (Diver) request.getSession().getAttribute("loggedInDiver");
             int diver_id = diver.getDiverId();
+            String spotSelect = request.getParameter("spotSelect");
+            String dive_id = request.getParameter("diveSelection");
             String divenumber = request.getParameter("divenumber");
             String date = request.getParameter("date");
             String name = request.getParameter("name");
@@ -92,41 +94,87 @@ public class UpdateDivelistServlet extends BaseServlet {
             String diveDescription = request.getParameter("diveDescription");
 
             //jos kohdetta ei ole valittu listasta, talletetaan uusi kohde
-            if (request.getParameter("spotSelect").isEmpty()) {
+            if (spotSelect.isEmpty() || spotSelect.equals("0")) {
                 spot.setName(name);
                 spot.setLocation(location);
                 spot.setSpottype(spottype);
                 spot.setMindepth(mindepth);
                 spot.setDescription(spotDescription);
-                spot_id = spot.insertInDatabase();
+                if (spot.getErrors().isEmpty()) {
+                    spot_id = spot.insertInDatabase();
+                    dive.setSpot_id(spot_id);
+                    dive.setSpotNameById(spot_id);
+                } else {
+                    request.setAttribute("spot", spot);
+                    request.setAttribute("spotErrors", spot.getErrors());
+                }
             } else {
                 //muuten liitetään sukellukseen olemassaolevan kohteen id
                 String spotname = request.getParameter("spotSelect");
                 spot_id = Spot.getSpotIdByName(spotname);
+                dive.setSpot_id(spot_id);
+                dive.setSpotNameById(spot_id);
             }
-
-            dive.setDiver_id(diver_id);
-            dive.setSpot_id(spot_id);
-            dive.setDiveNumber(divenumber);
-            dive.setDivedate(date);
-            dive.setDivetimeInMinutes(divetime);
-            dive.setBottomtimeInMinutes(bottomtime);
-            dive.setMaxdepth(maxdepth);
-            dive.setVisibility(visibility);
-            dive.setAirtemp(airtemp);
-            dive.setWatertemp(watertemp);
-            dive.setSuittype(suittype);
-            dive.setTanksize(tanksize);
-            dive.setStartpressure(startpressure);
-            dive.setEndpressure(endpressure);
-            dive.setGastype(gastype);
-            dive.setOxygenPercentage(oxygenPercentage);
-            dive.setDescription(diveDescription);
-            dive.setSpotNameById(spot_id);
-            dive.insertInDatabase();
-            diver.addNewDive(dive);
-            request.getSession().setAttribute("loggedInDiver", diver);
-            response.sendRedirect("divelist");
+            //valittiin listasta sukellus
+            if (!dive_id.isEmpty() && !dive_id.equals("0")) {
+                int id = Integer.parseInt(dive_id);
+                dive.setDive_id(id);
+                dive.setDiver_id(diver_id);
+                dive.setDiveNumber(divenumber);
+                dive.setDivedate(date);
+                dive.setDivetimeInMinutes(divetime);
+                dive.setBottomtimeInMinutes(bottomtime);
+                dive.setMaxdepth(maxdepth);
+                dive.setVisibility(visibility);
+                dive.setAirtemp(airtemp);
+                dive.setWatertemp(watertemp);
+                dive.setSuittype(suittype);
+                dive.setTanksize(tanksize);
+                dive.setStartpressure(startpressure);
+                dive.setEndpressure(endpressure);
+                dive.setGastype(gastype);
+                dive.setOxygenPercentage(oxygenPercentage);
+                dive.setDescription(diveDescription);
+                if (dive.getErrors().isEmpty()) {
+                    dive.updateDiveById(id);
+                    request.getSession().setAttribute("loggedInDiver", diver);
+                    request.setAttribute("diveList", diver.setDivelistByDiverId(diver_id));
+                    showMessage(request,response,"divelist","Sukelluksen muokkaus onnistui!");
+                } else {
+                    request.setAttribute("dive", dive);
+                    request.setAttribute("diveErrors", dive.getErrors());
+                    showPage(request, response, "dive");
+                }
+            //lisättiin kokonaan uusi sukellus
+            } else {
+                dive.setDiver_id(diver_id);
+                dive.setDiveNumber(divenumber);
+                dive.setDivedate(date);
+                dive.setDivetimeInMinutes(divetime);
+                dive.setBottomtimeInMinutes(bottomtime);
+                dive.setMaxdepth(maxdepth);
+                dive.setVisibility(visibility);
+                dive.setAirtemp(airtemp);
+                dive.setWatertemp(watertemp);
+                dive.setSuittype(suittype);
+                dive.setTanksize(tanksize);
+                dive.setStartpressure(startpressure);
+                dive.setEndpressure(endpressure);
+                dive.setGastype(gastype);
+                dive.setOxygenPercentage(oxygenPercentage);
+                dive.setDescription(diveDescription);
+                if (dive.getErrors().isEmpty()) {
+                    dive.insertInDatabase();
+                    diver.addNewDive(dive);
+                    request.getSession().setAttribute("loggedInDiver", diver);
+                    request.setAttribute("diveList", diver.setDivelistByDiverId(diver_id));
+                    showMessage(request,response,"spotlist","Sukelluksen lisäys onnistui!");
+                } else {
+                    request.setAttribute("dive", dive);
+                    request.setAttribute("diveErrors", dive.getErrors());
+                    showPage(request, response, "dive");
+                }
+            }
         } catch (Exception ex) {
             Logger.getLogger(DiveServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

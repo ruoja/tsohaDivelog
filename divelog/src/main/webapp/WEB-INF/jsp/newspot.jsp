@@ -1,14 +1,17 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="form-group">
     <label for="Name" class="col-md-2 control-label">Nimi</label>
     <div class="col-md-6">
-        <input type="text" class="form-control" name="name" placeholder="Kohteen nimi" value="${spot.name}">
+        <input type="text" class="form-control" name="name" placeholder="Kohteen nimi" <c:out value="${spot.name}"></c:out>>
     </div>
 </div>
 
 <div class="form-group">
     <label for="Location" class="col-md-2 control-label">Sijainti</label>
     <div class="col-md-6">
-        <input type="text" class="form-control" name="location" placeholder="Kohteen sijainti" value="${spot.location}">
+        <input type="text" class="form-control" name="location" placeholder="Kohteen sijainti" <c:out value="${spot.location}"></c:out>
     </div>
 </div>
 
@@ -42,14 +45,14 @@
 <div class="form-group">
     <label for="Mindepth" class="col-md-2 control-label">Minimisyvyys</label>
     <div class="col-md-6">
-        <input type="number" class="form-control" name="mindepth" placeholder="Minimisyvyys kohteella" value="${spot.mindepth}">
+        <input type="number" class="form-control" name="mindepth" placeholder="Minimisyvyys kohteella" <c:out value="${spot.mindepth}"></c:out>
     </div>
 </div>
 
 <div class="form-group">
     <label for="Description" class="col-md-2 control-label">kuvaus</label>
     <div class="col-md-6">
-        <textarea class="form-control" name="spotDescription" placeholder="Kohteen kuvaus" rows="8">${spot.description}</textarea>
+        <textarea class="form-control" name="spotDescription" placeholder="Kohteen kuvaus" rows="8"><c:out value="${spot.description}"></c:out></textarea>
     </div>
 </div>
 

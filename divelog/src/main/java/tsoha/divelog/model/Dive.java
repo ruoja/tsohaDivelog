@@ -3,6 +3,8 @@ package tsoha.divelog.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -33,6 +35,7 @@ public class Dive {
     private String gastype;
     private String oxygenPercentage;
     private String description;
+    private Map<String, String> errors = new HashMap<String, String>();
 
     public int getDive_id() {
         return dive_id;
@@ -110,6 +113,10 @@ public class Dive {
         return description;
     }
 
+    public Map<String, String> getErrors() {
+        return errors;
+    }
+
     public Dive setDive_id(int dive_id) {
         this.dive_id = dive_id;
         return this;
@@ -125,6 +132,11 @@ public class Dive {
     }
 
     public Dive setDiveNumber(String diveNumber) {
+        if(Integer.parseInt(diveNumber) < 0) {
+            errors.put("sukelluksennumero", " järjestysnumero ei voi olla negatiivinen");
+        } else {
+            errors.remove("sukelluksennumero");
+        }
         this.diveNumber = diveNumber;
         return this;
     }
@@ -135,31 +147,63 @@ public class Dive {
     }
 
     public Dive setDivetimeInMinutes(String divetimeInMinutes) {
+        if(Integer.parseInt(divetimeInMinutes) < 0) {
+            errors.put("sukellusaika", " sukellusaika ei voi olla negatiivinen");
+        } else {
+            errors.remove("sukellusaika");
+        }
         this.divetimeInMinutes = divetimeInMinutes;
         return this;
     }
 
     public Dive setBottomtimeInMinutes(String bottomtimeInMinutes) {
+        if(Integer.parseInt(bottomtimeInMinutes) < 0) {
+            errors.put("pohja-aika", " pohja-aika ei voi olla negatiivinen");
+        } else {
+            errors.remove("pohja-aika");
+        }
         this.bottomtimeInMinutes = bottomtimeInMinutes;
         return this;
     }
 
     public Dive setMaxdepth(String maxdepth) {
+        if(Integer.parseInt(maxdepth) < 0) {
+            errors.put("maksimisyvyys", " maksimisyvyys ei voi olla negatiivinen");
+        } else {
+            errors.remove("maksimisyvyys");
+        }
         this.maxdepth = maxdepth;
         return this;
     }
 
     public Dive setVisibility(String visibility) {
+        if(Integer.parseInt(visibility) < 0) {
+            errors.put("näkyvyys", " näkyvyys ei voi olla negatiivinen");
+        } else {
+            errors.remove("näkyvyys");
+        }
         this.visibility = visibility;
         return this;
     }
 
     public Dive setAirtemp(String airtemp) {
+        int temp = Integer.parseInt(airtemp);
+        if(temp < -40 || temp > 50) {
+            errors.put("ilmanlämpö", " ilman lämpötilan tulee olla väliltä -40 - +50 astetta");
+        } else {
+            errors.remove("ilmanlämpö");
+        }
         this.airtemp = airtemp;
         return this;
     }
 
     public Dive setWatertemp(String watertemp) {
+        int temp = Integer.parseInt(watertemp);
+        if(temp < -5 || temp > 30) {
+            errors.put("vedenlämpö", " veden lämpötilan tulee olla väliltä -5 - +30 astetta");
+        } else {
+            errors.remove("vedenlämpö");
+        }
         this.watertemp = watertemp;
         return this;
     }
@@ -170,16 +214,34 @@ public class Dive {
     }
 
     public Dive setTanksize(String tanksize) {
+        int tank = Integer.parseInt(tanksize);
+        if(tank < 4 || tank > 36) {
+            errors.put("laitekoko", " laitekoon tulee olla väliltä 4 - 36 litraa");
+        } else {
+            errors.remove("laitekoko");
+        }
         this.tanksize = tanksize;
         return this;
     }
 
     public Dive setStartpressure(String startpressure) {
+        int bar = Integer.parseInt(startpressure);
+        if(bar < 0 || bar > 300) {
+            errors.put("alkupaine", " alkupaineen tulee olla väliltä 0 - 300 bar");
+        } else {
+            errors.remove("alkupaine");
+        }
         this.startpressure = startpressure;
         return this;
     }
 
     public Dive setEndpressure(String endpressure) {
+        int bar = Integer.parseInt(endpressure);
+        if(bar < 0 || bar > 300) {
+            errors.put("loppupaine", " loppupaineen tulee olla väliltä 0 - 300 bar");
+        } else {
+            errors.remove("loppupaine");
+        }
         this.endpressure = endpressure;
         return this;
     }
@@ -189,8 +251,14 @@ public class Dive {
         return this;
     }
 
-    public Dive setOxygenPercentage(String oxydenPercentage) {
-        this.oxygenPercentage = oxydenPercentage;
+    public Dive setOxygenPercentage(String oxygenPercentage) {
+        int ean = Integer.parseInt(oxygenPercentage);
+        if(ean < 21 || ean > 100) {
+            errors.put("happiprosentti", " happiprosentin tulee olla väliltä 21% - 100%");
+        } else {
+            errors.remove("happiprosentti");
+        }
+        this.oxygenPercentage = oxygenPercentage;
         return this;
     }
 
@@ -318,5 +386,42 @@ public class Dive {
             Logger.getLogger(Dive.class.getName()).log(Level.SEVERE, null, ex);
         }
         return dive;
+    }
+    
+    public void updateDiveById(int id) {
+        try {
+            Database database = new Database();
+            PreparedStatement statement = database.query("UPDATE dive SET spot_id = ?, divenumber = ?::int, divedate = ?::date, divetime = ?::int,"
+                    + "bottomtime = ?::int, maxdepth = ?::int, visibility = ?::int, airtemp = ?::int, watertemp = ?::int, suittype = ?::suit,"
+                    + "tanksize = ?::int, startpressure = ?::int, endpressure = ?::int, gastype = ?::gas, oxygen_percentage = ?::int, description = ?"
+                    + "WHERE dive_id = ?");
+            statement.setInt(1, this.spot_id);
+            statement.setString(2, this.diveNumber);
+            statement.setString(3, this.divedate);
+            statement.setString(4, this.divetimeInMinutes);
+            statement.setString(5, this.bottomtimeInMinutes);
+            statement.setString(6, this.maxdepth);
+            statement.setString(7, this.visibility);
+            statement.setString(8, this.airtemp);
+            statement.setString(9, this.watertemp);
+            statement.setString(10, this.suittype);
+            statement.setString(11, this.tanksize);
+            statement.setString(12, this.startpressure);
+            statement.setString(13, this.endpressure);
+            statement.setString(14, this.gastype);
+            statement.setString(15, this.oxygenPercentage);
+            statement.setString(16, this.description);
+            statement.setInt(17, id);
+            statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Spot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

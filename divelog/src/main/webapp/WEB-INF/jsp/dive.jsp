@@ -55,7 +55,6 @@
                                         </ul>
                                     </div>
                                     <input type="text" class="form-control" id="spotSelect" name="spotSelect" placeholder="Sukelluskohde *" value="${dive.spotname}" readonly>
-
                                 </div>
                             </div>
                         </div>
@@ -193,6 +192,12 @@
                     </form>
                     <c:if test="${errorMessage != null}">
                         <div class="alert alert-danger col-md-4 text-center">${errorMessage}</div>
+                    </c:if>
+                    <c:if test="${spotErrors != null}">
+                        <div class="alert alert-danger col-md-4 text-center">${spotErrors}</div>
+                    </c:if> 
+                        <c:if test="${diveErrors != null}">
+                        <div class="alert alert-danger col-md-4 text-center">${diveErrors}</div>
                     </c:if> 
                 </div>
             </div>

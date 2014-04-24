@@ -4,7 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -22,6 +24,7 @@ public class Spot {
     private String spottype;
     private String mindepth;
     private String description;
+    private Map<String, String> errors = new HashMap<String, String>();
 
     public int getSpot_id() {
         return spot_id;
@@ -47,6 +50,10 @@ public class Spot {
         return description;
     }
 
+    public Map<String, String> getErrors() {
+        return errors;
+    }
+    
     public Spot setSpot_id(int spot_id) {
         this.spot_id = spot_id;
         return this;
@@ -63,6 +70,11 @@ public class Spot {
     }
 
     public Spot setMindepth(String mindepth) {
+        if(Integer.parseInt(mindepth) < 0) {
+            errors.put("minimisyvyys", " minimisyvyys ei voi olla negatiivinen");
+        } else {
+            errors.remove("minimisyvyys");
+        }
         this.mindepth = mindepth;
         return this;
     }

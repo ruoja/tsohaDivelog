@@ -18,7 +18,7 @@
 
             <form action="login" method="POST" class="form-signin" >
                 <h2 class="form-signin-heading text-center">Kirjaudu sisään</h2>
-                <input type="text" name="email" value="${email}" class="form-control" placeholder="sähköposti" autofocus>
+                <input type="email" name="email" value="${email}" class="form-control" placeholder="sähköposti" autofocus>
                 <input type="password" name="pswd" class="form-control" placeholder="salasana">
                 <button type="submit" class="btn btn-lg btn-primary btn-block">Kirjaudu</button>
                 <button type="submit" formaction="register" formmethod="GET"class="btn btn-lg btn-primary btn-block">Rekisteröidy</button>

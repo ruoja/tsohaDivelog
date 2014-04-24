@@ -82,6 +82,9 @@
                     </form>
                     <c:if test="${errorMessage != null}">
                         <div class="alert alert-danger col-md-4 text-center">${errorMessage}</div>
+                    </c:if>
+                    <c:if test="${errors != null}">
+                        <div class="alert alert-danger col-md-4 text-center">${errors}</div>
                     </c:if> 
                 </div>
             </div>
